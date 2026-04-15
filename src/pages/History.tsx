@@ -1,0 +1,76 @@
+import Layout from "@/components/Layout";
+import RedStar from "@/components/RedStar";
+
+const timeline = [
+  {
+    title: "The Crisis that Demands Revolution",
+    content:
+      "Kenya is trapped in a spiral of IMF debt, austerity and neocolonial exploitation. The 2024 Finance Bill protests showed the fury of the masses against a comprador bourgeoisie that serves imperialism while wages stagnate, unemployment soars, and the cost of living crushes working families. No capitalist government — whether led by Kenya Kwanza, ODM or any other bourgeois formation — can resolve this crisis. The system itself is the problem.",
+  },
+  {
+    title: "The Founding of the PRC",
+    content:
+      "The Permanent Revolutionary Congress was born out of the recognition that no capitalist party or reformist grouping can resolve the systemic crisis facing Kenya's workers and youth. Founded by workers, youth and revolutionary socialists, the PRC is built on the program of permanent revolution — the understanding that in countries dominated by imperialism, the struggle for democratic rights and economic justice can only be completed by the working class taking power and building socialism.",
+  },
+  {
+    title: "Affiliated with the ISL",
+    content:
+      "The PRC is proud to be the Kenyan section of the International Socialist League (ISL), a global network of revolutionary socialist parties and organizations. The ISL unites revolutionaries across Africa, Europe, Latin America, Asia, the Middle East and North America in a common struggle against capitalism and imperialism. Our international affiliation gives the PRC access to the collective experience, analysis and solidarity of the global working-class movement.",
+  },
+  {
+    title: "The Inaugural Congress",
+    content:
+      "The PRC held its inaugural congress, bringing together workers, students and organizers from across Kenya. Delegates debated and adopted the party program, elected leadership, and voted on key resolutions including affiliation with the ISL and the adoption of a full transitional program. The congress was held at Funcity Gardens, Nairobi. [Congress date to be confirmed.]",
+  },
+  {
+    title: "Looking Forward",
+    content:
+      "The PRC is building a mass revolutionary party rooted in workplaces, campuses and communities across Kenya. We are recruiting, educating and organizing a new generation of revolutionary cadres who will lead the struggle for a socialist Kenya as part of the fight for a socialist Africa and a socialist world.",
+  },
+];
+
+const History = () => (
+  <Layout>
+    <section className="py-16">
+      <div className="container mx-auto px-4 max-w-4xl">
+        <div className="text-center mb-16">
+          <RedStar className="w-10 h-10 text-primary mx-auto mb-4" />
+          <h1 className="text-4xl md:text-5xl font-black text-foreground mb-4">Our History</h1>
+          <p className="text-muted-foreground text-lg">The road to revolution.</p>
+        </div>
+
+        <div className="relative">
+          <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-primary/30" />
+          <div className="space-y-12">
+            {timeline.map((item, i) => (
+              <div key={i} className={`relative flex flex-col md:flex-row ${i % 2 === 0 ? "" : "md:flex-row-reverse"} gap-8`}>
+                <div className="hidden md:block md:w-1/2" />
+                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary border-2 border-primary mt-2" />
+                <div className="ml-10 md:ml-0 md:w-1/2 bg-card border border-border rounded-lg p-6">
+                  <h3 className="font-black text-xl text-foreground mb-3">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{item.content}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-16">
+          <img
+            src="/images/prc-congress.jpg"
+            alt="PRC Inaugural Congress"
+            className="w-full rounded-lg object-cover max-h-96"
+            loading="lazy"
+            width={1920}
+            height={1080}
+          />
+          <p className="text-center text-xs text-muted-foreground mt-2">
+            The PRC Inaugural Congress at Funcity Gardens, Nairobi.
+          </p>
+        </div>
+      </div>
+    </section>
+  </Layout>
+);
+
+export default History;
