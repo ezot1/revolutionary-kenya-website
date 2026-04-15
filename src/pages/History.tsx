@@ -56,16 +56,30 @@ const History = () => (
         </div>
 
         <div className="mt-16">
-          <img
-            src="/images/prc-congress.jpg"
-            alt="PRC Inaugural Congress"
-            className="w-full rounded-lg object-cover max-h-96"
-            loading="lazy"
-            width={1920}
-            height={1080}
-          />
-          <p className="text-center text-xs text-muted-foreground mt-2">
-            The PRC Inaugural Congress at Funcity Gardens, Nairobi.
+          <h2 className="text-2xl font-black text-foreground mb-6 text-center">Congress Gallery</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { src: "/images/prc-congress.jpg", alt: "PRC delegates with party and ISL banners at the Inaugural Congress" },
+              { src: "/images/congress-presentation.jpg", alt: "Presentation at the PRC Inaugural Congress" },
+              { src: "/images/congress-speaker.jpg", alt: "Speaker addressing delegates at the congress" },
+              { src: "/images/congress-vote.jpg", alt: "Delegates voting at the PRC Inaugural Congress" },
+              { src: "/images/congress-vote2.jpg", alt: "Congress delegates raising hands in vote" },
+              { src: "/images/bolts-protest.jpg", alt: "Workers protesting against exploitation by ride-hailing companies" },
+              { src: "/images/workshop-1.jpg", alt: "PRC political education workshop" },
+              { src: "/images/workshop-2.jpg", alt: "Participants at a PRC workshop session" },
+            ].map((img, i) => (
+              <div key={i} className="overflow-hidden rounded-lg border border-border">
+                <img
+                  src={img.src}
+                  alt={img.alt}
+                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+          <p className="text-center text-xs text-muted-foreground mt-4">
+            Photos from PRC congresses, workshops and workers' struggles.
           </p>
         </div>
       </div>
