@@ -36,7 +36,7 @@ const Footer = () => (
             The PRC is the Kenyan section of the International Socialist League.
           </p>
           <a
-            href="https://isl-isl.org"
+            href="https://lis-isl.org"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-accent hover:underline"

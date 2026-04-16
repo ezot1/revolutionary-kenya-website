@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import RedStar from "@/components/RedStar";
 import { supabase } from "@/lib/supabase";
-import { Users, Flame, Globe, Phone, Landmark } from "lucide-react";
+import { Users, Flame, Globe } from "lucide-react";
 
 interface Post {
   id: string;
@@ -101,7 +101,7 @@ const PartnersSection = () => (
             The International Socialist League is a worldwide revolutionary socialist organization uniting parties and groups across six continents in the common struggle against capitalism, imperialism and oppression. The PRC is the Kenyan section of the ISL.
           </p>
           <a
-            href="https://isl-isl.org"
+            href="https://lis-isl.org"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center px-5 py-2 rounded-md bg-accent text-accent-foreground font-bold text-sm hover:bg-accent/90 transition"
@@ -121,7 +121,6 @@ const PartnersSection = () => (
 );
 
 const DonateSection = () => {
-  const [showBank, setShowBank] = useState(false);
   return (
     <section id="donate" className="py-20 bg-primary">
       <div className="container mx-auto px-4 text-center max-w-2xl">
@@ -131,28 +130,15 @@ const DonateSection = () => {
         <p className="text-primary-foreground/80 mb-8 text-lg">
           The PRC runs on the contributions of workers and supporters. Every shilling funds organizing, education, and political work.
         </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <button className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md bg-foreground text-background font-bold hover:bg-foreground/90 transition">
-            <Phone className="w-5 h-5" />
-            M-Pesa Till: Coming Soon
-          </button>
-          <button
-            onClick={() => setShowBank(!showBank)}
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-md border-2 border-primary-foreground text-primary-foreground font-bold hover:bg-primary-foreground/10 transition"
-          >
-            <Landmark className="w-5 h-5" />
-            Bank Transfer Details
-          </button>
-        </div>
-        {showBank && (
-          <div className="mt-6 bg-background/10 rounded-lg p-6 text-primary-foreground text-left text-sm">
-            <p className="font-bold mb-2">Bank Transfer Details:</p>
-            <p>Bank: [Bank Name]</p>
-            <p>Account: [Account Number]</p>
-            <p>Branch: [Branch Name]</p>
-            <p className="mt-2 text-primary-foreground/60 italic">Contact us for more details.</p>
-          </div>
-        )}
+        <a
+          href="https://www.paypal.com/paypalme/prcdonate"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center justify-center gap-2 px-8 py-3 rounded-md bg-foreground text-background font-bold text-lg hover:bg-foreground/90 transition"
+        >
+          Donate via PayPal
+        </a>
+        <p className="text-primary-foreground/60 text-sm mt-4">PayPal: prcdonate@gmail.com</p>
       </div>
     </section>
   );
