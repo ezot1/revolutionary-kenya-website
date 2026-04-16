@@ -26,7 +26,7 @@ const HeroSection = () => (
     />
     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-background/40" />
     <div className="relative z-10 container mx-auto px-4 text-center max-w-4xl">
-      <RedStar className="w-12 h-12 text-primary mx-auto mb-6" />
+      <img src="/images/prc-logo.jpg" alt="PRC Logo" className="w-16 h-16 rounded-full object-cover mx-auto mb-6" />
       <h1 className="text-4xl md:text-6xl font-black leading-tight mb-6 text-foreground">
         Build the Revolutionary Party.{" "}
         <span className="text-primary">Fight for a Socialist Kenya.</span>
