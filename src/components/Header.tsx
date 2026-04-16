@@ -19,7 +19,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
         <Link to="/" className="flex items-center gap-2">
-          <RedStar className="w-7 h-7 text-primary" />
+          <img src="/images/prc-logo.jpg" alt="PRC Logo" className="h-10 w-10 rounded-full object-cover" />
           <span className="text-xl font-black tracking-tight text-foreground">PRC</span>
         </Link>
 
