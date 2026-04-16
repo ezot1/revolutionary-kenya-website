@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import RedStar from "@/components/RedStar";
 import { supabase } from "@/lib/supabase";
-import { Users, Flame, Globe, Phone, Landmark } from "lucide-react";
+import { Users, Flame, Globe } from "lucide-react";
 
 interface Post {
   id: string;
@@ -121,7 +121,6 @@ const PartnersSection = () => (
 );
 
 const DonateSection = () => {
-  const [showBank, setShowBank] = useState(false);
   return (
     <section id="donate" className="py-20 bg-primary">
       <div className="container mx-auto px-4 text-center max-w-2xl">
