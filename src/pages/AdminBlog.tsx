@@ -2,18 +2,23 @@ import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
-import { Trash2 } from "lucide-react";
+import { Trash2, Edit2, Plus, X, Upload } from "lucide-react";
 
 interface Post {
   id: string;
   title: string;
   slug: string;
+  excerpt: string | null;
+  content: string;
+  author: string;
+  image_url: string | null;
   published: boolean;
   date: string;
 }
 
 const AdminBlog = () => {
   const [posts, setPosts] = useState<Post[]>([]);
+  const [editing, setEditing] = useState<Post | null>(null);
   const [form, setForm] = useState({
     title: "",
     author: "PRC Editorial",
@@ -23,11 +28,13 @@ const AdminBlog = () => {
     published: false,
   });
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   const fetchPosts = async () => {
     const { data } = await supabase
       .from("posts")
-      .select("id, title, slug, published, date")
+      .select("*")
       .order("date", { ascending: false });
     if (data) setPosts(data);
   };
@@ -36,26 +43,84 @@ const AdminBlog = () => {
     fetchPosts();
   }, []);
 
+  const uploadImage = async (file: File): Promise<string | null> => {
+    const ext = file.name.split(".").pop();
+    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const { error } = await supabase.storage
+      .from("blog-images")
+      .upload(fileName, file);
+    if (error) {
+      toast.error("Image upload failed: " + error.message);
+      return null;
+    }
+    const { data } = supabase.storage.from("blog-images").getPublicUrl(fileName);
+    return data.publicUrl;
+  };
+
+  const resetForm = () => {
+    setForm({ title: "", author: "PRC Editorial", excerpt: "", content: "", image_url: "", published: false });
+    setEditing(null);
+    setImageFile(null);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSaving(true);
+
+    let imageUrl = form.image_url;
+    if (imageFile) {
+      setUploading(true);
+      const url = await uploadImage(imageFile);
+      setUploading(false);
+      if (url) imageUrl = url;
+    }
+
     const slug = form.title
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
 
-    const { error } = await supabase.from("posts").insert([{ ...form, slug }]);
-    setSaving(false);
-    if (error) {
-      toast.error("Failed to create post: " + error.message);
+    const payload = { ...form, image_url: imageUrl || null, slug };
+
+    if (editing) {
+      const { error } = await supabase.from("posts").update(payload).eq("id", editing.id);
+      setSaving(false);
+      if (error) {
+        toast.error("Failed to update post: " + error.message);
+      } else {
+        toast.success("Post updated!");
+        resetForm();
+        fetchPosts();
+      }
     } else {
-      toast.success("Post created!");
-      setForm({ title: "", author: "PRC Editorial", excerpt: "", content: "", image_url: "", published: false });
-      fetchPosts();
+      const { error } = await supabase.from("posts").insert([payload]);
+      setSaving(false);
+      if (error) {
+        toast.error("Failed to create post: " + error.message);
+      } else {
+        toast.success("Post created!");
+        resetForm();
+        fetchPosts();
+      }
     }
   };
 
+  const handleEdit = (post: Post) => {
+    setEditing(post);
+    setForm({
+      title: post.title,
+      author: post.author,
+      excerpt: post.excerpt || "",
+      content: post.content,
+      image_url: post.image_url || "",
+      published: post.published,
+    });
+    setImageFile(null);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this post?")) return;
     const { error } = await supabase.from("posts").delete().eq("id", id);
     if (error) {
       toast.error("Failed to delete post");
@@ -65,50 +130,93 @@ const AdminBlog = () => {
     }
   };
 
+  const inputClass =
+    "w-full px-4 py-2.5 rounded-md bg-card border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary";
+
   return (
     <Layout>
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
           <h1 className="text-3xl font-black text-foreground mb-8">Blog Admin</h1>
 
-          <form onSubmit={handleSubmit} className="space-y-4 mb-12">
+          <form onSubmit={handleSubmit} className="space-y-4 mb-12 bg-card border border-border rounded-lg p-6">
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-bold text-foreground">
+                {editing ? "Edit Post" : "New Post"}
+              </h2>
+              {editing && (
+                <button type="button" onClick={resetForm} className="text-muted-foreground hover:text-foreground">
+                  <X className="w-5 h-5" />
+                </button>
+              )}
+            </div>
+
             <input
               type="text"
               placeholder="Title"
               required
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-md bg-card border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              className={inputClass}
             />
             <input
               type="text"
               placeholder="Author"
               value={form.author}
               onChange={(e) => setForm({ ...form, author: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-md bg-card border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              className={inputClass}
             />
             <input
               type="text"
-              placeholder="Excerpt"
+              placeholder="Excerpt (short summary)"
               value={form.excerpt}
               onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-md bg-card border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary"
+              className={inputClass}
             />
             <textarea
-              placeholder="Content"
+              placeholder="Content (use double line breaks for paragraphs)"
               required
-              rows={10}
+              rows={12}
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-md bg-card border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary resize-none"
+              className={`${inputClass} resize-none`}
             />
-            <input
-              type="text"
-              placeholder="Image URL"
-              value={form.image_url}
-              onChange={(e) => setForm({ ...form, image_url: e.target.value })}
-              className="w-full px-4 py-2.5 rounded-md bg-card border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary"
-            />
+
+            {/* Image upload */}
+            <div className="space-y-2">
+              <label className="block text-sm font-semibold text-foreground">Cover Image</label>
+              <div className="flex items-center gap-3">
+                <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-secondary text-foreground text-sm hover:bg-secondary/80 transition">
+                  <Upload className="w-4 h-4" />
+                  {imageFile ? imageFile.name : "Upload Image"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) setImageFile(file);
+                    }}
+                  />
+                </label>
+                <span className="text-xs text-muted-foreground">or</span>
+                <input
+                  type="text"
+                  placeholder="Paste image URL"
+                  value={form.image_url}
+                  onChange={(e) => { setForm({ ...form, image_url: e.target.value }); setImageFile(null); }}
+                  className={`${inputClass} flex-1`}
+                />
+              </div>
+              {(form.image_url || imageFile) && (
+                <img
+                  src={imageFile ? URL.createObjectURL(imageFile) : form.image_url}
+                  alt="Preview"
+                  className="w-full h-48 object-cover rounded-md border border-border mt-2"
+                />
+              )}
+            </div>
+
             <label className="flex items-center gap-2 text-sm text-foreground">
               <input
                 type="checkbox"
@@ -123,26 +231,45 @@ const AdminBlog = () => {
               disabled={saving}
               className="w-full py-3 rounded-md bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition disabled:opacity-50"
             >
-              {saving ? "Saving..." : "Create Post"}
+              {saving
+                ? uploading
+                  ? "Uploading image..."
+                  : "Saving..."
+                : editing
+                ? "Update Post"
+                : "Create Post"}
             </button>
           </form>
 
-          <h2 className="text-xl font-bold text-foreground mb-4">Existing Posts</h2>
+          <h2 className="text-xl font-bold text-foreground mb-4">Existing Posts ({posts.length})</h2>
           <div className="space-y-3">
             {posts.map((p) => (
-              <div key={p.id} className="flex items-center justify-between bg-card border border-border rounded-lg p-4">
-                <div>
-                  <p className="font-bold text-foreground text-sm">{p.title}</p>
+              <div key={p.id} className="flex items-center gap-4 bg-card border border-border rounded-lg p-4">
+                {p.image_url && (
+                  <img src={p.image_url} alt="" className="w-16 h-16 object-cover rounded" />
+                )}
+                <div className="flex-1 min-w-0">
+                  <p className="font-bold text-foreground text-sm truncate">{p.title}</p>
                   <p className="text-xs text-muted-foreground">
-                    {p.published ? "Published" : "Draft"} · {new Date(p.date).toLocaleDateString()}
+                    {p.published ? "✅ Published" : "📝 Draft"} · {new Date(p.date).toLocaleDateString()} · {p.author}
                   </p>
                 </div>
-                <button
-                  onClick={() => handleDelete(p.id)}
-                  className="text-destructive hover:text-destructive/80 transition"
-                >
-                  <Trash2 className="w-4 h-4" />
-                </button>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={() => handleEdit(p)}
+                    className="text-accent hover:text-accent/80 transition"
+                    title="Edit"
+                  >
+                    <Edit2 className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(p.id)}
+                    className="text-destructive hover:text-destructive/80 transition"
+                    title="Delete"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
               </div>
             ))}
           </div>
