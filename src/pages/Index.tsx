@@ -137,10 +137,11 @@ const PartnersSection = () => {
 };
 
 const DonateSection = () => {
+  const headingRef = useReveal<HTMLHeadingElement>();
   return (
     <section id="donate" className="py-20 bg-primary">
       <div className="container mx-auto px-4 text-center max-w-2xl">
-        <h2 className="text-3xl md:text-4xl font-black mb-4 text-primary-foreground reveal" ref={useReveal<HTMLHeadingElement>()}>
+        <h2 ref={headingRef} className="text-3xl md:text-4xl font-black mb-4 text-primary-foreground reveal">
           Support the Struggle
         </h2>
         <p className="text-primary-foreground/80 mb-8 text-lg">
