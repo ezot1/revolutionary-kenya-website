@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import RedStar from "@/components/RedStar";
+import { useRevealGroup } from "@/hooks/use-reveal";
 
 const timeline = [
   {
@@ -29,24 +30,32 @@ const timeline = [
   },
 ];
 
-const History = () => (
+const History = () => {
+  const timelineRef = useRevealGroup<HTMLDivElement>();
+  const galleryRef = useRevealGroup<HTMLDivElement>();
+  return (
   <Layout>
     <section className="py-16">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-16">
-          <RedStar className="w-10 h-10 text-primary mx-auto mb-4" />
-          <h1 className="text-4xl md:text-5xl font-black text-foreground mb-4">Our History</h1>
-          <p className="text-muted-foreground text-lg">The road to revolution.</p>
+          <RedStar className="w-10 h-10 text-primary mx-auto mb-4 animate-float" />
+          <h1 className="text-4xl md:text-5xl font-black text-foreground mb-4 opacity-0 animate-fade-in-up">Our History</h1>
+          <p className="text-muted-foreground text-lg opacity-0 animate-fade-in-up [animation-delay:200ms]">The road to revolution.</p>
         </div>
 
-        <div className="relative">
+        <div className="relative" ref={timelineRef}>
           <div className="absolute left-4 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-0.5 bg-primary/30" />
           <div className="space-y-12">
             {timeline.map((item, i) => (
-              <div key={i} className={`relative flex flex-col md:flex-row ${i % 2 === 0 ? "" : "md:flex-row-reverse"} gap-8`}>
+              <div
+                key={i}
+                data-reveal
+                style={{ transitionDelay: `${i * 100}ms` }}
+                className={`reveal relative flex flex-col md:flex-row ${i % 2 === 0 ? "" : "md:flex-row-reverse"} gap-8`}
+              >
                 <div className="hidden md:block md:w-1/2" />
-                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary border-2 border-primary mt-2" />
-                <div className="ml-10 md:ml-0 md:w-1/2 bg-card border border-border rounded-lg p-6">
+                <div className="absolute left-4 md:left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary border-2 border-primary mt-2 animate-pulse-glow" />
+                <div className="ml-10 md:ml-0 md:w-1/2 bg-card border border-border rounded-lg p-6 hover-lift">
                   <h3 className="font-black text-xl text-foreground mb-3">{item.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{item.content}</p>
                 </div>
@@ -55,7 +64,7 @@ const History = () => (
           </div>
         </div>
 
-        <div className="mt-16">
+        <div className="mt-16" ref={galleryRef}>
           <h2 className="text-2xl font-black text-foreground mb-6 text-center">Congress Gallery</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {[
@@ -68,11 +77,16 @@ const History = () => (
               { src: "/images/workshop-1.jpg", alt: "PRC political education workshop" },
               { src: "/images/workshop-2.jpg", alt: "Participants at a PRC workshop session" },
             ].map((img, i) => (
-              <div key={i} className="overflow-hidden rounded-lg border border-border">
+              <div
+                key={i}
+                data-reveal
+                style={{ transitionDelay: `${(i % 4) * 100}ms` }}
+                className="reveal overflow-hidden rounded-lg border border-border group hover:border-primary/50 transition-colors duration-300"
+              >
                 <img
                   src={img.src}
                   alt={img.alt}
-                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                   loading="lazy"
                 />
               </div>
@@ -86,5 +100,6 @@ const History = () => (
     </section>
   </Layout>
 );
+};
 
 export default History;
