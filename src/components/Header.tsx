@@ -18,9 +18,13 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        <Link to="/" className="flex items-center gap-2">
-          <img src="/images/prc-logo.jpg" alt="PRC Logo" className="h-10 w-10 rounded-full object-cover" />
-          <span className="text-xl font-black tracking-tight text-foreground">PRC</span>
+        <Link to="/" className="flex items-center gap-2 group">
+          <img
+            src="/images/prc-logo.jpg"
+            alt="PRC Logo"
+            className="h-10 w-10 rounded-full object-cover transition-transform duration-500 group-hover:rotate-[360deg] ring-1 ring-primary/40"
+          />
+          <span className="text-xl font-black tracking-tight text-foreground transition-colors group-hover:text-primary">PRC</span>
         </Link>
 
         <nav className="hidden md:flex items-center gap-6">
@@ -28,7 +32,7 @@ const Header = () => {
             <Link
               key={l.to}
               to={l.to}
-              className={`text-sm font-semibold transition-colors hover:text-primary ${
+              className={`story-link text-sm font-semibold transition-colors hover:text-primary ${
                 location.pathname === l.to ? "text-primary" : "text-muted-foreground"
               }`}
             >
@@ -40,7 +44,7 @@ const Header = () => {
         <div className="hidden md:block">
           <a
             href="/#donate"
-            className="inline-flex items-center px-5 py-2 rounded-md bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition"
+            className="inline-flex items-center px-5 py-2 rounded-md bg-primary text-primary-foreground font-bold text-sm hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-md hover:shadow-primary/40"
           >
             Donate
           </a>
@@ -56,7 +60,7 @@ const Header = () => {
       </div>
 
       {open && (
-        <div className="md:hidden bg-background border-b border-border px-4 pb-4 space-y-3">
+        <div className="md:hidden bg-background border-b border-border px-4 pb-4 space-y-3 animate-fade-in-down">
           {navLinks.map((l) => (
             <Link
               key={l.to}
