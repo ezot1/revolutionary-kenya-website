@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
-import { Trash2, Edit2, Plus, X, Upload } from "lucide-react";
+import { Trash2, Edit2, X, Upload, LogOut } from "lucide-react";
 
 interface Post {
   id: string;
@@ -17,6 +18,10 @@ interface Post {
 }
 
 const AdminBlog = () => {
+  const navigate = useNavigate();
+  const [authChecked, setAuthChecked] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [posts, setPosts] = useState<Post[]>([]);
   const [editing, setEditing] = useState<Post | null>(null);
   const [form, setForm] = useState({
@@ -31,6 +36,32 @@ const AdminBlog = () => {
   const [uploading, setUploading] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
 
+  useEffect(() => {
+    const check = async (session: Awaited<ReturnType<typeof supabase.auth.getSession>>["data"]["session"]) => {
+      if (!session) {
+        navigate("/auth", { replace: true });
+        return;
+      }
+      setUserEmail(session.user.email ?? null);
+      const { data } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", session.user.id)
+        .eq("role", "admin")
+        .maybeSingle();
+      setIsAdmin(!!data);
+      setAuthChecked(true);
+    };
+    supabase.auth.getSession().then(({ data }) => check(data.session));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => check(session));
+    return () => sub.subscription.unsubscribe();
+  }, [navigate]);
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
+    navigate("/auth", { replace: true });
+  };
+
   const fetchPosts = async () => {
     const { data } = await supabase
       .from("posts")
@@ -40,8 +71,8 @@ const AdminBlog = () => {
   };
 
   useEffect(() => {
-    fetchPosts();
-  }, []);
+    if (isAdmin) fetchPosts();
+  }, [isAdmin]);
 
   const uploadImage = async (file: File): Promise<string | null> => {
     const ext = file.name.split(".").pop();
@@ -133,11 +164,48 @@ const AdminBlog = () => {
   const inputClass =
     "w-full px-4 py-2.5 rounded-md bg-card border border-border text-foreground text-sm focus:outline-none focus:ring-2 focus:ring-primary";
 
+  if (!authChecked) {
+    return (
+      <Layout>
+        <section className="py-16 text-center text-muted-foreground">Loading...</section>
+      </Layout>
+    );
+  }
+
+  if (!isAdmin) {
+    return (
+      <Layout>
+        <section className="py-16">
+          <div className="container mx-auto px-4 max-w-md text-center space-y-4">
+            <h1 className="text-2xl font-black text-foreground">Access denied</h1>
+            <p className="text-muted-foreground text-sm">
+              You're signed in as <span className="font-semibold">{userEmail}</span>, but this account does not have admin privileges.
+            </p>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-secondary text-foreground text-sm hover:bg-secondary/80 transition"
+            >
+              <LogOut className="w-4 h-4" /> Sign out
+            </button>
+          </div>
+        </section>
+      </Layout>
+    );
+  }
+
   return (
     <Layout>
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h1 className="text-3xl font-black text-foreground mb-8">Blog Admin</h1>
+          <div className="flex items-center justify-between mb-8">
+            <h1 className="text-3xl font-black text-foreground">Blog Admin</h1>
+            <button
+              onClick={handleLogout}
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary text-foreground text-xs hover:bg-secondary/80 transition"
+            >
+              <LogOut className="w-3.5 h-3.5" /> Sign out
+            </button>
+          </div>
 
           <form onSubmit={handleSubmit} className="space-y-4 mb-12 bg-card border border-border rounded-lg p-6">
             <div className="flex items-center justify-between">
