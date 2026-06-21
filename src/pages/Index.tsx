@@ -72,7 +72,7 @@ const About = () => {
         </div>
         <div className="lg:col-span-7 space-y-6 reveal" data-reveal>
           <p className="font-serif-editorial text-xl text-foreground/90 leading-relaxed">
-            PRC is rooted in the political tradition of <strong className="text-primary">Marxism, Leninism and Trotskyism</strong>. We organize workers, youth, women and the oppressed for the socialist transformation of society.
+            PRC is rooted in the <strong className="text-primary">revolutionary socialist tradition</strong>. We organize workers, youth, women and the oppressed for the socialist transformation of society.
           </p>
           <p className="text-muted-foreground leading-relaxed">
             Capitalism cannot deliver dignified jobs, housing, healthcare or a livable planet. Imperialism plunders the Global South. Patriarchy and racism are wielded to divide us. We fight for a different world — one organized by and for the working class.
