@@ -70,7 +70,9 @@ const Contact = () => {
                 <Mail className="w-5 h-5 text-primary mt-0.5" />
                 <div>
                   <p className="font-bold text-foreground text-sm">Email</p>
-                  <p className="text-muted-foreground text-sm">info@prc-kenya.org</p>
+                  <p className="text-muted-foreground text-sm">
+                    <a href="mailto:info@prca.world" className="hover:text-primary transition">info@prca.world</a>
+                  </p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
