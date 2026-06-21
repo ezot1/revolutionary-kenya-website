@@ -11,6 +11,7 @@ const types = ["All", "Statement", "Position Paper", "Resolution", "Pamphlet", "
 export default function Publications() {
   const [q, setQ] = useState("");
   const [type, setType] = useState("All");
+  const [selected, setSelected] = useState<Article | null>(null);
   const filtered = docs.filter((d) =>
     (type === "All" || d.type === type) && d.title.toLowerCase().includes(q.toLowerCase())
   );
@@ -50,7 +51,11 @@ export default function Publications() {
       <section className="py-12">
         <div className="container mx-auto px-4 space-y-px bg-border">
           {filtered.map((d) => (
-            <article key={d.title} className="bg-background p-6 flex flex-col sm:flex-row sm:items-center gap-4 hover:bg-secondary/40 transition group cursor-pointer">
+            <article
+              key={d.title}
+              onClick={() => setSelected(d)}
+              className="bg-background p-6 flex flex-col sm:flex-row sm:items-center gap-4 hover:bg-secondary/40 transition group cursor-pointer"
+            >
               <FileText className="w-6 h-6 text-primary" />
               <div className="flex-1">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-primary font-bold mb-1">{d.type}</p>
@@ -64,6 +69,37 @@ export default function Publications() {
           )}
         </div>
       </section>
+      {selected && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm overflow-y-auto"
+          onClick={() => setSelected(null)}
+        >
+          <div
+            className="min-h-full flex items-start justify-center p-4 sm:p-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <article className="bg-background border border-border max-w-3xl w-full p-8 sm:p-12 relative">
+              <button
+                onClick={() => setSelected(null)}
+                aria-label="Close article"
+                className="absolute top-4 right-4 w-9 h-9 grid place-items-center border border-border text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition"
+              >
+                <X className="w-4 h-4" />
+              </button>
+              <p className="text-[10px] uppercase tracking-[0.18em] text-primary font-bold mb-3">{selected.type}</p>
+              <h1 className="font-display text-3xl sm:text-4xl text-foreground leading-tight mb-3">{selected.title}</h1>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-8">
+                {selected.author ? `${selected.author} · ` : ""}{new Date(selected.date).toLocaleDateString()}
+              </p>
+              <div className="font-serif-editorial text-lg text-foreground/90 leading-relaxed space-y-5">
+                {selected.body.split(/\n\n+/).map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+            </article>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }
