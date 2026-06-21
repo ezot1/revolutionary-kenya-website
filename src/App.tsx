@@ -12,6 +12,15 @@ import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
 import AdminBlog from "./pages/AdminBlog";
 import Auth from "./pages/Auth";
+import About from "./pages/About";
+import Campaigns from "./pages/Campaigns";
+import Education from "./pages/Education";
+import Publications from "./pages/Publications";
+import International from "./pages/International";
+import Media from "./pages/Media";
+import Events from "./pages/Events";
+import Join from "./pages/Join";
+import Donate from "./pages/Donate";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +39,15 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin/blog" element={<AdminBlog />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/campaigns" element={<Campaigns />} />
+          <Route path="/education" element={<Education />} />
+          <Route path="/publications" element={<Publications />} />
+          <Route path="/international" element={<International />} />
+          <Route path="/media" element={<Media />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/join" element={<Join />} />
+          <Route path="/donate" element={<Donate />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
