@@ -38,6 +38,63 @@ export type Database = {
         }
         Relationships: []
       }
+      event_rsvps: {
+        Row: {
+          created_at: string
+          email: string
+          event_title: string
+          full_name: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          event_title: string
+          full_name: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          event_title?: string
+          full_name?: string
+          id?: string
+        }
+        Relationships: []
+      }
+      memberships: {
+        Row: {
+          city: string | null
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          motivation: string | null
+          occupation: string | null
+          phone: string | null
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          motivation?: string | null
+          occupation?: string | null
+          phone?: string | null
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          motivation?: string | null
+          occupation?: string | null
+          phone?: string | null
+        }
+        Relationships: []
+      }
       posts: {
         Row: {
           author: string
@@ -74,6 +131,24 @@ export type Database = {
           published?: boolean
           slug?: string
           title?: string
+        }
+        Relationships: []
+      }
+      subscribers: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
         }
         Relationships: []
       }
