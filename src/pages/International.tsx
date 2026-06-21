@@ -4,11 +4,6 @@ import { Globe2 } from "lucide-react";
 
 const partners = [
   { name: "International Socialist League", region: "Global", note: "PRC is the Kenyan section of the ISL." },
-  { name: "International Socialist Alternative", region: "Global", note: "Fraternal relations." },
-  { name: "Socialist Alternative", region: "United States / UK / Ireland", note: "Sister organizations in the imperialist core." },
-  { name: "Revolutionary Communist International", region: "Global", note: "Engagement on common political tasks." },
-  { name: "Africa-wide Revolutionary Network", region: "Africa", note: "Building Pan-African revolutionary collaboration." },
-  { name: "Left Voice", region: "Americas", note: "Comradely political exchange." },
 ];
 
 export default function International() {

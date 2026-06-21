@@ -1,24 +1,17 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
-import { Search, FileText } from "lucide-react";
+import { Search, FileText, X } from "lucide-react";
+import { articles, type Article } from "@/content/articles";
 
-const docs = [
-  { type: "Statement", title: "On the Gen-Z Uprising of 2024", date: "2024-07-10" },
-  { type: "Position Paper", title: "For a Workers' Government in Kenya", date: "2025-01-18" },
-  { type: "Resolution", title: "Founding Resolutions of the PRC", date: "2025-03-22" },
-  { type: "Pamphlet", title: "What is Permanent Revolution?", date: "2025-05-09" },
-  { type: "Conference Document", title: "Theses on Imperialism in Africa", date: "2025-06-14" },
-  { type: "Research Report", title: "The Gig Economy in Nairobi: A Class Analysis", date: "2025-08-02" },
-  { type: "Book", title: "Permanent Revolution & the African Working Class", date: "2025-09-30" },
-  { type: "Archive", title: "Selected Writings of Kenyan Marxists 1960–1990", date: "2025-11-11" },
-];
+const docs = articles;
 
 const types = ["All", "Statement", "Position Paper", "Resolution", "Pamphlet", "Conference Document", "Research Report", "Book", "Archive"];
 
 export default function Publications() {
   const [q, setQ] = useState("");
   const [type, setType] = useState("All");
+  const [selected, setSelected] = useState<Article | null>(null);
   const filtered = docs.filter((d) =>
     (type === "All" || d.type === type) && d.title.toLowerCase().includes(q.toLowerCase())
   );
@@ -58,7 +51,11 @@ export default function Publications() {
       <section className="py-12">
         <div className="container mx-auto px-4 space-y-px bg-border">
           {filtered.map((d) => (
-            <article key={d.title} className="bg-background p-6 flex flex-col sm:flex-row sm:items-center gap-4 hover:bg-secondary/40 transition group cursor-pointer">
+            <article
+              key={d.title}
+              onClick={() => setSelected(d)}
+              className="bg-background p-6 flex flex-col sm:flex-row sm:items-center gap-4 hover:bg-secondary/40 transition group cursor-pointer"
+            >
               <FileText className="w-6 h-6 text-primary" />
               <div className="flex-1">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-primary font-bold mb-1">{d.type}</p>
@@ -72,6 +69,37 @@ export default function Publications() {
           )}
         </div>
       </section>
+      {selected && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm overflow-y-auto"
+          onClick={() => setSelected(null)}
+        >
+          <div
+            className="min-h-full flex items-start justify-center p-4 sm:p-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <article className="bg-background border border-border max-w-3xl w-full p-8 sm:p-12 relative">
+              <button
+                onClick={() => setSelected(null)}
+                aria-label="Close article"
+                className="absolute top-4 right-4 w-9 h-9 grid place-items-center border border-border text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition"
+              >
+                <X className="w-4 h-4" />
+              </button>
+              <p className="text-[10px] uppercase tracking-[0.18em] text-primary font-bold mb-3">{selected.type}</p>
+              <h1 className="font-display text-3xl sm:text-4xl text-foreground leading-tight mb-3">{selected.title}</h1>
+              <p className="text-xs text-muted-foreground uppercase tracking-wider mb-8">
+                {selected.author ? `${selected.author} · ` : ""}{new Date(selected.date).toLocaleDateString()}
+              </p>
+              <div className="font-serif-editorial text-lg text-foreground/90 leading-relaxed space-y-5">
+                {selected.body.split(/\n\n+/).map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+            </article>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }

@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
-import { ArrowRight, Hammer, GraduationCap, Users, Leaf, Globe2, Building2, Wifi, Heart } from "lucide-react";
+import { ArrowRight, Hammer, GraduationCap, Users, Leaf, Globe2, Building2, Wifi } from "lucide-react";
 
 const items = [
   { icon: Hammer, title: "Fight Against Unemployment", goal: "Jobs and a living wage for every worker.", desc: "Building organizing committees in unemployed youth networks across Kenya." },
@@ -8,7 +8,6 @@ const items = [
   { icon: Wifi, title: "Organize Gig Workers", goal: "Unionize platform labor — riders, drivers, couriers.", desc: "Worker-led organizing against the gig giants and their algorithmic exploitation." },
   { icon: Users, title: "Workers Against Privatization", goal: "Stop the sell-off of state assets to foreign capital.", desc: "Mass campaigns in transport, energy and ports." },
   { icon: Leaf, title: "Climate Justice Campaign", goal: "Just transition under democratic workers' control.", desc: "Linking environmental struggle to labor and Indigenous land defense." },
-  { icon: Heart, title: "Tax the Rich", goal: "Expropriate from the billionaires and corporations.", desc: "Mass demands for emergency taxation to fund jobs, housing and health." },
   { icon: Globe2, title: "Solidarity With Palestine", goal: "End complicity. End the occupation.", desc: "Coordinated BDS, protest and political education work." },
   { icon: GraduationCap, title: "Anti-Imperialist Africa", goal: "Africa for Africans — out with imperialism, French, US and Chinese alike.", desc: "Pan-African revolutionary collaboration across the continent." },
 ];
