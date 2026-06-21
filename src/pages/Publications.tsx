@@ -1,18 +1,10 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
-import { Search, FileText } from "lucide-react";
+import { Search, FileText, X } from "lucide-react";
+import { articles, type Article } from "@/content/articles";
 
-const docs = [
-  { type: "Statement", title: "On the Gen-Z Uprising of 2024", date: "2024-07-10" },
-  { type: "Position Paper", title: "For a Workers' Government in Kenya", date: "2025-01-18" },
-  { type: "Resolution", title: "Founding Resolutions of the PRC", date: "2025-03-22" },
-  { type: "Pamphlet", title: "What is Permanent Revolution?", date: "2025-05-09" },
-  { type: "Conference Document", title: "Theses on Imperialism in Africa", date: "2025-06-14" },
-  { type: "Research Report", title: "The Gig Economy in Nairobi: A Class Analysis", date: "2025-08-02" },
-  { type: "Book", title: "Permanent Revolution & the African Working Class", date: "2025-09-30" },
-  { type: "Archive", title: "Selected Writings of Kenyan Marxists 1960–1990", date: "2025-11-11" },
-];
+const docs = articles;
 
 const types = ["All", "Statement", "Position Paper", "Resolution", "Pamphlet", "Conference Document", "Research Report", "Book", "Archive"];
 
