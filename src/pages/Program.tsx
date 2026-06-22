@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import RedStar from "@/components/RedStar";
+import { FileText, Download } from "lucide-react";
+import programPdf from "@/assets/prc-program.pdf.asset.json";
 
 const sections = [
   {
@@ -164,10 +166,27 @@ const Program = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <RedStar className="w-10 h-10 text-primary mx-auto mb-4" />
-            <h1 className="text-4xl md:text-5xl font-black text-foreground mb-4">Party Program</h1>
+            <h1 className="text-4xl md:text-5xl font-black text-foreground mb-4">Programmatic Bases</h1>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              The founding program of the Permanent Revolutionary Congress, adopted at the inaugural congress.
+              The programmatic bases of the Permanent Revolutionary Congress, adopted at the inaugural congress.
             </p>
+            <div className="mt-8 max-w-2xl mx-auto border-2 border-primary bg-primary/5 p-6 text-left flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
+              <div className="flex gap-3 items-start">
+                <FileText className="w-8 h-8 text-primary shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-black text-foreground uppercase tracking-wide text-sm">Full Program Document</h3>
+                  <p className="text-xs text-muted-foreground mt-1">Read or download the complete Program of the Permanent Revolutionary Congress (PDF).</p>
+                </div>
+              </div>
+              <a
+                href={programPdf.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground font-bold uppercase tracking-wider text-xs hover:bg-primary/90 transition shrink-0"
+              >
+                <Download className="w-4 h-4" /> Access Full Program
+              </a>
+            </div>
           </div>
 
           <div className="flex gap-8">
