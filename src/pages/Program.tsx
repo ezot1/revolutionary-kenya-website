@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import Layout from "@/components/Layout";
 import RedStar from "@/components/RedStar";
 import { FileText, Download } from "lucide-react";
-import programPdf from "@/assets/prc-program.pdf.asset.json";
+
+const PROGRAM_PDF_URL = "/docs/prc-program.pdf";
 
 const sections = [
   {
@@ -170,22 +171,45 @@ const Program = () => {
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               The programmatic bases of the Permanent Revolutionary Congress, adopted at the inaugural congress.
             </p>
-            <div className="mt-8 max-w-2xl mx-auto border-2 border-primary bg-primary/5 p-6 text-left flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between">
-              <div className="flex gap-3 items-start">
-                <FileText className="w-8 h-8 text-primary shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-black text-foreground uppercase tracking-wide text-sm">Full Program Document</h3>
-                  <p className="text-xs text-muted-foreground mt-1">Read or download the complete Program of the Permanent Revolutionary Congress (PDF).</p>
+            <div className="mt-8 max-w-4xl mx-auto border-2 border-primary bg-primary/5 text-left">
+              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center justify-between p-6 border-b-2 border-primary">
+                <div className="flex gap-3 items-start">
+                  <FileText className="w-8 h-8 text-primary shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-black text-foreground uppercase tracking-wide text-sm">Full Program Document</h3>
+                    <p className="text-xs text-muted-foreground mt-1">Read the complete Program of the Permanent Revolutionary Congress below, or download the PDF.</p>
+                  </div>
+                </div>
+                <div className="flex gap-2 shrink-0">
+                  <a
+                    href={PROGRAM_PDF_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-4 py-3 border-2 border-primary text-primary font-bold uppercase tracking-wider text-xs hover:bg-primary hover:text-primary-foreground transition"
+                  >
+                    Open in new tab
+                  </a>
+                  <a
+                    href={PROGRAM_PDF_URL}
+                    download
+                    className="inline-flex items-center gap-2 px-4 py-3 bg-primary text-primary-foreground font-bold uppercase tracking-wider text-xs hover:bg-primary/90 transition"
+                  >
+                    <Download className="w-4 h-4" /> Download
+                  </a>
                 </div>
               </div>
-              <a
-                href={programPdf.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-primary-foreground font-bold uppercase tracking-wider text-xs hover:bg-primary/90 transition shrink-0"
+              <object
+                data={PROGRAM_PDF_URL}
+                type="application/pdf"
+                className="w-full h-[80vh] bg-background"
+                aria-label="Program of the Permanent Revolutionary Congress"
               >
-                <Download className="w-4 h-4" /> Access Full Program
-              </a>
+                <iframe
+                  src={PROGRAM_PDF_URL}
+                  title="Program of the Permanent Revolutionary Congress"
+                  className="w-full h-[80vh]"
+                />
+              </object>
             </div>
           </div>
 
