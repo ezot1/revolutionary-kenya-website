@@ -8,7 +8,7 @@ const columns = [
     title: "Organization",
     links: [
       { to: "/about", label: "About PRC" },
-      { to: "/program", label: "Party Program" },
+      { to: "/program", label: "Programmatic Bases" },
       { to: "/history", label: "Our History" },
       { to: "/international", label: "International" },
     ],
