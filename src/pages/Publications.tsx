@@ -97,6 +97,10 @@ export default function Publications() {
                   <p key={i}>{p}</p>
                 ))}
               </div>
+              <div className="mt-10 pt-6 border-t border-border">
+                <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Share this document</p>
+                <SocialShare inline />
+              </div>
             </article>
           </div>
         </div>
