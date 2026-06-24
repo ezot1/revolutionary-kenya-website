@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import SocialShare from "@/components/SocialShare";
 import { supabase } from "@/lib/supabase";
 import { ArrowLeft } from "lucide-react";
 
