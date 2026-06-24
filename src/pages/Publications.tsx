@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
+import SocialShare from "@/components/SocialShare";
 import { Search, FileText, X } from "lucide-react";
 import { articles, type Article } from "@/content/articles";
 
@@ -95,6 +96,10 @@ export default function Publications() {
                 {selected.body.split(/\n\n+/).map((p, i) => (
                   <p key={i}>{p}</p>
                 ))}
+              </div>
+              <div className="mt-10 pt-6 border-t border-border">
+                <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Share this document</p>
+                <SocialShare inline />
               </div>
             </article>
           </div>

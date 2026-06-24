@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/Layout";
+import SocialShare from "@/components/SocialShare";
 import { supabase } from "@/lib/supabase";
 import { ArrowLeft } from "lucide-react";
 
@@ -76,6 +77,10 @@ const BlogPost = () => {
             {post.content.split("\n\n").map((paragraph, i) => (
               <p key={i} className="text-muted-foreground leading-relaxed mb-4">{paragraph}</p>
             ))}
+          </div>
+          <div className="mt-12 pt-8 border-t border-border">
+            <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Share this article</p>
+            <SocialShare inline />
           </div>
         </div>
       </article>
