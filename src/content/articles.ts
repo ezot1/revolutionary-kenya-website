@@ -16,6 +16,8 @@ export interface Article {
   image?: string;
 }
 
+export { slugify } from "./publication-meta";
+
 export const articles: Article[] = [
   {
     type: "Statement",
