@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import { ArrowRight, Hammer, GraduationCap, Users, Leaf, Globe2, Building2, Wifi } from "lucide-react";
 
@@ -15,6 +16,8 @@ const items = [
 export default function Campaigns() {
   return (
     <Layout>
+      <SEO title={"Campaigns"} description={"Active PRC campaigns — workers' rights, gig economy, climate justice, anti-imperialism and more."} path={"/campaigns"} />
+      
       <PageHero
         kicker="Campaigns"
         title="The fights we're in."

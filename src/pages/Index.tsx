@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import NewsletterForm from "@/components/NewsletterForm";
@@ -271,6 +272,8 @@ const Index = () => {
 
   return (
     <Layout>
+      <SEO title={"Workers' Power. Socialist Democracy. Permanent Revolution."} description={"PRC organizes workers, youth and the oppressed for socialist transformation in Kenya and across Africa."} path={"/"} />
+      
       <Hero />
       <About />
       <Campaigns />

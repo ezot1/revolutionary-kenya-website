@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEO from "@/components/SEO";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import SocialShare from "@/components/SocialShare";
@@ -18,6 +19,8 @@ export default function Publications() {
   );
   return (
     <Layout>
+      <SEO title={"Publications"} description={"Statements, resolutions, theses and research from the Permanent Revolutionary Congress."} path={"/publications"} />
+      
       <PageHero
         kicker="Publications"
         title="The PRC digital library."
