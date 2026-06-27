@@ -57,7 +57,18 @@ export default function Publications() {
               onClick={() => setSelected(d)}
               className="bg-background p-6 flex flex-col sm:flex-row sm:items-center gap-4 hover:bg-secondary/40 transition group cursor-pointer"
             >
-              <FileText className="w-6 h-6 text-primary" />
+              {d.image ? (
+                <img
+                  src={d.image}
+                  alt={d.title}
+                  loading="lazy"
+                  width={1024}
+                  height={640}
+                  className="w-full sm:w-40 h-40 sm:h-24 object-cover border border-border"
+                />
+              ) : (
+                <FileText className="w-6 h-6 text-primary" />
+              )}
               <div className="flex-1">
                 <p className="text-[10px] uppercase tracking-[0.18em] text-primary font-bold mb-1">{d.type}</p>
                 <h3 className="font-display text-lg text-foreground group-hover:text-primary transition">{d.title}</h3>
@@ -92,6 +103,16 @@ export default function Publications() {
               <p className="text-xs text-muted-foreground uppercase tracking-wider mb-8">
                 {selected.author ? `${selected.author} · ` : ""}{new Date(selected.date).toLocaleDateString()}
               </p>
+              {selected.image && (
+                <img
+                  src={selected.image}
+                  alt={selected.title}
+                  loading="lazy"
+                  width={1024}
+                  height={640}
+                  className="w-full h-auto mb-8 border border-border"
+                />
+              )}
               <div className="font-serif-editorial text-lg text-foreground/90 leading-relaxed space-y-5">
                 {selected.body.split(/\n\n+/).map((p, i) => (
                   <p key={i}>{p}</p>
