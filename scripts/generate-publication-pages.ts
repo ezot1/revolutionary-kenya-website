@@ -4,7 +4,7 @@
 // the SPA at /publications?p=<slug>.
 import { writeFileSync, mkdirSync, rmSync, existsSync } from "fs";
 import { resolve } from "path";
-import { articles, publicImageMap, slugify } from "../src/content/articles";
+import { publicationMeta, slugify } from "../src/content/publication-meta";
 
 const BASE_URL = "https://prca.world";
 const OUT_DIR = resolve("public/p");
@@ -22,13 +22,12 @@ function esc(s: string) {
 }
 
 let written = 0;
-for (const a of articles) {
+for (const a of publicationMeta) {
   const slug = slugify(a.title);
-  const image = publicImageMap[a.title] || "/images/prc-og.jpg";
-  const imageUrl = `${BASE_URL}${image}`;
+  const imageUrl = `${BASE_URL}${a.image}`;
   const canonical = `${BASE_URL}/p/${slug}`;
   const target = `/publications?p=${encodeURIComponent(slug)}`;
-  const description = (a.body.split(/\n\n+/)[0] || "").slice(0, 200).replace(/\s+/g, " ").trim();
+  const description = a.description;
 
   const html = `<!doctype html>
 <html lang="en">
