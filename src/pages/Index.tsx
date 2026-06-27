@@ -23,6 +23,8 @@ const Hero = () => (
       className="absolute inset-0 w-full h-full object-cover opacity-50 animate-ken-burns"
       width={1920}
       height={1080}
+      fetchPriority="high"
+      decoding="async"
     />
     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/30" />
     <div className="absolute inset-0 grain" />
