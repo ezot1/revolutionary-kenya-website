@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import { Globe2 } from "lucide-react";
 
@@ -9,6 +10,8 @@ const partners = [
 export default function International() {
   return (
     <Layout>
+      <SEO title={"International"} description={"The PRC's affiliation with the International Socialist League and its revolutionary partners worldwide."} path={"/international"} />
+      
       <PageHero
         kicker="International"
         title="The struggle is global."

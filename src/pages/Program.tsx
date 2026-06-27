@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import RedStar from "@/components/RedStar";
@@ -164,6 +165,8 @@ const Program = () => {
 
   return (
     <Layout>
+      <SEO title={"Programmatic Bases"} description={"The PRC programme: demands and socialist vision for jobs, wages, housing, healthcare, climate justice and workers' power."} path={"/program"} />
+      
       <section className="py-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEO from "@/components/SEO";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import { supabase } from "@/lib/supabase";
@@ -28,6 +29,8 @@ export default function Join() {
 
   return (
     <Layout>
+      <SEO title={"Join PRC"} description={"Become a member of the Permanent Revolutionary Congress. Membership application and ways to get involved."} path={"/join"} />
+      
       <PageHero kicker="Join PRC" title="Become a member." lede="Membership in the PRC means joining a disciplined revolutionary organization. We organize together. We study together. We fight together." />
       <section className="py-16">
         <div className="container mx-auto px-4 grid lg:grid-cols-12 gap-12">

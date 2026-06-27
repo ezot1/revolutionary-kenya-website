@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SEO from "@/components/SEO";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import { supabase } from "@/lib/supabase";
@@ -34,6 +35,8 @@ export default function Events() {
 
   return (
     <Layout>
+      <SEO title={"Events"} description={"Upcoming PRC conferences, political education classes, public meetings and campaign launches."} path={"/events"} />
+      
       <PageHero kicker="Events" title="Calendar of struggle." lede="Conferences, public meetings, political education and campaign launches." />
 
       <section className="py-16 border-b border-border">

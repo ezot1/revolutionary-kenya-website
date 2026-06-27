@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import SEO from "@/components/SEO";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import { ArrowRight } from "lucide-react";
@@ -24,6 +25,8 @@ const timeline = [
 export default function About() {
   return (
     <Layout>
+      <SEO title={"About the Permanent Revolutionary Congress"} description={"Mission, history, political tradition and what the PRC stands for in Kenya and internationally."} path={"/about"} />
+      
       <PageHero
         kicker="About PRC"
         title="A revolutionary socialist organization built for the struggles ahead."

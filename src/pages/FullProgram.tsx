@@ -1,4 +1,5 @@
 import Layout from "@/components/Layout";
+import SEO from "@/components/SEO";
 import RedStar from "@/components/RedStar";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Download } from "lucide-react";
@@ -140,6 +141,8 @@ const sections: Section[] = [
 const FullProgram = () => {
   return (
     <Layout>
+      <SEO title={"Full Programme of the PRC"} description={"Complete transitional programme of the Permanent Revolutionary Congress."} path={"/program/full"} />
+      
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
           <Link
