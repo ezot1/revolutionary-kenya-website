@@ -16,25 +16,7 @@ export interface Article {
   image?: string;
 }
 
-export function slugify(s: string) {
-  return s
-    .toLowerCase()
-    .replace(/['']/g, "")
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "");
-}
-
-// Public URLs for crawlers (must match files copied to /public/images/publications/)
-export const publicImageMap: Record<string, string> = {
-  "On the Gen-Z Uprising of 2024": "/images/publications/gen-z-uprising.jpg",
-  "For a Workers' Government in Kenya": "/images/publications/workers-government.jpg",
-  "Founding Resolutions of the PRC": "/images/publications/founding-resolutions.jpg",
-  "What is Permanent Revolution?": "/images/publications/permanent-revolution.jpg",
-  "Theses on Imperialism in Africa": "/images/publications/imperialism-africa.jpg",
-  "The Gig Economy in Nairobi: A Class Analysis": "/images/publications/gig-economy.jpg",
-  "Permanent Revolution & the African Working Class": "/images/publications/african-working-class.jpg",
-  "Selected Writings of Kenyan Marxists 1960–1990": "/images/publications/kenyan-marxists.jpg",
-};
+export { slugify } from "./publication-meta";
 
 export const articles: Article[] = [
   {
