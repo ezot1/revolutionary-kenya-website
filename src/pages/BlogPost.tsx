@@ -32,6 +32,32 @@ const BlogPost = () => {
       });
   }, [slug]);
 
+  useEffect(() => {
+    if (!post) return;
+    const setMeta = (attr: "property" | "name", key: string, value: string) => {
+      let tag = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
+      if (!tag) {
+        tag = document.createElement("meta");
+        tag.setAttribute(attr, key);
+        document.head.appendChild(tag);
+      }
+      tag.setAttribute("content", value);
+    };
+    const origin = window.location.origin;
+    const img = post.image_url
+      ? post.image_url.startsWith("http")
+        ? post.image_url
+        : `${origin}${post.image_url}`
+      : `${origin}/images/prc-og.jpg`;
+    document.title = `${post.title} | PRC`;
+    setMeta("property", "og:title", post.title);
+    setMeta("property", "og:image", img);
+    setMeta("property", "og:url", window.location.href);
+    setMeta("property", "og:type", "article");
+    setMeta("name", "twitter:title", post.title);
+    setMeta("name", "twitter:image", img);
+  }, [post]);
+
   if (loading) {
     return (
       <Layout>
