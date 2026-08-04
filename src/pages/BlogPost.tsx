@@ -74,9 +74,33 @@ const BlogPost = () => {
           <h1 className="text-3xl md:text-4xl font-black text-foreground mb-8">{post.title}</h1>
 
           <div className="prose prose-invert max-w-none">
-            {post.content.split("\n\n").map((paragraph, i) => (
-              <p key={i} className="text-muted-foreground leading-relaxed mb-4">{paragraph}</p>
-            ))}
+            {post.content.split("\n\n").map((paragraph, i) => {
+              const img = paragraph.trim().match(/^!\[(.*?)\]\((.*?)\)$/);
+              if (img) {
+                return (
+                  <figure key={i} className="my-8">
+                    <img
+                      src={img[2]}
+                      alt={img[1]}
+                      loading="lazy"
+                      className="w-full rounded-lg object-cover border border-border"
+                    />
+                    {img[1] && (
+                      <figcaption className="text-xs text-muted-foreground mt-2 italic">{img[1]}</figcaption>
+                    )}
+                  </figure>
+                );
+              }
+              const heading = paragraph.trim().match(/^\*\*(.+)\*\*$/);
+              if (heading) {
+                return (
+                  <h2 key={i} className="font-display text-2xl text-foreground mt-10 mb-4">{heading[1]}</h2>
+                );
+              }
+              return (
+                <p key={i} className="text-muted-foreground leading-relaxed mb-4">{paragraph}</p>
+              );
+            })}
           </div>
           <div className="mt-12 pt-8 border-t border-border">
             <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Share this article</p>
