@@ -1,12 +1,3 @@
-import genZUprising from "@/assets/publications/gen-z-uprising.jpg";
-import workersGovernment from "@/assets/publications/workers-government.jpg";
-import foundingResolutions from "@/assets/publications/founding-resolutions.jpg";
-import permanentRevolution from "@/assets/publications/permanent-revolution.jpg";
-import imperialismAfrica from "@/assets/publications/imperialism-africa.jpg";
-import gigEconomy from "@/assets/publications/gig-economy.jpg";
-import africanWorkingClass from "@/assets/publications/african-working-class.jpg";
-import kenyanMarxists from "@/assets/publications/kenyan-marxists.jpg";
-
 export interface Article {
   type: string;
   title: string;
@@ -22,7 +13,7 @@ export const articles: Article[] = [
     title: "On the Gen-Z Uprising of 2024",
     date: "2024-07-10",
     author: "PRC Political Committee",
-    image: genZUprising,
+    image: "/images/protest-1.jpg",
     body: `The June and July mobilizations of 2024 marked a rupture in Kenyan political life. What began as opposition to the Finance Bill exploded into a generational revolt against the entire regime of austerity, debt servitude and police violence administered by the Kenya Kwanza government on behalf of the IMF and international capital. The youth who flooded the streets of Nairobi, Mombasa, Kisumu, Nakuru and Eldoret were not asking for reform. They were declaring that the present order is illegitimate.
 
 The political instinct of the masses outran the political organizations of the masses. Without a recognized leadership, without a programmatic centre, hundreds of thousands of young workers and students coordinated through social media, neighborhood assemblies and improvised marshalling. They breached Parliament, forced the withdrawal of the bill, and shook the cabinet. Then the limits of spontaneity asserted themselves. The state regrouped. Abductions and extrajudicial killings followed. The bourgeois opposition rushed in to absorb the energy of the streets into a coalition government, neutralizing the threat to capital under the cover of a "broad-based" administration.
@@ -46,7 +37,7 @@ To the youth who marched: your courage opened a door. Walk through it. Organize 
     title: "For a Workers' Government in Kenya",
     date: "2025-01-18",
     author: "PRC National Bureau",
-    image: workersGovernment,
+    image: "/images/congress-hall.jpg",
     body: `The slogan of a workers' government is not a rhetorical flourish. It is the strategic axis around which the entire programme of the Permanent Revolutionary Congress is organized. This paper sets out what we mean by it, why we counterpose it to every variant of bourgeois government, and how we propose to fight for it under Kenyan conditions.
 
 A workers' government, in the sense used by the early Communist International and developed by the Fourth International, is a government that rests on the independent organizations of the working class — trade unions, factory committees, neighborhood assemblies, councils of delegates — and that carries through the transitional measures necessary to break the power of capital. It is not a parliamentary cabinet of "left" ministers administering the existing state. It is the political expression of the working class organized as the ruling class.
@@ -80,7 +71,7 @@ The Gen-Z uprising of 2024 made this question concrete for millions. The next up
     title: "Founding Resolutions of the PRC",
     date: "2025-03-22",
     author: "PRC Founding Congress",
-    image: foundingResolutions,
+    image: "/images/congress-vote.jpg",
     body: `The Founding Congress of the Permanent Revolutionary Congress, meeting in Nairobi in March 2025, adopted the following resolutions as the political foundation of the organization.
 
 1. Character of the Organization. The PRC constitutes itself as a revolutionary socialist organization of the Kenyan working class, oriented to the building of a mass revolutionary party in Kenya and to the construction of a revolutionary international. We affiliate as the Kenyan section of the International Socialist League. We claim continuity with the best traditions of the international workers' movement and with the anti-colonial, labor and student struggles of the Kenyan and East African working classes.
@@ -114,7 +105,7 @@ Adopted unanimously, with three abstentions noted in the minutes. Workers of all
     title: "What is Permanent Revolution?",
     date: "2025-05-09",
     author: "PRC Education Commission",
-    image: permanentRevolution,
+    image: "/images/school-one.png",
     body: `The theory of permanent revolution was developed by Leon Trotsky in the first decades of the twentieth century to answer a concrete strategic problem: in countries of belated capitalist development, what is the relationship between the democratic tasks of the revolution — independence, land reform, the destruction of pre-capitalist relations, basic political liberties — and the socialist tasks of overthrowing capital? The reformist and Stalinist answer was that these are two separate stages, separated by a long period of capitalist development under the leadership of a "progressive" national bourgeoisie. Trotsky's answer, vindicated by a century of revolutionary experience from China to Iran to South Africa, was that in the epoch of imperialism the bourgeoisie of dependent countries is incapable of leading the democratic revolution to the end, and that the democratic tasks can only be accomplished by the working class taking power and beginning the socialist transformation of society.
 
 This is not an abstract dispute. It is the strategic difference between a revolution that survives and one that is strangled. The Chinese revolution of 1925-27 was drowned in blood because the Communist Party, on the instructions of Stalin and Bukharin, subordinated the workers' movement to the Kuomintang as the "anti-imperialist bourgeoisie." The South African transition of 1994 left intact the white monopoly of land and capital because the ANC leadership accepted the two-stage schema in which "national democratic revolution" must precede any challenge to property. The Egyptian revolution of 2011 was crushed because no party existed capable of leading the workers to power against both Mubarak and the army.
@@ -140,7 +131,7 @@ This pamphlet is an introduction. The conclusions are practical. Study the theor
     title: "Theses on Imperialism in Africa",
     date: "2025-06-14",
     author: "PRC International Commission",
-    image: imperialismAfrica,
+    image: "/images/protest-2.jpg",
     body: `1. Imperialism in the twenty-first century is not a policy choice of particular states but the structural mode of existence of late capitalism. It operates through the integrated circuits of finance, debt, trade, military force and ideological domination. Africa is not "marginal" to this system; it is central to it as a source of strategic minerals, agricultural products, cheap labor and rents extracted through debt service.
 
 2. The fashion for declaring imperialism obsolete — whether in the discourse of "globalization," "Afro-optimism" or "South-South cooperation" — is a screen behind which the extraction intensifies. The fact that the imperial powers no longer rule through direct colonial administration does not reduce their power; it makes it more difficult to identify and more difficult to resist.
@@ -170,7 +161,7 @@ This pamphlet is an introduction. The conclusions are practical. Study the theor
     title: "The Gig Economy in Nairobi: A Class Analysis",
     date: "2025-08-02",
     author: "PRC Labor Research Unit",
-    image: gigEconomy,
+    image: "/images/bolts-protest.jpg",
     body: `Introduction. This report presents the findings of an eighteen-month investigation by the PRC Labor Research Unit into the conditions, organization and political potential of platform workers in Nairobi — riders, drivers, couriers and freelance digital workers operating through the platforms of Uber, Bolt, Glovo, Jumia, Little, Faras and the international microwork sites. The study combined a survey of 1,840 workers, fifty-six in-depth interviews, participant observation in three rider hubs, and analysis of platform pricing and disciplinary algorithms.
 
 Class Character. Platform workers in Nairobi are wage workers, not "entrepreneurs," and the categorization of their status by platforms as "independent contractors" is a juridical fiction designed to externalize the costs of social reproduction and to deny basic labor rights. The platforms exercise the classic prerogatives of an employer: setting prices unilaterally, directing the labor process minute by minute through algorithmic instruction, disciplining workers through deactivation, and extracting a surplus that is distributed to platform shareholders. The "flexibility" celebrated in marketing material is the flexibility of capital to dispose of labor without the constraints imposed by a century of working-class struggle.
@@ -200,7 +191,7 @@ The full data, methodology and tables are available from the PRC Labor Research 
     title: "Permanent Revolution & the African Working Class",
     date: "2025-09-30",
     author: "PRC Education Commission",
-    image: africanWorkingClass,
+    image: "/images/congress-speaker.jpg",
     body: `Preface. This book began as a series of internal education lectures delivered to the founding cadre of the Permanent Revolutionary Congress. Its purpose is to develop, in the conditions of contemporary Africa, the strategic perspective that Leon Trotsky called permanent revolution. We do not present this perspective as an inheritance to be guarded but as a living instrument to be applied.
 
 Chapter One: The African Working Class as Historical Subject. The African working class is younger than the European but it is no longer young. A century of capitalist development on the continent — uneven, dependent, distorted by imperial intervention — has produced an urban proletariat of hundreds of millions, supplemented by a vast semi-proletariat in the informal sector and a peasantry increasingly integrated into commodity production. The colonial myth of an Africa without a working class is dead; what remains is the political task of organizing this class as a class for itself.
@@ -230,7 +221,7 @@ Conclusion. The African revolution is not a project for the distant future. Its 
     title: "Selected Writings of Kenyan Marxists 1960–1990",
     date: "2025-11-11",
     author: "PRC Archive Project",
-    image: kenyanMarxists,
+    image: "/images/workshop-1.jpg",
     body: `Editor's Introduction. This volume gathers, for the first time in a single collection, key writings of the Kenyan Marxist tradition from the late colonial period through the high authoritarianism of the Moi years. The texts presented here have been retrieved from private collections, exile publications, university theses suppressed by the state, and the underground press of the 1980s. They are the political inheritance of every contemporary Kenyan socialist.
 
 The selection is not neutral. The PRC Archive Project has worked from the conviction that the Kenyan Marxist tradition is not the property of any single party or tendency but the common heritage of the workers' movement. We have included revolutionary nationalists, communists, Pan-Africanists and independent socialists. We have excluded writings whose claim to belong to the tradition is purely rhetorical.
