@@ -108,7 +108,7 @@ const BlogPost = () => {
           </div>
           <div className="mt-12 pt-8 border-t border-border">
             <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Share this article</p>
-            <SocialShare inline />
+            <SocialShare inline title={post.title} image={post.image_url} />
           </div>
         </div>
       </article>

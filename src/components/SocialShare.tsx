@@ -2,11 +2,31 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 interface SocialShareProps {
+  /** Canonical page URL being shared (defaults to current location). */
   url?: string;
   title?: string;
+  /** Article image to show in the social preview card. */
+  image?: string;
   className?: string;
   inline?: boolean;
 }
+
+const SHARE_ENDPOINT =
+  `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/share`;
+
+/** Blog posts resolve their preview server-side by slug; others pass metadata. */
+const buildShareUrl = (pageUrl: string, title: string, image?: string) => {
+  try {
+    const parsed = new URL(pageUrl);
+    const blog = parsed.pathname.match(/^\/blog\/([^/]+)$/);
+    if (blog) return `${SHARE_ENDPOINT}?slug=${encodeURIComponent(blog[1])}`;
+    const params = new URLSearchParams({ u: pageUrl, t: title });
+    if (image) params.set("img", image);
+    return `${SHARE_ENDPOINT}?${params.toString()}`;
+  } catch {
+    return pageUrl;
+  }
+};
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -44,8 +64,8 @@ const platforms = [
     key: "facebook",
     label: "Facebook",
     Icon: FacebookIcon,
-    getUrl: (url: string) =>
-      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`,
+    getUrl: (url: string, title: string) =>
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}&quote=${encodeURIComponent(title)}`,
   },
   {
     key: "x",
@@ -62,7 +82,7 @@ const platforms = [
   },
 ];
 
-const SocialShare = ({ url, title, className = "", inline = false }: SocialShareProps) => {
+const SocialShare = ({ url, title, image, className = "", inline = false }: SocialShareProps) => {
   const [currentUrl, setCurrentUrl] = useState(url || "");
   const [pageTitle, setPageTitle] = useState(title || "");
 
@@ -72,15 +92,16 @@ const SocialShare = ({ url, title, className = "", inline = false }: SocialShare
   }, [url, title]);
 
   const handleShare = (platform: typeof platforms[0]) => {
+    const linkToShare = buildShareUrl(currentUrl, pageTitle, image);
     if (platform.key === "instagram") {
-      navigator.clipboard.writeText(`${pageTitle} — ${currentUrl}`).then(() => {
+      navigator.clipboard.writeText(`${pageTitle} — ${linkToShare}`).then(() => {
         toast.success("Link copied to clipboard! Paste it on Instagram.");
       }).catch(() => {
         toast.error("Could not copy link.");
       });
       return;
     }
-    const shareUrl = platform.getUrl(currentUrl, pageTitle);
+    const shareUrl = platform.getUrl(linkToShare, pageTitle);
     window.open(shareUrl, "_blank", "width=600,height=400,noopener,noreferrer");
   };
 
