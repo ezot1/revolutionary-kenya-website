@@ -1,5 +1,4 @@
 import { useState } from "react";
-import SEO from "@/components/SEO";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { Mail, MapPin, Twitter } from "lucide-react";
@@ -24,8 +23,6 @@ const Contact = () => {
 
   return (
     <Layout>
-      <SEO title={"Contact"} description={"Reach the Permanent Revolutionary Congress at info@prca.world."} path={"/contact"} />
-      
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-4xl">
           <h1 className="text-4xl md:text-5xl font-black text-foreground text-center mb-4">Contact Us</h1>

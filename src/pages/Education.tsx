@@ -1,5 +1,4 @@
 import Layout from "@/components/Layout";
-import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import { BookOpen, Video, Users, Download } from "lucide-react";
 
@@ -26,8 +25,6 @@ const formats = [
 export default function Education() {
   return (
     <Layout>
-      <SEO title={"Marxist School"} description={"Reading lists, courses, study groups and resources on Marxism, political economy and revolutionary history."} path={"/education"} />
-      
       <PageHero
         kicker="Marxist School"
         title="Theory. Strategy. Cadre formation."

@@ -1,5 +1,4 @@
 import Layout from "@/components/Layout";
-import SEO from "@/components/SEO";
 import RedStar from "@/components/RedStar";
 import { useRevealGroup } from "@/hooks/use-reveal";
 
@@ -36,8 +35,6 @@ const History = () => {
   const galleryRef = useRevealGroup<HTMLDivElement>();
   return (
   <Layout>
-      <SEO title={"Our History"} description={"Founding of the Permanent Revolutionary Congress and the milestones of our movement."} path={"/history"} />
-      
     <section className="py-16">
       <div className="container mx-auto px-4 max-w-4xl">
         <div className="text-center mb-16">

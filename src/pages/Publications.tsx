@@ -1,11 +1,9 @@
-import { useEffect, useState } from "react";
-import SEO from "@/components/SEO";
+import { useState } from "react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import SocialShare from "@/components/SocialShare";
 import { Search, FileText, X } from "lucide-react";
-import { articles, slugify, type Article } from "@/content/articles";
-import { publicationMeta } from "@/content/publication-meta";
+import { articles, type Article } from "@/content/articles";
 
 const docs = articles;
 
@@ -15,33 +13,11 @@ export default function Publications() {
   const [q, setQ] = useState("");
   const [type, setType] = useState("All");
   const [selected, setSelected] = useState<Article | null>(null);
-
-  // Open modal when arriving via /p/<slug> redirect (?p=<slug>)
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const slug = params.get("p");
-    if (!slug) return;
-    const match = docs.find((d) => slugify(d.title) === slug);
-    if (match) setSelected(match);
-  }, []);
-
   const filtered = docs.filter((d) =>
     (type === "All" || d.type === type) && d.title.toLowerCase().includes(q.toLowerCase())
   );
   return (
     <Layout>
-      {selected ? (
-        <SEO
-          title={selected.title}
-          description={selected.body.slice(0, 150)}
-          path={`/p/${slugify(selected.title)}`}
-          image={`https://prca.world${publicationMeta.find((m) => m.title === selected.title)?.image ?? "/images/prc-og.jpg"}`}
-          type="article"
-        />
-      ) : (
-        <SEO title={"Publications"} description={"Statements, resolutions, theses and research from the Permanent Revolutionary Congress."} path={"/publications"} />
-      )}
-      
       <PageHero
         kicker="Publications"
         title="The PRC digital library."
@@ -144,11 +120,7 @@ export default function Publications() {
               </div>
               <div className="mt-10 pt-6 border-t border-border">
                 <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Share this document</p>
-                <SocialShare
-                  inline
-                  url={`https://prca.world/p/${slugify(selected.title)}`}
-                  title={selected.title}
-                />
+                <SocialShare inline />
               </div>
             </article>
           </div>

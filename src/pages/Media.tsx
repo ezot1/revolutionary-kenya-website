@@ -1,5 +1,4 @@
 import Layout from "@/components/Layout";
-import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import { Play, Mic, Image as ImageIcon, FileText, Radio } from "lucide-react";
 import { toast } from "sonner";
@@ -15,8 +14,6 @@ const sections = [
 export default function Media() {
   return (
     <Layout>
-      <SEO title={"Media Center"} description={"Videos, podcasts, galleries and press releases from the Permanent Revolutionary Congress."} path={"/media"} />
-      
       <PageHero
         kicker="Media Center"
         title="The PRC in pictures, video and audio."

@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import SEO from "@/components/SEO";
 import { useEffect, useState } from "react";
 import Layout from "@/components/Layout";
 import NewsletterForm from "@/components/NewsletterForm";
@@ -24,8 +23,6 @@ const Hero = () => (
       className="absolute inset-0 w-full h-full object-cover opacity-50 animate-ken-burns"
       width={1920}
       height={1080}
-      fetchPriority="high"
-      decoding="async"
     />
     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/85 to-background/30" />
     <div className="absolute inset-0 grain" />
@@ -272,8 +269,6 @@ const Index = () => {
 
   return (
     <Layout>
-      <SEO title={"Workers' Power. Socialist Democracy. Permanent Revolution."} description={"PRC organizes workers, youth and the oppressed for socialist transformation in Kenya and across Africa."} path={"/"} />
-      
       <Hero />
       <About />
       <Campaigns />

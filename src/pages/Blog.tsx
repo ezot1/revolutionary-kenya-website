@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import SEO from "@/components/SEO";
 import { Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
@@ -36,8 +35,6 @@ const Blog = () => {
 
   return (
     <Layout>
-      <SEO title={"News & Analysis"} description={"Articles from the PRC on Kenya, Africa, workers' struggles, women's liberation and socialist theory."} path={"/blog"} />
-      
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h1 className="text-4xl md:text-5xl font-black text-foreground text-center mb-4">Blog</h1>

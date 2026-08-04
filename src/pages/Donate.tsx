@@ -1,5 +1,4 @@
 import Layout from "@/components/Layout";
-import SEO from "@/components/SEO";
 import PageHero from "@/components/PageHero";
 import { Heart } from "lucide-react";
 
@@ -13,8 +12,6 @@ const tiers = [
 export default function Donate() {
   return (
     <Layout>
-      <SEO title={"Donate"} description={"Support the work of the Permanent Revolutionary Congress."} path={"/donate"} />
-      
       <PageHero kicker="Donate" title="The PRC runs on worker contributions." lede="We take no money from corporations, governments or NGOs. Every shilling comes from workers and supporters of the struggle." />
       <section className="py-16 border-b border-border">
         <div className="container mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
