@@ -29,7 +29,17 @@ export default function Publications() {
   );
   return (
     <Layout>
-      <SEO title={"Publications"} description={"Statements, resolutions, theses and research from the Permanent Revolutionary Congress."} path={"/publications"} />
+      {selected ? (
+        <SEO
+          title={selected.title}
+          description={selected.body.slice(0, 150)}
+          path={`/p/${slugify(selected.title)}`}
+          image={`https://prca.world/images/publications/${slugify(selected.title)}.jpg`}
+          type="article"
+        />
+      ) : (
+        <SEO title={"Publications"} description={"Statements, resolutions, theses and research from the Permanent Revolutionary Congress."} path={"/publications"} />
+      )}
       
       <PageHero
         kicker="Publications"
