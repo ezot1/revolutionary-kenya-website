@@ -58,6 +58,10 @@ for (const a of publicationMeta) {
 </html>
 `;
   writeFileSync(resolve(OUT_DIR, `${slug}.html`), html);
+  // Also emit /p/<slug>/index.html so the extension-less URL resolves on
+  // static hosts that don't do .html fallback.
+  mkdirSync(resolve(OUT_DIR, slug), { recursive: true });
+  writeFileSync(resolve(OUT_DIR, slug, "index.html"), html);
   written++;
 }
 console.log(`generated ${written} publication share pages in public/p/`);
