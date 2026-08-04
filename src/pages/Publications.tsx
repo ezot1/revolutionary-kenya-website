@@ -5,6 +5,7 @@ import PageHero from "@/components/PageHero";
 import SocialShare from "@/components/SocialShare";
 import { Search, FileText, X } from "lucide-react";
 import { articles, slugify, type Article } from "@/content/articles";
+import { publicationMeta } from "@/content/publication-meta";
 
 const docs = articles;
 
@@ -34,7 +35,7 @@ export default function Publications() {
           title={selected.title}
           description={selected.body.slice(0, 150)}
           path={`/p/${slugify(selected.title)}`}
-          image={`https://prca.world/images/publications/${slugify(selected.title)}.jpg`}
+          image={`https://prca.world${publicationMeta.find((m) => m.title === selected.title)?.image ?? "/images/prc-og.jpg"}`}
           type="article"
         />
       ) : (
