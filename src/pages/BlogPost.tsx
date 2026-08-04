@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import Layout from "@/components/Layout";
 import SocialShare from "@/components/SocialShare";
+import SEO from "@/components/SEO";
 import { supabase } from "@/lib/supabase";
 import { ArrowLeft } from "lucide-react";
 
@@ -9,6 +10,7 @@ interface Post {
   id: string;
   title: string;
   content: string;
+  excerpt?: string | null;
   author: string;
   date: string;
   image_url: string;
@@ -53,6 +55,19 @@ const BlogPost = () => {
 
   return (
     <Layout>
+      <SEO
+        title={post.title}
+        description={post.excerpt || post.content.replace(/!\[.*?\]\(.*?\)/g, "").replace(/\*\*/g, "").slice(0, 155)}
+        path={`/blog/${slug}`}
+        type="article"
+        image={
+          post.image_url
+            ? post.image_url.startsWith("http")
+              ? post.image_url
+              : `https://prca.world${post.image_url}`
+            : undefined
+        }
+      />
       <article className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
           <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary mb-8">
