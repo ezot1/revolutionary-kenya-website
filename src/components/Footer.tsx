@@ -88,7 +88,7 @@ const Footer = () => (
 
       <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row gap-3 justify-between items-center text-xs text-muted-foreground">
         <p>© {new Date().getFullYear()} Permanent Revolutionary Congress. All rights reserved.</p>
-        <p className="uppercase tracking-[0.18em]">Workers of all countries, unite.</p>
+        <p className="uppercase tracking-[0.18em]">Workers of the world, Unite.</p>
       </div>
     </div>
   </footer>

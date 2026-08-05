@@ -24,7 +24,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 bg-background/90 backdrop-blur-md border-b border-border">
       <div className="bg-primary text-primary-foreground text-[11px] font-bold tracking-[0.18em] uppercase">
         <div className="container mx-auto px-4 h-7 flex items-center justify-between">
-          <span className="hidden sm:inline">Workers of all countries, unite.</span>
+          <span className="hidden sm:inline">Workers of the world, Unite.</span>
           <span className="sm:hidden">Workers, unite.</span>
           <Link to="/join" className="hover:underline">Become a member →</Link>
         </div>
