@@ -98,7 +98,7 @@ The Gen-Z uprising of 2024 made this question concrete for millions. The next up
 
 12. Recruitment and Construction. The central task of the next period is the systematic recruitment and political formation of cadre — workers, youth, women, oppressed nationalities — capable of leading the struggles to come. Every member is a builder of the PRC.
 
-Adopted unanimously, with three abstentions noted in the minutes. Workers of all countries, unite.`
+Adopted unanimously, with three abstentions noted in the minutes. Workers of the world, Unite.`
   },
   {
     type: "Pamphlet",
