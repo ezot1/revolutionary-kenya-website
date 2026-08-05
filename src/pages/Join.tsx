@@ -43,7 +43,7 @@ export default function Join() {
               ))}
             </ul>
             <p className="font-serif-editorial italic text-muted-foreground border-l-2 border-primary pl-4 mt-6">
-              "The philosophers have only interpreted the world, in various ways; the point is to change it." — Marx
+              "The philosophers have only interpreted the world, in various ways; the point is to change it." - Marx
             </p>
           </div>
           <div className="lg:col-span-7">

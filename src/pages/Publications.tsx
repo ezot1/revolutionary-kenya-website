@@ -21,7 +21,7 @@ export default function Publications() {
       <PageHero
         kicker="Publications"
         title="The PRC digital library."
-        lede="Statements, position papers, theses, pamphlets and books — the political record of our organization."
+        lede="Statements, position papers, theses, pamphlets and books - the political record of our organization."
       />
       <section className="py-12 border-b border-border">
         <div className="container mx-auto px-4 flex flex-col md:flex-row gap-4">

@@ -12,7 +12,7 @@ export default function International() {
       <PageHero
         kicker="International"
         title="The struggle is global."
-        lede="Capital crosses every border — so does our movement. The PRC is part of a worldwide revolutionary tradition."
+        lede="Capital crosses every border - so does our movement. The PRC is part of a worldwide revolutionary tradition."
       />
       <section className="py-20 border-b border-border">
         <div className="container mx-auto px-4 grid lg:grid-cols-12 gap-12">
@@ -20,7 +20,7 @@ export default function International() {
             <p className="kicker mb-3">ISL</p>
             <h2 className="font-display text-4xl text-foreground mb-4">International Socialist League.</h2>
             <p className="text-muted-foreground leading-relaxed mb-4 font-serif-editorial">
-              The PRC is the Kenyan section of the International Socialist League — a worldwide organization of revolutionary socialists uniting sections across six continents.
+              The PRC is the Kenyan section of the International Socialist League - a worldwide organization of revolutionary socialists uniting sections across six continents.
             </p>
             <a href="https://lis-isl.org" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-primary font-bold uppercase tracking-wider text-sm story-link">
               Visit the ISL →

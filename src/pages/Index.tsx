@@ -75,7 +75,7 @@ const About = () => {
             PRC is rooted in the <strong className="text-primary">revolutionary socialist tradition</strong>. We organize workers, youth, women and the oppressed for the socialist transformation of society.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Capitalism cannot deliver dignified jobs, housing, healthcare or a livable planet. Imperialism plunders the Global South. Patriarchy and racism are wielded to divide us. We fight for a different world — one organized by and for the working class.
+            Capitalism cannot deliver dignified jobs, housing, healthcare or a livable planet. Imperialism plunders the Global South. Patriarchy and racism are wielded to divide us. We fight for a different world - one organized by and for the working class.
           </p>
           <div className="flex flex-wrap gap-2 pt-2">
             {pillars.map((p) => (
@@ -96,7 +96,7 @@ const campaigns = [
   { icon: Wifi, title: "Gig Economy Organizing", desc: "Building power among riders, drivers and platform workers." },
   { icon: GraduationCap, title: "Youth & Students", desc: "Mobilizing the next generation against austerity and repression." },
   { icon: Heart, title: "Women's Liberation", desc: "A socialist feminist struggle against patriarchy and capital." },
-  { icon: Leaf, title: "Climate Justice", desc: "System change, not climate change — for a just transition." },
+  { icon: Leaf, title: "Climate Justice", desc: "System change, not climate change - for a just transition." },
   { icon: Globe2, title: "Anti-Imperialism", desc: "Solidarity with Palestine, Sudan, Congo and the oppressed nations." },
   { icon: Users, title: "Trade Union Building", desc: "Reclaiming the unions as fighting organizations of the class." },
   { icon: Building2, title: "Digital Workers", desc: "Organizing tech, BPO and digital labor across the continent." },
@@ -196,7 +196,7 @@ const Newsletter = () => (
 const events = [
   { date: "Jul 12", title: "Marxist School: Imperialism Today", type: "Education", location: "Nairobi + online" },
   { date: "Jul 19", title: "Public Meeting: Organizing the Gig Economy", type: "Public Meeting", location: "Mombasa" },
-  { date: "Aug 02", title: "PRC Branch Launch — Kisumu", type: "Campaign Launch", location: "Kisumu" },
+  { date: "Aug 02", title: "PRC Branch Launch - Kisumu", type: "Campaign Launch", location: "Kisumu" },
 ];
 
 const Events = () => {
