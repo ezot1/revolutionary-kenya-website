@@ -5,11 +5,11 @@ import { ArrowRight } from "lucide-react";
 
 const pillars = [
   { t: "Workers' Power", d: "Organize the working class into a conscious political force capable of taking power." },
-  { t: "Socialist Democracy", d: "Democratic planning, workers' control, accountable institutions — not bureaucratic dictatorship." },
+  { t: "Socialist Democracy", d: "Democratic planning, workers' control, accountable institutions - not bureaucratic dictatorship." },
   { t: "Internationalism", d: "Capital crosses every border. So must the resistance. The PRC is a section of the ISL." },
   { t: "Permanent Revolution", d: "In the imperialist epoch, only the working class can carry democratic tasks to completion." },
   { t: "Anti-Imperialism", d: "Unconditional solidarity with oppressed nations against every imperialist power." },
-  { t: "Women's Liberation", d: "Socialist feminism — class struggle against patriarchy is inseparable from struggle against capital." },
+  { t: "Women's Liberation", d: "Socialist feminism - class struggle against patriarchy is inseparable from struggle against capital." },
   { t: "Climate Justice", d: "There is no green capitalism. A planned, democratic economy is the only path to a livable planet." },
 ];
 
@@ -27,7 +27,7 @@ export default function About() {
       <PageHero
         kicker="About PRC"
         title="A revolutionary socialist organization built for the struggles ahead."
-        lede="We are a Marxist organization in the tradition of Marx, Lenin and Trotsky — fighting for workers' power, socialist democracy and permanent revolution."
+        lede="We are a Marxist organization in the tradition of Marx, Lenin and Trotsky - fighting for workers' power, socialist democracy and permanent revolution."
       />
       <section className="py-20 border-b border-border">
         <div className="container mx-auto px-4 grid lg:grid-cols-12 gap-12">
@@ -36,7 +36,7 @@ export default function About() {
             <h2 className="font-display text-3xl text-foreground">Why we exist.</h2>
           </div>
           <div className="lg:col-span-8 space-y-5 text-foreground/90 font-serif-editorial text-lg leading-relaxed">
-            <p>The PRC was founded to build a revolutionary party of the working class in Kenya, capable of leading struggles against capitalism, imperialism and the comprador state — and rooted in an international revolutionary movement.</p>
+            <p>The PRC was founded to build a revolutionary party of the working class in Kenya, capable of leading struggles against capitalism, imperialism and the comprador state - and rooted in an international revolutionary movement.</p>
             <p>We reject the politics of class collaboration, NGO-ism and parliamentary illusions. We fight in workplaces, neighborhoods, schools and the streets. We organize for power, not influence.</p>
           </div>
         </div>

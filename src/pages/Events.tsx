@@ -8,7 +8,7 @@ import { MapPin, Calendar } from "lucide-react";
 const upcoming = [
   { date: "Jul 12, 2026", title: "Marxist School: Imperialism Today", type: "Education", location: "Nairobi + Online" },
   { date: "Jul 19, 2026", title: "Public Meeting: Organizing the Gig Economy", type: "Public Meeting", location: "Mombasa" },
-  { date: "Aug 02, 2026", title: "PRC Branch Launch — Kisumu", type: "Campaign Launch", location: "Kisumu" },
+  { date: "Aug 02, 2026", title: "PRC Branch Launch - Kisumu", type: "Campaign Launch", location: "Kisumu" },
   { date: "Aug 16, 2026", title: "Women's Liberation Conference", type: "Conference", location: "Nairobi" },
 ];
 

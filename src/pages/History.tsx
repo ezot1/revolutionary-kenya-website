@@ -6,12 +6,12 @@ const timeline = [
   {
     title: "The Crisis that Demands Revolution",
     content:
-      "Kenya is trapped in a spiral of IMF debt, austerity and neocolonial exploitation. The 2024 Finance Bill protests showed the fury of the masses against a comprador bourgeoisie that serves imperialism while wages stagnate, unemployment soars, and the cost of living crushes working families. No capitalist government — whether led by Kenya Kwanza, ODM or any other bourgeois formation — can resolve this crisis. The system itself is the problem.",
+      "Kenya is trapped in a spiral of IMF debt, austerity and neocolonial exploitation. The 2024 Finance Bill protests showed the fury of the masses against a comprador bourgeoisie that serves imperialism while wages stagnate, unemployment soars, and the cost of living crushes working families. No capitalist government - whether led by Kenya Kwanza, ODM or any other bourgeois formation - can resolve this crisis. The system itself is the problem.",
   },
   {
     title: "The Founding of the PRC",
     content:
-      "The Permanent Revolutionary Congress was born out of the recognition that no capitalist party or reformist grouping can resolve the systemic crisis facing Kenya's workers and youth. Founded by workers, youth and revolutionary socialists, the PRC is built on the program of permanent revolution — the understanding that in countries dominated by imperialism, the struggle for democratic rights and economic justice can only be completed by the working class taking power and building socialism.",
+      "The Permanent Revolutionary Congress was born out of the recognition that no capitalist party or reformist grouping can resolve the systemic crisis facing Kenya's workers and youth. Founded by workers, youth and revolutionary socialists, the PRC is built on the program of permanent revolution - the understanding that in countries dominated by imperialism, the struggle for democratic rights and economic justice can only be completed by the working class taking power and building socialism.",
   },
   {
     title: "Affiliated with the ISL",

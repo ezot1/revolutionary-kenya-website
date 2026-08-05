@@ -44,7 +44,7 @@ const platforms = [
     label: "WhatsApp",
     Icon: WhatsAppIcon,
     getUrl: (url: string, title: string) =>
-      `https://wa.me/?text=${encodeURIComponent(`${title} — ${url}`)}`,
+      `https://wa.me/?text=${encodeURIComponent(`${title} - ${url}`)}`,
   },
   {
     key: "facebook",
@@ -80,7 +80,7 @@ const SocialShare = ({ url, title, image, className = "", inline = false }: Soci
   const handleShare = (platform: typeof platforms[0]) => {
     const linkToShare = buildShareUrl(currentUrl);
     if (platform.key === "instagram") {
-      navigator.clipboard.writeText(`${pageTitle} — ${linkToShare}`).then(() => {
+      navigator.clipboard.writeText(`${pageTitle} - ${linkToShare}`).then(() => {
         toast.success("Link copied to clipboard! Paste it on Instagram.");
       }).catch(() => {
         toast.error("Could not copy link.");

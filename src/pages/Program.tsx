@@ -19,11 +19,11 @@ This crisis is not unique to Kenya. Globally, capitalism is in a state of decay.
   {
     id: "objective",
     title: "Our Revolutionary Objective",
-    content: `The PRC fights for the socialist transformation of Kenya as part of the world socialist revolution. Our strategic objective is the overthrow of capitalist rule and the establishment of a workers' government based on democratic organs of working-class power — factory committees, neighborhood councils, and a democratically planned economy.
+    content: `The PRC fights for the socialist transformation of Kenya as part of the world socialist revolution. Our strategic objective is the overthrow of capitalist rule and the establishment of a workers' government based on democratic organs of working-class power - factory committees, neighborhood councils, and a democratically planned economy.
 
-We base ourselves on the theory of permanent revolution as developed by Leon Trotsky: in countries oppressed by imperialism, the tasks of the democratic revolution — land reform, national liberation, democratic rights — cannot be completed by the national bourgeoisie. Only the working class, leading the poor peasants and all the oppressed, can carry through these tasks, and in doing so must move directly to socialist measures.
+We base ourselves on the theory of permanent revolution as developed by Leon Trotsky: in countries oppressed by imperialism, the tasks of the democratic revolution - land reform, national liberation, democratic rights - cannot be completed by the national bourgeoisie. Only the working class, leading the poor peasants and all the oppressed, can carry through these tasks, and in doing so must move directly to socialist measures.
 
-There is no intermediate stage. There is no progressive wing of the ruling class. The revolution must be permanent — uninterrupted from the democratic to the socialist tasks, and international in scope.`,
+There is no intermediate stage. There is no progressive wing of the ruling class. The revolution must be permanent - uninterrupted from the democratic to the socialist tasks, and international in scope.`,
   },
   {
     id: "workers",
@@ -32,12 +32,12 @@ There is no intermediate stage. There is no progressive wing of the ruling class
 
 The PRC demands:
 • A living wage indexed to the real cost of living, with automatic adjustment for inflation.
-• Full employment through a massive public works program — building schools, hospitals, housing and infrastructure.
+• Full employment through a massive public works program - building schools, hospitals, housing and infrastructure.
 • The right to organize, strike and bargain collectively without state interference.
 • Nationalization of key industries, banks, and large-scale agriculture under workers' control and democratic management.
-• Abolition of casualization and outsourcing — all workers must have permanent, dignified employment with full benefits.
+• Abolition of casualization and outsourcing - all workers must have permanent, dignified employment with full benefits.
 • Workers' control of health and safety in every workplace.
-• A sliding scale of working hours — share the available work among all hands without loss of pay.`,
+• A sliding scale of working hours - share the available work among all hands without loss of pay.`,
   },
   {
     id: "women-youth",
@@ -45,7 +45,7 @@ The PRC demands:
     content: `Women and youth bear the heaviest burden of capitalist exploitation in Kenya. Women face the double oppression of class exploitation and gender-based violence, discrimination, and unpaid care work. Young people confront mass unemployment, a dysfunctional education system, and a future of precarity.
 
 The PRC demands:
-• Full equality for women in law and in practice — equal pay, reproductive rights, and an end to all forms of gender-based violence.
+• Full equality for women in law and in practice - equal pay, reproductive rights, and an end to all forms of gender-based violence.
 • Free, quality childcare and socialized domestic labor.
 • Comprehensive, free public education from early childhood through university.
 • Abolition of student debt and guaranteed employment for graduates.
@@ -53,7 +53,7 @@ The PRC demands:
 • Full access to sexual and reproductive healthcare.
 • An end to the harassment and criminalization of young people in informal settlements and on campuses.
 
-The liberation of women and youth is inseparable from the socialist revolution. We reject the notion that these struggles can be postponed until "after the revolution" — they are integral to it.`,
+The liberation of women and youth is inseparable from the socialist revolution. We reject the notion that these struggles can be postponed until "after the revolution" - they are integral to it.`,
   },
   {
     id: "oppression",
@@ -62,17 +62,17 @@ The liberation of women and youth is inseparable from the socialist revolution. 
 
 We demand:
 • An end to ethnic-based political patronage and land grabbing.
-• Full rights for LGBTQ+ people — decriminalization, anti-discrimination protections, and an end to all state and social persecution.
+• Full rights for LGBTQ+ people - decriminalization, anti-discrimination protections, and an end to all state and social persecution.
 • Full rights and dignity for refugees and migrants.
 • An end to police brutality and extrajudicial killings, particularly in poor and marginalized communities.
 • Community control of policing with full democratic accountability.
 
-The fight against oppression is not a secondary struggle — it is a class struggle. The working class cannot liberate itself while any section of the oppressed remains in chains.`,
+The fight against oppression is not a secondary struggle - it is a class struggle. The working class cannot liberate itself while any section of the oppressed remains in chains.`,
   },
   {
     id: "democratic-rights",
     title: "The Struggle for Democratic Rights",
-    content: `Bourgeois democracy in Kenya is a facade. Elections are rigged by money, ethnicity and state power. The judiciary, police and military serve the interests of the ruling class. Democratic freedoms — assembly, speech, press, organization — are routinely violated when they threaten the status quo.
+    content: `Bourgeois democracy in Kenya is a facade. Elections are rigged by money, ethnicity and state power. The judiciary, police and military serve the interests of the ruling class. Democratic freedoms - assembly, speech, press, organization - are routinely violated when they threaten the status quo.
 
 The PRC fights for the fullest democratic rights as part of the struggle for socialism:
 • Freedom of assembly, speech, press and organization without restriction.
@@ -82,7 +82,7 @@ The PRC fights for the fullest democratic rights as part of the struggle for soc
 • Abolition of repressive colonial-era laws still on the books.
 • Full transparency and democratic control over all state institutions.
 
-We do not fetishize bourgeois democracy. Real democracy — workers' democracy — can only be achieved through the revolutionary transformation of society.`,
+We do not fetishize bourgeois democracy. Real democracy - workers' democracy - can only be achieved through the revolutionary transformation of society.`,
   },
   {
     id: "internationalism",
@@ -98,21 +98,21 @@ The PRC is the Kenyan section of the International Socialist League (ISL). We bu
   {
     id: "elections",
     title: "Our Position on Elections",
-    content: `The PRC does not place its faith in elections as the road to socialism. Bourgeois elections are designed to legitimize capitalist rule, not to challenge it. The state — its army, police, judiciary, and bureaucracy — is an instrument of class domination that cannot simply be voted out of existence.
+    content: `The PRC does not place its faith in elections as the road to socialism. Bourgeois elections are designed to legitimize capitalist rule, not to challenge it. The state - its army, police, judiciary, and bureaucracy - is an instrument of class domination that cannot simply be voted out of existence.
 
 However, we do not abstain from elections on principle. Where conditions allow, the PRC may stand candidates or critically support working-class candidates as a means of propaganda, agitation, and building the party's profile among the masses. Any participation in elections is subordinate to the broader goal of building a mass revolutionary movement.
 
-We oppose all illusions in bourgeois parties and coalitions. We call on workers and youth to break with all capitalist parties — including those that claim to represent "the people" or "the hustler" — and to build their own independent political organization.`,
+We oppose all illusions in bourgeois parties and coalitions. We call on workers and youth to break with all capitalist parties - including those that claim to represent "the people" or "the hustler" - and to build their own independent political organization.`,
   },
   {
     id: "tasks",
     title: "Our Tasks and Organization",
-    content: `The central task before the PRC is the building of a revolutionary party — a disciplined, cadre-based organization rooted in the working class and guided by Marxist theory.
+    content: `The central task before the PRC is the building of a revolutionary party - a disciplined, cadre-based organization rooted in the working class and guided by Marxist theory.
 
 Our immediate tasks:
 • Recruit and educate a new generation of revolutionary cadres.
 • Establish party branches in workplaces, campuses, and communities across Kenya.
-• Produce and distribute revolutionary literature — newspapers, pamphlets, digital media.
+• Produce and distribute revolutionary literature - newspapers, pamphlets, digital media.
 • Intervene in trade unions, student movements, and community organizations with a revolutionary program.
 • Build solidarity campaigns linking local struggles to the international fight against capitalism.
 • Develop a systematic program of Marxist political education for all members.
@@ -126,13 +126,13 @@ The PRC is organized on the basis of democratic centralism: full democracy in di
 2. Full employment through a public works program.
 3. Nationalization of banks, key industries, and large-scale agriculture under workers' control.
 4. Free, quality public healthcare and education for all.
-5. Land redistribution — expropriate the large landowners and redistribute land to poor peasants and cooperatives.
+5. Land redistribution - expropriate the large landowners and redistribute land to poor peasants and cooperatives.
 6. Cancel all illegitimate foreign debt.
-7. A sliding scale of hours — share the work without loss of pay.
-8. Full democratic rights — assembly, speech, press, organization.
-9. An end to police brutality and extrajudicial killings — community control of policing.
+7. A sliding scale of hours - share the work without loss of pay.
+8. Full democratic rights - assembly, speech, press, organization.
+9. An end to police brutality and extrajudicial killings - community control of policing.
 10. Full equality for women and LGBTQ+ people.
-11. Free Palestine — end the occupation, right of return, for a socialist Palestine.
+11. Free Palestine - end the occupation, right of return, for a socialist Palestine.
 12. For a Socialist Federation of Africa.
 13. Build the International Socialist League as the nucleus of a new revolutionary international.
 14. For a workers' government in Kenya based on democratic organs of working-class power.`,

@@ -46,7 +46,7 @@ const Footer = () => (
             </div>
           </div>
           <p className="text-muted-foreground text-sm leading-relaxed max-w-sm mb-6">
-            A revolutionary socialist organization building workers' power, socialist democracy and permanent revolution — in Kenya, Africa and across the world.
+            A revolutionary socialist organization building workers' power, socialist democracy and permanent revolution - in Kenya, Africa and across the world.
           </p>
           <div className="flex gap-3">
             {[
