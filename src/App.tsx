@@ -12,6 +12,7 @@ import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
 import Contact from "./pages/Contact";
 import AdminBlog from "./pages/AdminBlog";
+import AdminEnquiries from "./pages/AdminEnquiries";
 import Auth from "./pages/Auth";
 import About from "./pages/About";
 import Campaigns from "./pages/Campaigns";
@@ -40,6 +41,7 @@ const App = () => (
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin/blog" element={<AdminBlog />} />
+          <Route path="/admin/enquiries" element={<AdminEnquiries />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/about" element={<About />} />
           <Route path="/campaigns" element={<Campaigns />} />
