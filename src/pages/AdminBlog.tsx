@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
-import { Trash2, Edit2, X, Upload, LogOut } from "lucide-react";
+import { Trash2, Edit2, X, Upload, LogOut, Inbox } from "lucide-react";
 
 interface Post {
   id: string;
@@ -199,12 +199,20 @@ const AdminBlog = () => {
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-3xl font-black text-foreground">Blog Admin</h1>
-            <button
-              onClick={handleLogout}
-              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary text-foreground text-xs hover:bg-secondary/80 transition"
-            >
-              <LogOut className="w-3.5 h-3.5" /> Sign out
-            </button>
+            <div className="flex items-center gap-2">
+              <Link
+                to="/admin/enquiries"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary text-foreground text-xs hover:bg-secondary/80 transition"
+              >
+                <Inbox className="w-3.5 h-3.5" /> Enquiries
+              </Link>
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary text-foreground text-xs hover:bg-secondary/80 transition"
+              >
+                <LogOut className="w-3.5 h-3.5" /> Sign out
+              </button>
+            </div>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-4 mb-12 bg-card border border-border rounded-lg p-6">
