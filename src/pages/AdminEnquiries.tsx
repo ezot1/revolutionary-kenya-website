@@ -44,7 +44,9 @@ const AdminEnquiries = () => {
       setAuthChecked(true);
     };
     supabase.auth.getSession().then(({ data }) => check(data.session));
-    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => check(session));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => {
+      setTimeout(() => check(session), 0);
+    });
     return () => sub.subscription.unsubscribe();
   }, [navigate]);
 
