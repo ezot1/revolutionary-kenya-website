@@ -249,7 +249,7 @@ Acknowledgments. We acknowledge the families of detained and assassinated comrad
     title: "French Imperialism Shifts East as Influence Collapses in the Sahel",
     date: "2026-08-14",
     author: "PRC Political Committee",
-    image: "/images/protest-3.jpg",
+    image: "/images/french-imperialism-sahel.jpg",
     body: `French imperialism is seeking to rebuild its influence in Africa through new alliances in East Africa after suffering a series of major setbacks across the Sahel and West Africa.
 
 Over the past four years, French troops have been expelled from Mali, Burkina Faso, Niger, Chad, and other former strongholds where Paris maintained military, political, and economic influence for decades. The withdrawal marks one of the most significant challenges to French interests on the continent since formal decolonization.
