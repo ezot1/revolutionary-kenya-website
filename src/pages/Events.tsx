@@ -1,26 +1,42 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import { MapPin, Calendar } from "lucide-react";
 
-const upcoming = [
-  { date: "Jul 12, 2026", title: "Marxist School: Imperialism Today", type: "Education", location: "Nairobi + Online" },
-  { date: "Jul 19, 2026", title: "Public Meeting: Organizing the Gig Economy", type: "Public Meeting", location: "Mombasa" },
-  { date: "Aug 02, 2026", title: "PRC Branch Launch - Kisumu", type: "Campaign Launch", location: "Kisumu" },
-  { date: "Aug 16, 2026", title: "Women's Liberation Conference", type: "Conference", location: "Nairobi" },
-];
+interface EventItem {
+  title: string;
+  displayDate: string;
+  endDate: string;
+  type?: string;
+  location: string;
+}
 
-const past = [
-  { date: "Jun 01, 2026", title: "PRC Founding Congress", location: "Nairobi" },
-  { date: "May 10, 2026", title: "Anti-Imperialism Panel with ISL Comrades", location: "Online" },
+const allEvents: EventItem[] = [
+  { displayDate: "Oct 11-12, 2026", endDate: "2026-10-12", title: "2nd Congress of the PRC", type: "Congress", location: "Nairobi" },
+  { displayDate: "Aug 16, 2026", endDate: "2026-08-16", title: "Women's Liberation Conference", type: "Conference", location: "Nairobi" },
+  { displayDate: "Aug 02, 2026", endDate: "2026-08-02", title: "PRC Branch Launch - Kisumu", type: "Campaign Launch", location: "Kisumu" },
+  { displayDate: "Jul 19, 2026", endDate: "2026-07-19", title: "Public Meeting: Organizing the Gig Economy", type: "Public Meeting", location: "Mombasa" },
+  { displayDate: "Jul 12, 2026", endDate: "2026-07-12", title: "Marxist School: Imperialism Today", type: "Education", location: "Nairobi + Online" },
+  { displayDate: "Jun 01, 2026", endDate: "2026-06-01", title: "PRC Founding Congress", location: "Nairobi" },
+  { displayDate: "May 10, 2026", endDate: "2026-05-10", title: "Anti-Imperialism Panel with ISL Comrades", location: "Online" },
 ];
 
 export default function Events() {
   const [active, setActive] = useState<string | null>(null);
   const [form, setForm] = useState({ full_name: "", email: "" });
   const [loading, setLoading] = useState(false);
+
+  const { upcoming, past } = useMemo(() => {
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const sorted = [...allEvents].sort((a, b) => new Date(b.endDate).getTime() - new Date(a.endDate).getTime());
+    return {
+      upcoming: sorted.filter((e) => new Date(e.endDate).getTime() >= today.getTime()).reverse(),
+      past: sorted.filter((e) => new Date(e.endDate).getTime() < today.getTime()),
+    };
+  }, []);
 
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -40,24 +56,28 @@ export default function Events() {
         <div className="container mx-auto px-4">
           <p className="kicker mb-3">Upcoming</p>
           <h2 className="font-display text-4xl text-foreground mb-10">What's next.</h2>
-          <div className="space-y-px bg-border">
-            {upcoming.map((e) => (
-              <div key={e.title} className="bg-background p-6 grid grid-cols-12 gap-4 items-center">
-                <div className="col-span-12 sm:col-span-3 flex items-center gap-3 text-primary">
-                  <Calendar className="w-5 h-5" />
-                  <span className="font-display text-lg">{e.date}</span>
+          {upcoming.length === 0 ? (
+            <p className="text-muted-foreground font-serif-editorial italic">No upcoming events scheduled. Check back soon.</p>
+          ) : (
+            <div className="space-y-px bg-border">
+              {upcoming.map((e) => (
+                <div key={e.title} className="bg-background p-6 grid grid-cols-12 gap-4 items-center">
+                  <div className="col-span-12 sm:col-span-3 flex items-center gap-3 text-primary">
+                    <Calendar className="w-5 h-5" />
+                    <span className="font-display text-lg">{e.displayDate}</span>
+                  </div>
+                  <div className="col-span-12 sm:col-span-6">
+                    <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-1">{e.type}</p>
+                    <h3 className="font-display text-xl text-foreground">{e.title}</h3>
+                    <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1"><MapPin className="w-3 h-3" /> {e.location}</p>
+                  </div>
+                  <div className="col-span-12 sm:col-span-3 sm:text-right">
+                    <button onClick={() => setActive(e.title)} className="px-5 py-2 bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider hover:bg-primary/90 transition">RSVP</button>
+                  </div>
                 </div>
-                <div className="col-span-12 sm:col-span-6">
-                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-1">{e.type}</p>
-                  <h3 className="font-display text-xl text-foreground">{e.title}</h3>
-                  <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1"><MapPin className="w-3 h-3" /> {e.location}</p>
-                </div>
-                <div className="col-span-12 sm:col-span-3 sm:text-right">
-                  <button onClick={() => setActive(e.title)} className="px-5 py-2 bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider hover:bg-primary/90 transition">RSVP</button>
-                </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -66,8 +86,8 @@ export default function Events() {
           <p className="kicker mb-3">Past Events</p>
           <div className="space-y-px bg-border">
             {past.map((e) => (
-              <div key={e.title} className="bg-background p-6 grid grid-cols-12 gap-4 items-center">
-                <p className="col-span-3 text-muted-foreground text-sm">{e.date}</p>
+              <div key={e.title} className="bg-background p-6 grid grid-cols-12 gap-4 items-center opacity-70">
+                <p className="col-span-3 text-muted-foreground text-sm">{e.displayDate}</p>
                 <p className="col-span-6 font-display text-foreground">{e.title}</p>
                 <p className="col-span-3 text-right text-xs text-muted-foreground">{e.location}</p>
               </div>

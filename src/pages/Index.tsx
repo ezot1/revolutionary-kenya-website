@@ -193,11 +193,17 @@ const Newsletter = () => (
   </section>
 );
 
-const events = [
-  { date: "Jul 12", title: "Marxist School: Imperialism Today", type: "Education", location: "Nairobi + online" },
-  { date: "Jul 19", title: "Public Meeting: Organizing the Gig Economy", type: "Public Meeting", location: "Mombasa" },
-  { date: "Aug 02", title: "PRC Branch Launch - Kisumu", type: "Campaign Launch", location: "Kisumu" },
-];
+const upcomingEvents = [
+  { date: "Oct 11-12", endDate: "2026-10-12", title: "2nd Congress of the PRC", type: "Congress", location: "Nairobi" },
+  { date: "Aug 16", endDate: "2026-08-16", title: "Women's Liberation Conference", type: "Conference", location: "Nairobi" },
+  { date: "Aug 02", endDate: "2026-08-02", title: "PRC Branch Launch - Kisumu", type: "Campaign Launch", location: "Kisumu" },
+  { date: "Jul 19", endDate: "2026-07-19", title: "Public Meeting: Organizing the Gig Economy", type: "Public Meeting", location: "Mombasa" },
+  { date: "Jul 12", endDate: "2026-07-12", title: "Marxist School: Imperialism Today", type: "Education", location: "Nairobi + online" },
+].filter((e) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return new Date(e.endDate).getTime() >= today.getTime();
+}).slice(0, 3);
 
 const Events = () => {
   const ref = useRevealGroup<HTMLDivElement>();
@@ -211,26 +217,30 @@ const Events = () => {
           </div>
           <Link to="/events" className="text-sm font-bold uppercase tracking-wider text-primary story-link">All events →</Link>
         </div>
-        <div className="space-y-px bg-border">
-          {events.map((e, i) => (
-            <Link
-              key={i}
-              to="/events"
-              data-reveal
-              style={{ transitionDelay: `${i * 80}ms` }}
-              className="reveal grid grid-cols-12 gap-4 items-center bg-background p-6 hover:bg-secondary transition group"
-            >
-              <div className="col-span-3 sm:col-span-2 font-display text-2xl text-primary">{e.date}</div>
-              <div className="col-span-9 sm:col-span-7">
-                <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-1">{e.type}</p>
-                <h3 className="font-display text-lg text-foreground group-hover:text-primary transition">{e.title}</h3>
-              </div>
-              <div className="col-span-12 sm:col-span-3 flex items-center gap-2 text-sm text-muted-foreground sm:justify-end">
-                <MapPin className="w-4 h-4" /> {e.location}
-              </div>
-            </Link>
-          ))}
-        </div>
+        {upcomingEvents.length === 0 ? (
+          <p className="text-muted-foreground font-serif-editorial italic">No upcoming events scheduled. Check the full calendar.</p>
+        ) : (
+          <div className="space-y-px bg-border">
+            {upcomingEvents.map((e, i) => (
+              <Link
+                key={i}
+                to="/events"
+                data-reveal
+                style={{ transitionDelay: `${i * 80}ms` }}
+                className="reveal grid grid-cols-12 gap-4 items-center bg-background p-6 hover:bg-secondary transition group"
+              >
+                <div className="col-span-3 sm:col-span-2 font-display text-2xl text-primary">{e.date}</div>
+                <div className="col-span-9 sm:col-span-7">
+                  <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-1">{e.type}</p>
+                  <h3 className="font-display text-lg text-foreground group-hover:text-primary transition">{e.title}</h3>
+                </div>
+                <div className="col-span-12 sm:col-span-3 flex items-center gap-2 text-sm text-muted-foreground sm:justify-end">
+                  <MapPin className="w-4 h-4" /> {e.location}
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
