@@ -7,7 +7,7 @@ export interface Article {
   image?: string;
 }
 
-export const articles: Article[] = [
+const rawArticles: Article[] = [
   {
     type: "Statement",
     title: "On the Gen-Z Uprising of 2024",
@@ -243,5 +243,75 @@ Part Seven: Exile and Solidarity. The forced exile of Kenyan Marxists in the 198
 On the Inheritance. The reader who works through this volume will find an inheritance that is neither pristine nor unified. The Kenyan Marxist tradition contains nationalist deviations, Stalinist accommodations, theoretical errors and tactical failures. It also contains insights, analyses and acts of courage that no contemporary movement can afford to ignore. The Permanent Revolutionary Congress claims this inheritance critically, with the right to dispute and the obligation to extend.
 
 Acknowledgments. We acknowledge the families of detained and assassinated comrades who entrusted us with private papers; the librarians and archivists who preserved suppressed materials at personal risk; the comrades in exile who carried the tradition through years of darkness; and the cadre of the PRC Archive Project who completed the painstaking work of retrieval, transcription and contextualization. The volume is dedicated to the memory of all those Kenyan revolutionaries who paid the highest price for the convictions presented in these pages.`
+  },
+  {
+    type: "Statement",
+    title: "French Imperialism Shifts East as Influence Collapses in the Sahel",
+    date: "2026-08-14",
+    author: "PRC Political Committee",
+    image: "/images/protest-3.jpg",
+    body: `French imperialism is seeking to rebuild its influence in Africa through new alliances in East Africa after suffering a series of major setbacks across the Sahel and West Africa.
+
+Over the past four years, French troops have been expelled from Mali, Burkina Faso, Niger, Chad, and other former strongholds where Paris maintained military, political, and economic influence for decades. The withdrawal marks one of the most significant challenges to French interests on the continent since formal decolonization.
+
+Rather than retreating from Africa altogether, France has turned its attention toward Kenya, where President William Ruto's government has emerged as one of its closest regional partners.
+
+The shift was highlighted by the Africa Forward Summit held in Nairobi in May, bringing together thousands of delegates, heads of state, investors, and government officials. French President Emmanuel Macron used the summit to announce billions of euros in investment commitments across energy, agriculture, technology, and infrastructure.
+
+While government officials described the gathering as a symbol of a new partnership between Africa and France, critics argue that the summit reflects a broader effort by French capital to establish a new base of operations following its decline in West Africa.
+
+THE END OF FRANCAFRIQUE?
+
+For decades, France maintained a powerful network of influence across its former colonies through military deployments, economic agreements, political intervention, and the CFA franc currency system.
+
+Mass protests across the Sahel increasingly challenged this arrangement. In Mali, Burkina Faso, and Niger, widespread anger over military intervention, economic dependency, and foreign influence contributed to the removal of French forces. Large demonstrations outside French military installations became common, with protesters demanding an end to what many viewed as continued neo-colonial control.
+
+The departures represented a serious political defeat for Paris. French military influence, once stretching across much of West and Central Africa, has been reduced dramatically. However, analysts warn that the decline of French influence in one region does not necessarily mean the end of imperialist intervention on the continent.
+
+KENYA BECOMES A STRATEGIC PARTNER
+
+Kenya has increasingly attracted French investment over the past decade. French companies have expanded their presence in sectors including renewable energy, transportation, telecommunications, banking, and urban development.
+
+French officials view Kenya as a stable regional hub and a gateway to East African markets. Its location along major Indian Ocean trade routes also provides important strategic advantages. The growing relationship received another boost through a defence cooperation agreement ratified earlier this year. Under the agreement, French and Kenyan forces will conduct joint training exercises, intelligence cooperation, maritime security operations, and peacekeeping activities.
+
+The agreement generated controversy after details emerged granting legal protections to French military personnel operating in Kenya. Opposition figures, civil society organizations, and activists questioned whether the arrangement undermines Kenyan sovereignty and creates a system in which foreign troops enjoy privileges unavailable to ordinary citizens. Approximately 800 French military personnel have reportedly participated in operations linked to the agreement.
+
+CRITICS LINK DEAL TO IMPERIALIST INTERESTS
+
+Socialist organizations have described the agreement as evidence of France's attempt to establish a new military foothold after losing access to strategic bases in the Sahel.
+
+We argue that the partnership reflects the interests of French corporations seeking secure conditions for investment rather than the needs of Kenyan workers and poor communities.
+
+Foreign investment under capitalist conditions primarily benefits multinational corporations and local elites while leaving workers facing rising costs of living, unemployment, and austerity measures. The criticism comes amid growing social tensions in Kenya following years of IMF-backed economic reforms.
+
+THE SHADOW OF THE GEN Z UPRISING
+
+The Kenya-France partnership is unfolding against the backdrop of the 2024 Gen Z uprising, one of the largest protest movements in Kenya's history. Millions of young people mobilized against tax increases, austerity policies, corruption, and rising living costs.
+
+The youth accused the government of placing the interests of international lenders and foreign investors ahead of ordinary citizens. Protest slogans such as "IMF Go Home" and "Ruto Must Go" reflected growing anger toward both the government and international financial institutions. Human rights groups documented deaths, injuries, arrests, and disappearances during the government's response to the demonstrations.
+
+For us, the growing relationship between Kenya and France cannot be separated from these broader economic and political struggles.
+
+COUNTER-SUMMIT PROTESTS MET WITH ARRESTS
+
+As leaders gathered inside Nairobi's Kenyatta International Convention Centre for the Africa Forward Summit, anti-imperialist activists organized parallel events opposing the gathering.
+
+Protesters accused France of attempting to revive old forms of domination through investment deals, military cooperation, and political influence. Police dispersed demonstrations and arrested several activists and international delegates linked to the counter-summit.
+
+The arrests drew widespread condemnation, with critics arguing that democratic rights were being restricted to protect the summit from public opposition.
+
+A NEW CHAPTER OF AN OLD SYSTEM
+
+The growing French presence in Kenya has intensified debate about the future of African sovereignty and development. Supporters of the partnership point to promised investments, infrastructure projects, and economic opportunities.
+
+We as Trotskyists argue that the underlying structure remains unchanged. Foreign capital continues to extract wealth from Africa while local governments act as intermediaries between multinational corporations and the population.
+
+For socialist organizations across the continent, the central question remains whether African workers and youth can build independent political movements capable of challenging both foreign domination and the local ruling classes that sustain it.
+
+As French influence declines in one region and expands in another, the struggle over Africa's future continues.`
   }
 ];
+
+export const articles: Article[] = [...rawArticles].sort(
+  (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+);
