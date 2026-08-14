@@ -1,20 +1,26 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import { MapPin, Calendar } from "lucide-react";
 
-const upcoming = [
-  { date: "Jul 12, 2026", title: "Marxist School: Imperialism Today", type: "Education", location: "Nairobi + Online" },
-  { date: "Jul 19, 2026", title: "Public Meeting: Organizing the Gig Economy", type: "Public Meeting", location: "Mombasa" },
-  { date: "Aug 02, 2026", title: "PRC Branch Launch - Kisumu", type: "Campaign Launch", location: "Kisumu" },
-  { date: "Aug 16, 2026", title: "Women's Liberation Conference", type: "Conference", location: "Nairobi" },
-];
+interface EventItem {
+  title: string;
+  displayDate: string;
+  endDate: string;
+  type?: string;
+  location: string;
+}
 
-const past = [
-  { date: "Jun 01, 2026", title: "PRC Founding Congress", location: "Nairobi" },
-  { date: "May 10, 2026", title: "Anti-Imperialism Panel with ISL Comrades", location: "Online" },
+const allEvents: EventItem[] = [
+  { displayDate: "Oct 11-12, 2026", endDate: "2026-10-12", title: "2nd Congress of the PRC", type: "Congress", location: "Nairobi" },
+  { displayDate: "Aug 16, 2026", endDate: "2026-08-16", title: "Women's Liberation Conference", type: "Conference", location: "Nairobi" },
+  { displayDate: "Aug 02, 2026", endDate: "2026-08-02", title: "PRC Branch Launch - Kisumu", type: "Campaign Launch", location: "Kisumu" },
+  { displayDate: "Jul 19, 2026", endDate: "2026-07-19", title: "Public Meeting: Organizing the Gig Economy", type: "Public Meeting", location: "Mombasa" },
+  { displayDate: "Jul 12, 2026", endDate: "2026-07-12", title: "Marxist School: Imperialism Today", type: "Education", location: "Nairobi + Online" },
+  { displayDate: "Jun 01, 2026", endDate: "2026-06-01", title: "PRC Founding Congress", location: "Nairobi" },
+  { displayDate: "May 10, 2026", endDate: "2026-05-10", title: "Anti-Imperialism Panel with ISL Comrades", location: "Online" },
 ];
 
 export default function Events() {
