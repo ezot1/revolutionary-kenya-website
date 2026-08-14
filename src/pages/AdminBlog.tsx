@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
-import { Trash2, Edit2, X, Upload, LogOut } from "lucide-react";
+import { Trash2, Edit2, X, Upload, LogOut, Inbox } from "lucide-react";
 
 interface Post {
   id: string;
