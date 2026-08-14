@@ -193,11 +193,17 @@ const Newsletter = () => (
   </section>
 );
 
-const events = [
-  { date: "Jul 12", title: "Marxist School: Imperialism Today", type: "Education", location: "Nairobi + online" },
-  { date: "Jul 19", title: "Public Meeting: Organizing the Gig Economy", type: "Public Meeting", location: "Mombasa" },
-  { date: "Aug 02", title: "PRC Branch Launch - Kisumu", type: "Campaign Launch", location: "Kisumu" },
-];
+const upcomingEvents = [
+  { date: "Oct 11-12", endDate: "2026-10-12", title: "2nd Congress of the PRC", type: "Congress", location: "Nairobi" },
+  { date: "Aug 16", endDate: "2026-08-16", title: "Women's Liberation Conference", type: "Conference", location: "Nairobi" },
+  { date: "Aug 02", endDate: "2026-08-02", title: "PRC Branch Launch - Kisumu", type: "Campaign Launch", location: "Kisumu" },
+  { date: "Jul 19", endDate: "2026-07-19", title: "Public Meeting: Organizing the Gig Economy", type: "Public Meeting", location: "Mombasa" },
+  { date: "Jul 12", endDate: "2026-07-12", title: "Marxist School: Imperialism Today", type: "Education", location: "Nairobi + online" },
+].filter((e) => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return new Date(e.endDate).getTime() >= today.getTime();
+}).slice(0, 3);
 
 const Events = () => {
   const ref = useRevealGroup<HTMLDivElement>();
