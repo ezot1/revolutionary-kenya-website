@@ -38,6 +38,39 @@ export type Database = {
         }
         Relationships: []
       }
+      enquiry_replies: {
+        Row: {
+          body: string
+          created_at: string
+          id: string
+          sent_by: string | null
+          source_id: string | null
+          source_table: string
+          subject: string
+          to_email: string
+        }
+        Insert: {
+          body: string
+          created_at?: string
+          id?: string
+          sent_by?: string | null
+          source_id?: string | null
+          source_table: string
+          subject: string
+          to_email: string
+        }
+        Update: {
+          body?: string
+          created_at?: string
+          id?: string
+          sent_by?: string | null
+          source_id?: string | null
+          source_table?: string
+          subject?: string
+          to_email?: string
+        }
+        Relationships: []
+      }
       event_rsvps: {
         Row: {
           created_at: string
