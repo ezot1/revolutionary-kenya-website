@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
-import { LogOut, Download, RefreshCw, FileText } from "lucide-react";
+import { LogOut, Download, RefreshCw, FileText, Reply, X } from "lucide-react";
 import { toast } from "sonner";
 
 type Row = Record<string, string | null>;
@@ -26,6 +26,11 @@ const AdminEnquiries = () => {
   const [rows, setRows] = useState<Row[]>([]);
   const [counts, setCounts] = useState<Record<string, number>>({});
   const [loading, setLoading] = useState(false);
+  const [replyTo, setReplyTo] = useState<Row | null>(null);
+  const [subject, setSubject] = useState("");
+  const [message, setMessage] = useState("");
+  const [sending, setSending] = useState(false);
+  const [repliedTo, setRepliedTo] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const check = async (session: Awaited<ReturnType<typeof supabase.auth.getSession>>["data"]["session"]) => {
@@ -65,6 +70,53 @@ const AdminEnquiries = () => {
     }
     setRows((data ?? []) as Row[]);
     setCounts((c) => ({ ...c, [current.key]: data?.length ?? 0 }));
+  };
+
+  const fetchReplies = async () => {
+    const { data } = await supabase.from("enquiry_replies").select("to_email");
+    setRepliedTo(new Set((data ?? []).map((r) => (r.to_email as string).toLowerCase())));
+  };
+
+  useEffect(() => {
+    if (isAdmin) fetchReplies();
+  }, [isAdmin]);
+
+  const openReply = (r: Row) => {
+    setReplyTo(r);
+    const subj =
+      current.key === "contacts"
+        ? "Re: Your message to the Permanent Revolutionary Congress"
+        : current.key === "memberships"
+          ? "Re: Your PRC membership application"
+          : current.key === "event_rsvps"
+            ? `Re: Your RSVP for ${r.event_title ?? "our event"}`
+            : "Re: PRC newsletter";
+    const name = (r.name || r.full_name || "Comrade") as string;
+    setSubject(subj);
+    setMessage(`Dear ${name},\n\nThank you for reaching out to the Permanent Revolutionary Congress.\n\n\n\nIn solidarity,\nPRC\ninfo@prca.world`);
+  };
+
+  const sendReply = async () => {
+    if (!replyTo?.email || !subject.trim() || !message.trim()) return;
+    setSending(true);
+    const { data, error } = await supabase.functions.invoke("send-reply", {
+      body: {
+        to: replyTo.email,
+        subject: subject.trim(),
+        body: message.trim(),
+        sourceTable: current.table,
+        sourceId: replyTo.id,
+      },
+    });
+    setSending(false);
+    const err = (error as unknown as { message?: string })?.message ?? (data as { error?: string } | null)?.error;
+    if (err || error) {
+      toast.error((data as { error?: string } | null)?.error || "Could not send the reply.");
+      return;
+    }
+    toast.success(`Reply sent to ${replyTo.email}`);
+    setRepliedTo((s) => new Set(s).add((replyTo.email as string).toLowerCase()));
+    setReplyTo(null);
   };
 
   useEffect(() => {
@@ -197,6 +249,7 @@ const AdminEnquiries = () => {
                         {labelize(c)}
                       </th>
                     ))}
+                    <th className="text-left font-bold text-foreground px-4 py-3">Reply</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -215,6 +268,16 @@ const AdminEnquiries = () => {
                           )}
                         </td>
                       ))}
+                      <td className="px-4 py-3 whitespace-nowrap">
+                        <button
+                          onClick={() => openReply(r)}
+                          disabled={!r.email}
+                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition disabled:opacity-50"
+                        >
+                          <Reply className="w-3.5 h-3.5" />
+                          {r.email && repliedTo.has(r.email.toLowerCase()) ? "Reply again" : "Reply"}
+                        </button>
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -223,6 +286,51 @@ const AdminEnquiries = () => {
           </div>
         </div>
       </section>
+
+      {replyTo && (
+        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4">
+          <div className="w-full max-w-xl bg-card border border-border rounded-lg p-6 space-y-4">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h2 className="text-xl font-black text-foreground">Reply</h2>
+                <p className="text-xs text-muted-foreground">
+                  From info@prca.world to <span className="text-primary">{replyTo.email}</span>
+                </p>
+              </div>
+              <button onClick={() => setReplyTo(null)} className="text-muted-foreground hover:text-foreground">
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+            <input
+              value={subject}
+              onChange={(e) => setSubject(e.target.value)}
+              placeholder="Subject"
+              className="w-full px-3 py-2 bg-background border border-border rounded-md text-sm text-foreground focus:outline-none focus:border-primary"
+            />
+            <textarea
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              rows={10}
+              className="w-full px-3 py-2 bg-background border border-border rounded-md text-sm text-foreground focus:outline-none focus:border-primary"
+            />
+            <div className="flex justify-end gap-2">
+              <a
+                href={`mailto:${replyTo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`}
+                className="px-4 py-2 rounded-md bg-secondary text-foreground text-sm hover:bg-secondary/80 transition"
+              >
+                Open in mail app
+              </a>
+              <button
+                onClick={sendReply}
+                disabled={sending}
+                className="px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition disabled:opacity-50"
+              >
+                {sending ? "Sending..." : "Send reply"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };
