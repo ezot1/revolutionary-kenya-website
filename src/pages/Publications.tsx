@@ -2,7 +2,7 @@ import { useState } from "react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import SocialShare from "@/components/SocialShare";
-import { Search, FileText, X } from "lucide-react";
+import { Search, X } from "lucide-react";
 import { articles, type Article } from "@/content/articles";
 import defaultPublicationImage from "@/assets/publication-default.jpg";
 
