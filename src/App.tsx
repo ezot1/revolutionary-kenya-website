@@ -23,6 +23,9 @@ import Media from "./pages/Media";
 import Events from "./pages/Events";
 import Join from "./pages/Join";
 import Donate from "./pages/Donate";
+import Newsletter from "./pages/Newsletter";
+import NewsletterIssue from "./pages/NewsletterIssue";
+import AdminNewsletter from "./pages/AdminNewsletter";
 
 const queryClient = new QueryClient();
 
@@ -52,6 +55,9 @@ const App = () => (
           <Route path="/events" element={<Events />} />
           <Route path="/join" element={<Join />} />
           <Route path="/donate" element={<Donate />} />
+          <Route path="/newsletter" element={<Newsletter />} />
+          <Route path="/newsletter/:slug" element={<NewsletterIssue />} />
+          <Route path="/admin/newsletter" element={<AdminNewsletter />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

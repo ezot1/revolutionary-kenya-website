@@ -83,6 +83,9 @@ const Footer = () => (
           <h4 className="font-bold text-foreground mb-4 text-xs uppercase tracking-[0.18em]">Newsletter</h4>
           <p className="text-xs text-muted-foreground mb-3">Revolutionary analysis, weekly.</p>
           <NewsletterForm compact />
+          <Link to="/newsletter" className="mt-3 inline-block text-xs text-muted-foreground hover:text-primary transition">
+            Read past issues →
+          </Link>
         </div>
       </div>
 

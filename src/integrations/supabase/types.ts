@@ -128,6 +128,45 @@ export type Database = {
         }
         Relationships: []
       }
+      newsletter_issues: {
+        Row: {
+          content: string
+          created_at: string
+          date: string
+          id: string
+          image_url: string | null
+          issue_number: number | null
+          published: boolean
+          slug: string
+          summary: string | null
+          title: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          date?: string
+          id?: string
+          image_url?: string | null
+          issue_number?: number | null
+          published?: boolean
+          slug: string
+          summary?: string | null
+          title: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          date?: string
+          id?: string
+          image_url?: string | null
+          issue_number?: number | null
+          published?: boolean
+          slug?: string
+          summary?: string | null
+          title?: string
+        }
+        Relationships: []
+      }
       posts: {
         Row: {
           author: string

@@ -3,33 +3,34 @@ import { Link, useNavigate } from "react-router-dom";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
-import { Trash2, Edit2, X, Upload, LogOut, Inbox, Mail } from "lucide-react";
+import { Trash2, Edit2, X, Upload, LogOut, Inbox, FileText } from "lucide-react";
 
-interface Post {
+interface Issue {
   id: string;
   title: string;
   slug: string;
-  excerpt: string | null;
+  issue_number: number | null;
+  summary: string | null;
   content: string;
-  author: string;
   image_url: string | null;
   published: boolean;
   date: string;
 }
 
-const AdminBlog = () => {
+const AdminNewsletter = () => {
   const navigate = useNavigate();
   const [authChecked, setAuthChecked] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   const [userEmail, setUserEmail] = useState<string | null>(null);
-  const [posts, setPosts] = useState<Post[]>([]);
-  const [editing, setEditing] = useState<Post | null>(null);
+  const [issues, setIssues] = useState<Issue[]>([]);
+  const [editing, setEditing] = useState<Issue | null>(null);
   const [form, setForm] = useState({
     title: "",
-    author: "PRC Editorial",
-    excerpt: "",
+    issue_number: "",
+    summary: "",
     content: "",
     image_url: "",
+    date: new Date().toISOString().slice(0, 10),
     published: false,
   });
   const [saving, setSaving] = useState(false);
@@ -37,7 +38,9 @@ const AdminBlog = () => {
   const [imageFile, setImageFile] = useState<File | null>(null);
 
   useEffect(() => {
-    const check = async (session: Awaited<ReturnType<typeof supabase.auth.getSession>>["data"]["session"]) => {
+    const check = async (
+      session: Awaited<ReturnType<typeof supabase.auth.getSession>>["data"]["session"]
+    ) => {
       if (!session) {
         navigate("/auth", { replace: true });
         return;
@@ -64,24 +67,22 @@ const AdminBlog = () => {
     navigate("/auth", { replace: true });
   };
 
-  const fetchPosts = async () => {
+  const fetchIssues = async () => {
     const { data } = await supabase
-      .from("posts")
+      .from("newsletter_issues")
       .select("*")
       .order("date", { ascending: false });
-    if (data) setPosts(data);
+    if (data) setIssues(data as Issue[]);
   };
 
   useEffect(() => {
-    if (isAdmin) fetchPosts();
+    if (isAdmin) fetchIssues();
   }, [isAdmin]);
 
   const uploadImage = async (file: File): Promise<string | null> => {
     const ext = file.name.split(".").pop();
-    const fileName = `${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
-    const { error } = await supabase.storage
-      .from("blog-images")
-      .upload(fileName, file);
+    const fileName = `newsletter-${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const { error } = await supabase.storage.from("blog-images").upload(fileName, file);
     if (error) {
       toast.error("Image upload failed: " + error.message);
       return null;
@@ -91,7 +92,15 @@ const AdminBlog = () => {
   };
 
   const resetForm = () => {
-    setForm({ title: "", author: "PRC Editorial", excerpt: "", content: "", image_url: "", published: false });
+    setForm({
+      title: "",
+      issue_number: "",
+      summary: "",
+      content: "",
+      image_url: "",
+      date: new Date().toISOString().slice(0, 10),
+      published: false,
+    });
     setEditing(null);
     setImageFile(null);
   };
@@ -113,53 +122,54 @@ const AdminBlog = () => {
       .replace(/[^a-z0-9]+/g, "-")
       .replace(/(^-|-$)/g, "");
 
-    const payload = { ...form, image_url: imageUrl || null, slug };
+    const payload = {
+      title: form.title,
+      slug,
+      issue_number: form.issue_number ? Number(form.issue_number) : null,
+      summary: form.summary || null,
+      content: form.content,
+      image_url: imageUrl || null,
+      date: form.date,
+      published: form.published,
+    };
 
-    if (editing) {
-      const { error } = await supabase.from("posts").update(payload).eq("id", editing.id);
-      setSaving(false);
-      if (error) {
-        toast.error("Failed to update post: " + error.message);
-      } else {
-        toast.success("Post updated!");
-        resetForm();
-        fetchPosts();
-      }
-    } else {
-      const { error } = await supabase.from("posts").insert([payload]);
-      setSaving(false);
-      if (error) {
-        toast.error("Failed to create post: " + error.message);
-      } else {
-        toast.success("Post created!");
-        resetForm();
-        fetchPosts();
-      }
+    const { error } = editing
+      ? await supabase.from("newsletter_issues").update(payload).eq("id", editing.id)
+      : await supabase.from("newsletter_issues").insert([payload]);
+
+    setSaving(false);
+    if (error) {
+      toast.error("Failed to save issue: " + error.message);
+      return;
     }
+    toast.success(editing ? "Issue updated!" : "Issue created!");
+    resetForm();
+    fetchIssues();
   };
 
-  const handleEdit = (post: Post) => {
-    setEditing(post);
+  const handleEdit = (issue: Issue) => {
+    setEditing(issue);
     setForm({
-      title: post.title,
-      author: post.author,
-      excerpt: post.excerpt || "",
-      content: post.content,
-      image_url: post.image_url || "",
-      published: post.published,
+      title: issue.title,
+      issue_number: issue.issue_number ? String(issue.issue_number) : "",
+      summary: issue.summary || "",
+      content: issue.content,
+      image_url: issue.image_url || "",
+      date: issue.date,
+      published: issue.published,
     });
     setImageFile(null);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this post?")) return;
-    const { error } = await supabase.from("posts").delete().eq("id", id);
+    if (!confirm("Delete this newsletter issue?")) return;
+    const { error } = await supabase.from("newsletter_issues").delete().eq("id", id);
     if (error) {
-      toast.error("Failed to delete post");
+      toast.error("Failed to delete issue");
     } else {
-      toast.success("Post deleted");
-      fetchPosts();
+      toast.success("Issue deleted");
+      fetchIssues();
     }
   };
 
@@ -181,7 +191,8 @@ const AdminBlog = () => {
           <div className="container mx-auto px-4 max-w-md text-center space-y-4">
             <h1 className="text-2xl font-black text-foreground">Access denied</h1>
             <p className="text-muted-foreground text-sm">
-              You're signed in as <span className="font-semibold">{userEmail}</span>, but this account does not have admin privileges.
+              You're signed in as <span className="font-semibold">{userEmail}</span>, but this account does not have
+              admin privileges.
             </p>
             <button
               onClick={handleLogout}
@@ -200,13 +211,13 @@ const AdminBlog = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="flex items-center justify-between mb-8">
-            <h1 className="text-3xl font-black text-foreground">Blog Admin</h1>
+            <h1 className="text-3xl font-black text-foreground">Newsletter Admin</h1>
             <div className="flex items-center gap-2">
               <Link
-                to="/admin/newsletter"
+                to="/admin/blog"
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary text-foreground text-xs hover:bg-secondary/80 transition"
               >
-                <Mail className="w-3.5 h-3.5" /> Newsletter
+                <FileText className="w-3.5 h-3.5" /> Blog
               </Link>
               <Link
                 to="/admin/enquiries"
@@ -225,9 +236,7 @@ const AdminBlog = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4 mb-12 bg-card border border-border rounded-lg p-6">
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-foreground">
-                {editing ? "Edit Post" : "New Post"}
-              </h2>
+              <h2 className="text-lg font-bold text-foreground">{editing ? "Edit Issue" : "New Issue"}</h2>
               {editing && (
                 <button type="button" onClick={resetForm} className="text-muted-foreground hover:text-foreground">
                   <X className="w-5 h-5" />
@@ -237,36 +246,43 @@ const AdminBlog = () => {
 
             <input
               type="text"
-              placeholder="Title"
+              placeholder="Issue title"
               required
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               className={inputClass}
             />
+            <div className="grid sm:grid-cols-2 gap-4">
+              <input
+                type="number"
+                placeholder="Issue number"
+                value={form.issue_number}
+                onChange={(e) => setForm({ ...form, issue_number: e.target.value })}
+                className={inputClass}
+              />
+              <input
+                type="date"
+                value={form.date}
+                onChange={(e) => setForm({ ...form, date: e.target.value })}
+                className={inputClass}
+              />
+            </div>
             <input
               type="text"
-              placeholder="Author"
-              value={form.author}
-              onChange={(e) => setForm({ ...form, author: e.target.value })}
-              className={inputClass}
-            />
-            <input
-              type="text"
-              placeholder="Excerpt (short summary)"
-              value={form.excerpt}
-              onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
+              placeholder="Summary (short standfirst)"
+              value={form.summary}
+              onChange={(e) => setForm({ ...form, summary: e.target.value })}
               className={inputClass}
             />
             <textarea
-              placeholder="Content (use double line breaks for paragraphs)"
+              placeholder="Issue content (use double line breaks between paragraphs)"
               required
-              rows={12}
+              rows={14}
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
               className={`${inputClass} resize-none`}
             />
 
-            {/* Image upload */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-foreground">Cover Image</label>
               <div className="flex items-center gap-3">
@@ -288,7 +304,10 @@ const AdminBlog = () => {
                   type="text"
                   placeholder="Paste image URL"
                   value={form.image_url}
-                  onChange={(e) => { setForm({ ...form, image_url: e.target.value }); setImageFile(null); }}
+                  onChange={(e) => {
+                    setForm({ ...form, image_url: e.target.value });
+                    setImageFile(null);
+                  }}
                   className={`${inputClass} flex-1`}
                 />
               </div>
@@ -310,44 +329,38 @@ const AdminBlog = () => {
               />
               Published
             </label>
+
             <button
               type="submit"
               disabled={saving}
               className="w-full py-3 rounded-md bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition disabled:opacity-50"
             >
-              {saving
-                ? uploading
-                  ? "Uploading image..."
-                  : "Saving..."
-                : editing
-                ? "Update Post"
-                : "Create Post"}
+              {saving ? (uploading ? "Uploading image..." : "Saving...") : editing ? "Update Issue" : "Create Issue"}
             </button>
           </form>
 
-          <h2 className="text-xl font-bold text-foreground mb-4">Existing Posts ({posts.length})</h2>
+          <h2 className="text-xl font-bold text-foreground mb-4">Issues ({issues.length})</h2>
           <div className="space-y-3">
-            {posts.map((p) => (
-              <div key={p.id} className="flex items-center gap-4 bg-card border border-border rounded-lg p-4">
-                {p.image_url && (
-                  <img src={p.image_url} alt="" className="w-16 h-16 object-cover rounded" />
+            {issues.map((issue) => (
+              <div key={issue.id} className="flex items-center gap-4 bg-card border border-border rounded-lg p-4">
+                {issue.image_url && (
+                  <img src={issue.image_url} alt="" className="w-16 h-16 object-cover rounded" />
                 )}
                 <div className="flex-1 min-w-0">
-                  <p className="font-bold text-foreground text-sm truncate">{p.title}</p>
+                  <p className="font-bold text-foreground text-sm truncate">
+                    {issue.issue_number ? `#${issue.issue_number} · ` : ""}
+                    {issue.title}
+                  </p>
                   <p className="text-xs text-muted-foreground">
-                    {p.published ? "✅ Published" : "📝 Draft"} · {new Date(p.date).toLocaleDateString()} · {p.author}
+                    {issue.published ? "Published" : "Draft"} · {new Date(issue.date).toLocaleDateString()}
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => handleEdit(p)}
-                    className="text-accent hover:text-accent/80 transition"
-                    title="Edit"
-                  >
+                  <button onClick={() => handleEdit(issue)} className="text-accent hover:text-accent/80 transition" title="Edit">
                     <Edit2 className="w-4 h-4" />
                   </button>
                   <button
-                    onClick={() => handleDelete(p.id)}
+                    onClick={() => handleDelete(issue.id)}
                     className="text-destructive hover:text-destructive/80 transition"
                     title="Delete"
                   >
@@ -363,4 +376,4 @@ const AdminBlog = () => {
   );
 };
 
-export default AdminBlog;
+export default AdminNewsletter;
