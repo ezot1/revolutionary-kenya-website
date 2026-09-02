@@ -203,6 +203,12 @@ const AdminBlog = () => {
             <h1 className="text-3xl font-black text-foreground">Blog Admin</h1>
             <div className="flex items-center gap-2">
               <Link
+                to="/admin/newsletter"
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary text-foreground text-xs hover:bg-secondary/80 transition"
+              >
+                <Mail className="w-3.5 h-3.5" /> Newsletter
+              </Link>
+              <Link
                 to="/admin/enquiries"
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary text-foreground text-xs hover:bg-secondary/80 transition"
               >
