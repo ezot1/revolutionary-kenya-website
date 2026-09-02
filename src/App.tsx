@@ -23,6 +23,9 @@ import Media from "./pages/Media";
 import Events from "./pages/Events";
 import Join from "./pages/Join";
 import Donate from "./pages/Donate";
+import Newsletter from "./pages/Newsletter";
+import NewsletterIssue from "./pages/NewsletterIssue";
+import AdminNewsletter from "./pages/AdminNewsletter";
 
 const queryClient = new QueryClient();
 
