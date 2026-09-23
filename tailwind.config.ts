@@ -60,6 +60,13 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        review: {
+          paper: "hsl(var(--review-paper))",
+          ink: "hsl(var(--review-ink))",
+          muted: "hsl(var(--review-muted))",
+          line: "hsl(var(--review-line))",
+          red: "hsl(var(--review-red))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

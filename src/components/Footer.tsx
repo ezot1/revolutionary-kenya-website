@@ -80,11 +80,11 @@ const Footer = () => (
         ))}
 
         <div className="lg:col-span-2">
-          <h4 className="font-bold text-foreground mb-4 text-xs uppercase tracking-[0.18em]">Newsletter</h4>
-          <p className="text-xs text-muted-foreground mb-3">Revolutionary analysis, weekly.</p>
+          <h4 className="font-bold text-foreground mb-4 text-xs uppercase tracking-[0.18em]">The Revolutionary Review</h4>
+          <p className="text-xs text-muted-foreground mb-3">Kenyan socialist analysis, monthly.</p>
           <NewsletterForm compact />
           <Link to="/newsletter" className="mt-3 inline-block text-xs text-muted-foreground hover:text-primary transition">
-            Read past issues →
+            Read the latest issue →
           </Link>
         </div>
       </div>
