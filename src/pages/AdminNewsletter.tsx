@@ -211,7 +211,10 @@ const AdminNewsletter = () => {
       <section className="py-16">
         <div className="container mx-auto px-4 max-w-3xl">
           <div className="flex items-center justify-between mb-8">
-            <h1 className="text-3xl font-black text-foreground">Newsletter Admin</h1>
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">Monthly publication</p>
+              <h1 className="text-3xl font-black text-foreground">The Revolutionary Review</h1>
+            </div>
             <div className="flex items-center gap-2">
               <Link
                 to="/admin/blog"
