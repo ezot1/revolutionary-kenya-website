@@ -34,7 +34,7 @@ const NewsletterIssue = () => {
   if (isInaugural) {
     return (
       <Layout>
-        <article className="bg-review-paper text-review-ink py-8 md:py-14">
+        <article className="overflow-x-hidden bg-review-paper text-review-ink py-8 md:py-14">
           <div className="mx-auto max-w-5xl px-4">
             <Link to="/newsletter" className="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-[0.16em] text-review-muted hover:text-review-red">
               <ArrowLeft className="h-4 w-4" /> All issues

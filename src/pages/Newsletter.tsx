@@ -36,7 +36,7 @@ const Newsletter = () => {
 
   return (
     <Layout>
-      <main className="bg-review-paper text-review-ink py-8 md:py-14">
+      <main className="overflow-x-hidden bg-review-paper text-review-ink py-8 md:py-14">
         <div className="container mx-auto px-4">
           <header className="mx-auto max-w-6xl border-y-4 border-review-ink py-5 text-center">
             <div className="mb-5 grid grid-cols-3 items-center gap-2 font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-review-muted">
@@ -47,7 +47,7 @@ const Newsletter = () => {
             <p className="mb-3 font-sans text-xs font-bold uppercase tracking-[0.24em] text-review-red">
               Permanent Revolutionary Congress
             </p>
-            <h1 className="font-review-display text-5xl font-black uppercase leading-[0.9] md:text-8xl">
+            <h1 className="break-words font-review-display text-[2.15rem] font-black uppercase leading-[0.92] sm:text-5xl md:text-7xl lg:text-8xl">
               The Revolutionary Review
             </h1>
             <p className="mx-auto mt-5 max-w-3xl border-t border-review-line pt-4 font-review italic text-review-muted md:text-xl">
