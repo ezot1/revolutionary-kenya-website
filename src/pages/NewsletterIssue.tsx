@@ -43,9 +43,9 @@ const NewsletterIssue = () => {
               <div className="bg-review-red px-5 py-6 text-review-paper md:px-8 md:py-8">
                 <div className="flex items-center gap-4 border-b border-review-paper/40 pb-5 text-left md:gap-6">
                   <img src="/images/prc-logo.jpg" alt="Permanent Revolutionary Congress" className="h-16 w-16 shrink-0 rounded-full border-2 border-review-paper object-cover md:h-24 md:w-24" />
-                  <div>
+                  <div className="min-w-0">
                     <p className="font-sans text-[10px] font-bold uppercase tracking-[0.16em] md:text-xs">Permanent Revolutionary Congress</p>
-                    <p className="mt-1 font-review-display text-3xl font-black uppercase leading-none sm:text-4xl md:text-6xl">The Revolutionary Review</p>
+                    <p className="mt-1 break-words font-review-display text-2xl font-black uppercase leading-none sm:text-4xl md:text-6xl">The Revolutionary Review</p>
                   </div>
                 </div>
                 <p className="mt-4 text-left font-sans text-[10px] font-bold uppercase tracking-[0.14em]">Volume I · Issue 01 · September 2026</p>
