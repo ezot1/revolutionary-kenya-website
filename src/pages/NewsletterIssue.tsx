@@ -39,9 +39,18 @@ const NewsletterIssue = () => {
             <Link to="/newsletter" className="inline-flex items-center gap-2 font-sans text-xs font-bold uppercase tracking-[0.16em] text-review-muted hover:text-review-red">
               <ArrowLeft className="h-4 w-4" /> All issues
             </Link>
-            <header className="mt-8 border-y-4 border-review-ink py-7 text-center">
-              <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-review-red">The Revolutionary Review · Volume I · Issue 01</p>
-              <h1 className="mx-auto mt-4 max-w-4xl font-review-display text-5xl font-black leading-[0.95] md:text-7xl">{inauguralIssue.title}</h1>
+            <header className="mt-8 border-b border-review-line pb-8 text-center">
+              <div className="bg-review-red px-5 py-6 text-review-paper md:px-8 md:py-8">
+                <div className="flex items-center gap-4 border-b border-review-paper/40 pb-5 text-left md:gap-6">
+                  <img src="/images/prc-logo.jpg" alt="Permanent Revolutionary Congress" className="h-16 w-16 shrink-0 rounded-full border-2 border-review-paper object-cover md:h-24 md:w-24" />
+                  <div>
+                    <p className="font-sans text-[10px] font-bold uppercase tracking-[0.16em] md:text-xs">Permanent Revolutionary Congress</p>
+                    <p className="mt-1 font-review-display text-3xl font-black uppercase leading-none sm:text-4xl md:text-6xl">The Revolutionary Review</p>
+                  </div>
+                </div>
+                <p className="mt-4 text-left font-sans text-[10px] font-bold uppercase tracking-[0.14em]">Volume I · Issue 01 · September 2026</p>
+              </div>
+              <h1 className="mx-auto mt-8 max-w-4xl font-review-display text-5xl font-black leading-[0.95] md:text-7xl">{inauguralIssue.title}</h1>
               <p className="mx-auto mt-4 max-w-2xl font-review text-xl italic text-review-muted">{inauguralIssue.subtitle}</p>
               <div className="mt-6 flex flex-wrap justify-center gap-3">
                 <a href={inauguralIssue.pdfUrl} download className="inline-flex items-center gap-2 bg-review-ink px-5 py-3 font-sans text-xs font-bold uppercase tracking-[0.14em] text-review-paper hover:bg-review-red">
@@ -71,18 +80,12 @@ const NewsletterIssue = () => {
                     <p className="mt-4 font-review text-xl italic leading-relaxed text-review-muted">{article.standfirst}</p>
                   </div>
                 </div>
-                <img src={article.image} alt={article.imageAlt} className="mt-8 aspect-[16/7] w-full object-cover grayscale contrast-125" />
+                <img src={article.image} alt={article.imageAlt} className="mt-8 aspect-[16/7] w-full object-cover" />
                 <div className="mx-auto mt-9 max-w-3xl">
                   <div className="space-y-5 font-review text-lg leading-relaxed text-review-muted">
                     {article.body.map((paragraph, index) => <p key={paragraph} className={index === 0 ? "first-letter:float-left first-letter:mr-2 first-letter:font-review-display first-letter:text-6xl first-letter:font-black first-letter:leading-[0.8]" : ""}>{paragraph}</p>)}
                   </div>
                   <blockquote className="my-9 border-y-2 border-review-ink py-6 font-review-display text-2xl font-bold leading-tight text-review-red">“{article.pullQuote}”</blockquote>
-                  <div className="border-t border-review-line pt-5">
-                    <p className="font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-review-muted">Sources and further reading</p>
-                    <ul className="mt-3 space-y-2 font-review text-sm text-review-muted">
-                      {article.sources.map((source) => <li key={source.url}><a href={source.url} target="_blank" rel="noreferrer" className="underline decoration-review-line underline-offset-4 hover:text-review-red">{source.label}</a></li>)}
-                    </ul>
-                  </div>
                 </div>
               </section>
             ))}

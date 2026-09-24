@@ -38,19 +38,23 @@ const Newsletter = () => {
     <Layout>
       <main className="overflow-x-hidden bg-review-paper text-review-ink py-8 md:py-14">
         <div className="container mx-auto px-4">
-          <header className="mx-auto max-w-6xl border-y-4 border-review-ink py-5 text-center">
-            <div className="mb-5 grid grid-cols-3 items-center gap-2 font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-review-muted">
-              <span className="text-left">Volume I · Issue 01</span>
-              <span>Published monthly</span>
-              <span className="text-right">Nairobi · September 2026</span>
+          <header className="mx-auto max-w-6xl border-b border-review-line pb-8">
+            <div className="bg-review-red px-5 py-6 text-review-paper md:px-8 md:py-8">
+              <div className="flex items-center gap-4 border-b border-review-paper/40 pb-5 md:gap-6">
+                <img src="/images/prc-logo.jpg" alt="Permanent Revolutionary Congress" className="h-16 w-16 shrink-0 rounded-full border-2 border-review-paper object-cover md:h-24 md:w-24" />
+                <div>
+                  <p className="font-sans text-[10px] font-bold uppercase tracking-[0.18em] md:text-xs">Permanent Revolutionary Congress</p>
+                  <h1 className="mt-1 break-words font-review-display text-4xl font-black uppercase leading-none sm:text-5xl md:text-7xl">
+                    The Revolutionary Review
+                  </h1>
+                </div>
+              </div>
+              <div className="mt-4 flex flex-wrap justify-between gap-2 font-sans text-[10px] font-bold uppercase tracking-[0.14em]">
+                <span>Volume I · Issue 01</span>
+                <span>Monthly · Nairobi · September 2026</span>
+              </div>
             </div>
-            <p className="mb-3 font-sans text-xs font-bold uppercase tracking-[0.24em] text-review-red">
-              Permanent Revolutionary Congress
-            </p>
-            <h1 className="break-words font-review-display text-[2.15rem] font-black uppercase leading-[0.92] sm:text-5xl md:text-7xl lg:text-8xl">
-              The Revolutionary Review
-            </h1>
-            <p className="mx-auto mt-5 max-w-3xl border-t border-review-line pt-4 font-review italic text-review-muted md:text-xl">
+            <p className="mx-auto max-w-3xl px-5 pt-6 text-center font-review text-base font-semibold italic text-review-muted md:text-lg">
               A monthly journal of working-class struggle, socialist analysis and permanent revolution.
             </p>
           </header>
@@ -65,7 +69,7 @@ const Newsletter = () => {
               <img
                 src={lead.image}
                 alt={lead.imageAlt}
-                className="mt-7 aspect-[16/8] w-full object-cover grayscale contrast-125"
+                className="mt-7 aspect-[16/8] w-full object-cover"
               />
               <div className="mt-6 grid gap-6 md:grid-cols-[1fr_auto] md:items-end">
                 <div>
@@ -139,7 +143,7 @@ const Newsletter = () => {
               <div className="grid gap-px bg-review-line md:grid-cols-3">
                 {issues.map((issue) => (
                   <Link key={issue.id} to={`/newsletter/${issue.slug}`} className="group bg-review-paper py-6 md:px-5">
-                    <img src={issue.image_url || defaultCover} alt="" className="aspect-[4/3] w-full object-cover grayscale transition duration-500 group-hover:grayscale-0" />
+                     <img src={issue.image_url || defaultCover} alt="" className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:brightness-90" />
                     <p className="mt-4 font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-review-red">
                       {issue.issue_number ? `Issue ${issue.issue_number} · ` : ""}{new Date(issue.date).toLocaleDateString(undefined, { month: "long", year: "numeric" })}
                     </p>
