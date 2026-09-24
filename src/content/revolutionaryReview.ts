@@ -1,3 +1,6 @@
+import kenyaProtestsAsset from "@/assets/kenya-2024-protests.asset.json";
+import nairobiBodaAsset from "@/assets/boda-boda-rider-nairobi.asset.json";
+
 export interface ReviewSource {
   label: string;
   url: string;
@@ -17,8 +20,8 @@ export interface ReviewArticle {
   sources: ReviewSource[];
 }
 
-const kenyaProtestsPhoto = "/__l5e/assets-v1/4c773ffb-f69e-4f31-a3bc-f69f57df30b7/kenya-2024-protests.jpg";
-const nairobiBodaPhoto = "/__l5e/assets-v1/50a8a212-7608-4b33-ac4d-50501aa66439/boda-boda-rider-nairobi.jpg";
+const kenyaProtestsPhoto = kenyaProtestsAsset.url;
+const nairobiBodaPhoto = nairobiBodaAsset.url;
 
 export interface ReviewIssue {
   issueNumber: number;
