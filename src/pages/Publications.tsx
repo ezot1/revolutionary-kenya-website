@@ -108,6 +108,11 @@ export default function Publications() {
                   height={640}
                   className="w-full h-auto mb-8 border border-border"
                 />
+              {selected.imageCredit && (
+                <p className="-mt-6 mb-8 text-right text-[10px] text-muted-foreground">
+                  Photo: {selected.imageSource ? <a href={selected.imageSource} target="_blank" rel="noreferrer" className="underline hover:text-primary">{selected.imageCredit}</a> : selected.imageCredit}
+                </p>
+              )}
               <div className="font-serif-editorial text-lg text-foreground/90 leading-relaxed space-y-5">
                 {selected.body.split(/\n\n+/).map((p, i) => (
                   <p key={i}>{p}</p>

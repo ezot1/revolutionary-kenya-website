@@ -80,7 +80,14 @@ const NewsletterIssue = () => {
                     <p className="mt-4 font-review text-xl italic leading-relaxed text-review-muted">{article.standfirst}</p>
                   </div>
                 </div>
-                <img src={article.image} alt={article.imageAlt} className="mt-8 aspect-[16/7] w-full object-cover" />
+                <figure className="mt-8">
+                  <img src={article.image} alt={article.imageAlt} className="aspect-[16/7] w-full object-cover" />
+                  {article.imageCredit && (
+                    <figcaption className="mt-2 text-right font-sans text-[10px] text-review-muted">
+                      Photo: {article.imageSource ? <a href={article.imageSource} target="_blank" rel="noreferrer" className="underline hover:text-review-red">{article.imageCredit}</a> : article.imageCredit}
+                    </figcaption>
+                  )}
+                </figure>
                 <div className="mx-auto mt-9 max-w-3xl">
                   <div className="space-y-5 font-review text-lg leading-relaxed text-review-muted">
                     {article.body.map((paragraph, index) => <p key={paragraph} className={index === 0 ? "first-letter:float-left first-letter:mr-2 first-letter:font-review-display first-letter:text-6xl first-letter:font-black first-letter:leading-[0.8]" : ""}>{paragraph}</p>)}

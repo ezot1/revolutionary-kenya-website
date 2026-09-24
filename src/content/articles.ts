@@ -5,7 +5,12 @@ export interface Article {
   author?: string;
   body: string;
   image?: string;
+  imageCredit?: string;
+  imageSource?: string;
 }
+
+const kenyaProtestsPhoto = "/__l5e/assets-v1/4c773ffb-f69e-4f31-a3bc-f69f57df30b7/kenya-2024-protests.jpg";
+const nairobiBodaPhoto = "/__l5e/assets-v1/50a8a212-7608-4b33-ac4d-50501aa66439/boda-boda-rider-nairobi.jpg";
 
 const rawArticles: Article[] = [
   {
@@ -13,7 +18,9 @@ const rawArticles: Article[] = [
     title: "On the Gen-Z Uprising of 2024",
     date: "2024-07-10",
     author: "PRC Political Committee",
-    image: "/images/gen-genz-uprising.jpg",
+    image: kenyaProtestsPhoto,
+    imageCredit: "Capital FM Kenya, CC BY 3.0",
+    imageSource: "https://commons.wikimedia.org/wiki/File:Kenya_2024_protests_(1).jpg",
     body: `The June and July mobilizations of 2024 marked a rupture in Kenyan political life. What began as opposition to the Finance Bill exploded into a generational revolt against the entire regime of austerity, debt servitude and police violence administered by the Kenya Kwanza government on behalf of the IMF and international capital. The youth who flooded the streets of Nairobi, Mombasa, Kisumu, Nakuru and Eldoret were not asking for reform. They were declaring that the present order is illegitimate.
 
 The political instinct of the masses outran the political organizations of the masses. Without a recognized leadership, without a programmatic centre, hundreds of thousands of young workers and students coordinated through social media, neighborhood assemblies and improvised marshalling. They breached Parliament, forced the withdrawal of the bill, and shook the cabinet. Then the limits of spontaneity asserted themselves. The state regrouped. Abductions and extrajudicial killings followed. The bourgeois opposition rushed in to absorb the energy of the streets into a coalition government, neutralizing the threat to capital under the cover of a "broad-based" administration.
@@ -161,7 +168,9 @@ This pamphlet is an introduction. The conclusions are practical. Study the theor
     title: "The Gig Economy in Nairobi: A Class Analysis",
     date: "2025-08-02",
     author: "PRC Labor Research Unit",
-    image: "/images/gen-gig-economy.jpg",
+    image: nairobiBodaPhoto,
+    imageCredit: "Tmaokisa, CC BY-SA 4.0",
+    imageSource: "https://commons.wikimedia.org/wiki/File:Boda_Boda_rider_in_Nairobi.jpg",
     body: `Introduction. This report presents the findings of an eighteen-month investigation by the PRC Labor Research Unit into the conditions, organization and political potential of platform workers in Nairobi - riders, drivers, couriers and freelance digital workers operating through the platforms of Uber, Bolt, Glovo, Jumia, Little, Faras and the international microwork sites. The study combined a survey of 1,840 workers, fifty-six in-depth interviews, participant observation in three rider hubs, and analysis of platform pricing and disciplinary algorithms.
 
 Class Character. Platform workers in Nairobi are wage workers, not "entrepreneurs," and the categorization of their status by platforms as "independent contractors" is a juridical fiction designed to externalize the costs of social reproduction and to deny basic labor rights. The platforms exercise the classic prerogatives of an employer: setting prices unilaterally, directing the labor process minute by minute through algorithmic instruction, disciplining workers through deactivation, and extracting a surplus that is distributed to platform shareholders. The "flexibility" celebrated in marketing material is the flexibility of capital to dispose of labor without the constraints imposed by a century of working-class struggle.
