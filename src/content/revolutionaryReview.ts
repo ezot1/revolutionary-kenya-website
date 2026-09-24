@@ -1,3 +1,6 @@
+import kenyaProtestsAsset from "@/assets/kenya-2024-protests.asset.json";
+import nairobiBodaAsset from "@/assets/boda-boda-rider-nairobi.asset.json";
+
 export interface ReviewSource {
   label: string;
   url: string;
@@ -10,10 +13,15 @@ export interface ReviewArticle {
   author: string;
   image: string;
   imageAlt: string;
+  imageCredit?: string;
+  imageSource?: string;
   body: string[];
   pullQuote: string;
   sources: ReviewSource[];
 }
+
+const kenyaProtestsPhoto = kenyaProtestsAsset.url;
+const nairobiBodaPhoto = nairobiBodaAsset.url;
 
 export interface ReviewIssue {
   issueNumber: number;
@@ -69,8 +77,10 @@ export const inauguralIssue: ReviewIssue = {
       "title": "The Price Shock Is Political",
       "standfirst": "Fuel, freight, taxes and debt are turning global instability into another assault on Kenyan households and small traders.",
       "author": "Economic Affairs Desk",
-      "image": "/images/gen-gig-economy.jpg",
-      "imageAlt": "Workers and traders in a crowded city economy",
+      "image": nairobiBodaPhoto,
+      "imageAlt": "A boda boda rider carrying a passenger on a Nairobi road",
+      "imageCredit": "Tmaokisa, CC BY-SA 4.0",
+      "imageSource": "https://commons.wikimedia.org/wiki/File:Boda_Boda_rider_in_Nairobi.jpg",
       "pullQuote": "Every rise in transport and food costs poses the same class question: must living standards fall so debt and profit remain protected?",
       "body": [
         "The cost-of-living crisis is again becoming the central fact of Kenyan politics. Data reported in August by the Kenya Freedom Index counted 1,292 protests between January 2025 and June 2026, with economic grievances the leading cause. In the first half of 2026 alone, the study recorded 453 protests, a rise of 29 percent over the comparable period. Behind the statistics are households forced to choose between food, rent, transport, school fees and healthcare.",
@@ -96,8 +106,10 @@ export const inauguralIssue: ReviewIssue = {
       "title": "Gen Z: From Revolt to Organisation",
       "standfirst": "Two years after the Finance Bill uprising, the courage of a generation remains a force. Its central challenge is political organisation.",
       "author": "Youth Commission",
-      "image": "/images/gen-genz-uprising.jpg",
-      "imageAlt": "Young protesters marching with raised fists",
+      "image": kenyaProtestsPhoto,
+      "imageAlt": "Protesters in Nairobi during Kenya's 2024 Finance Bill demonstrations",
+      "imageCredit": "Capital FM Kenya, CC BY 3.0",
+      "imageSource": "https://commons.wikimedia.org/wiki/File:Kenya_2024_protests_(1).jpg",
       "pullQuote": "Spontaneity opened the door. Only democratic organisation, a programme and roots in the working class can carry the struggle through it.",
       "body": [
         "The June anniversary returned Kenya to the central question opened by the youth uprising: what becomes of a movement after it proves that fear can be broken? The 2024 struggle forced withdrawal of the Finance Bill and shattered the claim that young people were passive or permanently divided by ethnicity. Anniversary demonstrations in 2026 showed that unemployment, police violence, corruption and the cost of living remain unresolved.",
