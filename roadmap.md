@@ -10,3 +10,7 @@
 - [x] Restore yesterday's A4 Academic Broadside PDF proportions and structure
 - [x] Regenerate the PDF and inspect every page
 - [x] Verify the website edition and download
+- [x] Audit all generated images and their usage
+- [x] Replace them with realistic human-centred political photography
+- [x] Update website and Revolutionary Review PDF
+- [x] Inspect every revised page and verify the download
