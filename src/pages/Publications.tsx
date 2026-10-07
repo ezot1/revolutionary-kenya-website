@@ -2,13 +2,15 @@ import { useState } from "react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import SocialShare from "@/components/SocialShare";
-import { Search, X } from "lucide-react";
+import { Search, X, Download, FileText } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { congressDocuments } from "@/content/congressDocuments";
 import { articles, type Article } from "@/content/articles";
 import defaultPublicationImage from "@/assets/publication-default.jpg";
 
 const docs = articles;
 
-const types = ["All", "Statement", "Position Paper", "Resolution", "Pamphlet", "Conference Document", "Research Report", "Book", "Archive"];
+const types = ["All", "Congress Document", "Statement", "Position Paper", "Resolution", "Pamphlet", "Conference Document", "Research Report", "Book", "Archive"];
 
 export default function Publications() {
   const [q, setQ] = useState("");
@@ -16,6 +18,9 @@ export default function Publications() {
   const [selected, setSelected] = useState<Article | null>(null);
   const filtered = docs.filter((d) =>
     (type === "All" || d.type === type) && d.title.toLowerCase().includes(q.toLowerCase())
+  );
+  const filteredCongress = congressDocuments.filter((d) =>
+    (type === "All" || type === "Congress Document") && d.title.toLowerCase().includes(q.toLowerCase())
   );
   return (
     <Layout>
@@ -50,6 +55,30 @@ export default function Publications() {
           </div>
         </div>
       </section>
+      {filteredCongress.length > 0 && (
+        <section className="py-10 border-b border-border">
+          <div className="container mx-auto px-4">
+            <h2 className="font-display text-2xl text-foreground mb-6">Congress documents</h2>
+            <div className="divide-y divide-border">
+              {filteredCongress.map((document) => (
+                <article key={document.filename} className="py-6 flex flex-col sm:flex-row sm:items-center gap-5">
+                  <FileText className="h-8 w-8 shrink-0 text-primary" aria-hidden="true" />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs uppercase font-bold text-primary mb-2">Congress Document · Word</p>
+                    <h3 className="font-display text-lg text-foreground">{document.title}</h3>
+                    <p className="mt-2 text-sm text-muted-foreground">{document.description}</p>
+                  </div>
+                  <Button asChild variant="outline" className="self-start sm:self-center shrink-0">
+                    <a href={document.url} download={document.filename} aria-label={`Download ${document.title}`}>
+                      <Download /> Download DOCX
+                    </a>
+                  </Button>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
       <section className="py-12">
         <div className="container mx-auto px-4 space-y-px bg-border">
           {filtered.map((d) => (
@@ -73,7 +102,7 @@ export default function Publications() {
               <p className="text-xs text-muted-foreground uppercase tracking-wider">{new Date(d.date).toLocaleDateString()}</p>
             </article>
           ))}
-          {filtered.length === 0 && (
+          {filtered.length === 0 && filteredCongress.length === 0 && (
             <p className="bg-background p-8 text-muted-foreground italic font-serif-editorial">No documents match your search.</p>
           )}
         </div>
