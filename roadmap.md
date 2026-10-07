@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Add both uploaded congress documents to Publications and verify their downloads
+- [x] Add both uploaded congress documents to Publications and verify their downloads
 
 - [x] Replace Issue 1’s PDF with the user-uploaded edition and verify the newsletter download
 
