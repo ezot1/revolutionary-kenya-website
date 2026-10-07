@@ -1,5 +1,6 @@
 import kenyaProtestsAsset from "@/assets/kenya-2024-protests.asset.json";
 import nairobiBodaAsset from "@/assets/boda-boda-rider-nairobi.asset.json";
+import firstIssuePdf from "@/assets/revolutionary-review-issue-1.pdf.asset.json";
 
 export interface ReviewSource {
   label: string;
@@ -42,7 +43,7 @@ export const inauguralIssue: ReviewIssue = {
   "title": "Politics at the Breaking Point",
   "slug": "kenya-at-the-crossroads",
   "subtitle": "Power, repression and working-class resistance in Kenya, Africa and the world",
-  "pdfUrl": "/downloads/revolutionary-review-issue-1.pdf",
+  "pdfUrl": firstIssuePdf.url,
   "editorial": [
     "This issue goes to press as political tensions sharpen in Kenya and far beyond it. The approach of the 2027 election has accelerated elite realignments while organised violence, police repression and the cost-of-living crisis narrow the space available to workers and young people. The daily news presents these developments as separate dramas. They are, in fact, connected by the struggle over who will pay for a deepening crisis of capitalism.",
     "Four national articles examine the immediate Kenyan situation: attacks on opposition and civic meetings, renewed pressure on household budgets, the unfinished political work of the Gen Z uprising, and the manoeuvres of establishment politicians ahead of 2027. Our Africa article considers the Alliance of Sahel States under imperialist pressure without giving political support to military rule. Our international article traces how war against Iran is transmitted through fuel prices and food costs to working people across continents.",
