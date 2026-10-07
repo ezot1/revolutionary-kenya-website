@@ -2,7 +2,7 @@ import { useState } from "react";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import SocialShare from "@/components/SocialShare";
-import { Search, X, Download, FileText } from "lucide-react";
+import { Search, X, ArrowRight, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { congressDocuments } from "@/content/congressDocuments";
 import { articles, type Article } from "@/content/articles";
@@ -61,17 +61,15 @@ export default function Publications() {
             <h2 className="font-display text-2xl text-foreground mb-6">Congress documents</h2>
             <div className="divide-y divide-border">
               {filteredCongress.map((document) => (
-                <article key={document.filename} className="py-6 flex flex-col sm:flex-row sm:items-center gap-5">
+                <article key={document.title} className="py-6 flex flex-col sm:flex-row sm:items-center gap-5">
                   <FileText className="h-8 w-8 shrink-0 text-primary" aria-hidden="true" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs uppercase font-bold text-primary mb-2">Congress Document · Word</p>
+                    <p className="text-xs uppercase font-bold text-primary mb-2">Congress Document</p>
                     <h3 className="font-display text-lg text-foreground">{document.title}</h3>
                     <p className="mt-2 text-sm text-muted-foreground">{document.description}</p>
                   </div>
-                  <Button asChild variant="outline" className="self-start sm:self-center shrink-0">
-                    <a href={document.url} download={document.filename} aria-label={`Download ${document.title}`}>
-                      <Download /> Download DOCX
-                    </a>
+                  <Button variant="outline" onClick={() => setSelected(document)} aria-label={`Read ${document.title}`} className="self-start sm:self-center shrink-0">
+                    Read article <ArrowRight />
                   </Button>
                 </article>
               ))}
@@ -143,9 +141,13 @@ export default function Publications() {
                 </p>
               )}
               <div className="font-serif-editorial text-lg text-foreground/90 leading-relaxed space-y-5">
-                {selected.body.split(/\n\n+/).map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
+                {congressDocuments.find((document) => document.title === selected.title)?.blocks.map((block, i) => (
+                  block.kind === "list" ? (
+                    <ul key={i} className="list-disc pl-6 space-y-2">{block.items.map((item, j) => <li key={j}>{item}</li>)}</ul>
+                  ) : block.kind === "heading" ? (
+                    <h2 key={i} className="font-display text-2xl text-foreground pt-5">{block.text}</h2>
+                  ) : <p key={i}>{block.text}</p>
+                )) ?? selected.body.split(/\n\n+/).map((p, i) => <p key={i}>{p}</p>)}
               </div>
               <div className="mt-10 pt-6 border-t border-border">
                 <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Share this document</p>
