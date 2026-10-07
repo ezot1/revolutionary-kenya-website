@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Replace Issue 1’s PDF with the user-uploaded edition and verify the newsletter download
+- [x] Replace Issue 1’s PDF with the user-uploaded edition and verify the newsletter download
 
 - [x] Redesign The Revolutionary Review landing page
 - [x] Add Issue 1 online reading experience
