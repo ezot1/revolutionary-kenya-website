@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Add the full political education guide to Education and verify its content
+
 - [x] Convert the last two congress documents into readable Publications articles and verify both
 
 - [x] Add both uploaded congress documents to Publications and verify their downloads
