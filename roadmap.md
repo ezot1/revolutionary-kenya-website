@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Add The Revolutionary Review to News and verify its issue links
+
 - [x] Add the full political education guide to Education and verify its content
 
 - [x] Convert the last two congress documents into readable Publications articles and verify both
