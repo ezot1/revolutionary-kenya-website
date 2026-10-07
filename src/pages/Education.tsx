@@ -1,6 +1,9 @@
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import { BookOpen, Video, Users, Download } from "lucide-react";
+import { congressDocuments } from "@/content/congressDocuments";
+
+const educationGuide = congressDocuments.find((document) => document.title === "Political Education Guide of the Permanent Revolutionary Congress");
 
 const tracks = [
   "Introduction to Marxism",
@@ -30,6 +33,25 @@ export default function Education() {
         title="Theory. Strategy. Cadre formation."
         lede="Revolutionary politics requires revolutionary education. The PRC Marxist School trains organizers in the theory and history of our movement."
       />
+      {educationGuide && (
+        <section id="political-education-guide" className="py-16 border-b border-border">
+          <article className="mx-auto max-w-3xl px-4">
+            <p className="kicker mb-3">Political education · 2026</p>
+            <h2 className="font-display text-3xl sm:text-4xl text-foreground leading-tight mb-8">{educationGuide.title}</h2>
+            <div className="font-serif-editorial text-lg text-foreground/90 leading-relaxed space-y-5">
+              {educationGuide.blocks.map((block, index) => (
+                block.kind === "list" ? (
+                  <ul key={index} className="list-disc pl-6 space-y-2">
+                    {block.items.map((item, itemIndex) => <li key={itemIndex}>{item}</li>)}
+                  </ul>
+                ) : block.kind === "heading" ? (
+                  <h3 key={index} className="font-display text-2xl text-foreground pt-5">{block.text}</h3>
+                ) : <p key={index}>{block.text}</p>
+              ))}
+            </div>
+          </article>
+        </section>
+      )}
       <section className="py-20 border-b border-border">
         <div className="container mx-auto px-4">
           <p className="kicker mb-3">Courses</p>
