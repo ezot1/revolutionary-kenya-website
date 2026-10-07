@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Convert the last two congress documents into readable Publications articles and verify both
+- [x] Convert the last two congress documents into readable Publications articles and verify both
 
 - [x] Add both uploaded congress documents to Publications and verify their downloads
 
