@@ -1,10 +1,14 @@
 import type { Article } from "@/content/articles";
+import { congressPoliticalPaper } from "@/content/congressPoliticalPaper";
 
-type CongressBlock =
+export type CongressBlock =
   | { kind: "heading" | "paragraph"; text: string }
-  | { kind: "list"; items: string[] };
+  | { kind: "list"; items: string[]; ordered?: boolean };
 
-export const congressDocuments: (Article & { description: string; blocks: CongressBlock[] })[] = [
+export type CongressDocument = Article & { description: string; blocks: CongressBlock[]; isMainPaper?: boolean; slug?: string };
+
+export const congressDocuments: CongressDocument[] = [
+  congressPoliticalPaper,
   {
     "type": "Congress Document",
     "title": "Political Education Guide of the Permanent Revolutionary Congress",

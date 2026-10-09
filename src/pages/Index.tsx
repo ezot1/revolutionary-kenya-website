@@ -9,6 +9,7 @@ import {
   Wifi, Heart, ArrowRight, Calendar, MapPin
 } from "lucide-react";
 import heroRally from "@/assets/hero-rally.jpg";
+import { congressPoliticalPaper } from "@/content/congressPoliticalPaper";
 
 interface Post {
   id: string; title: string; slug: string; excerpt: string;
@@ -159,7 +160,7 @@ const LatestPosts = ({ posts }: { posts: Post[] }) => {
                     <img src={featured.image_url} alt={featured.title} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
                   </div>
                 )}
-                <p className="kicker mb-3">Featured</p>
+                <p className="kicker mb-3">{featured.slug === congressPoliticalPaper.slug ? "Second Congress · Main political paper" : "Featured"}</p>
                 <h3 className="font-display text-3xl md:text-4xl text-foreground group-hover:text-primary transition leading-tight mb-3">{featured.title}</h3>
                 <p className="text-muted-foreground font-serif-editorial text-lg leading-relaxed mb-3">{featured.excerpt}</p>
                 <p className="text-xs uppercase tracking-wider text-muted-foreground">{featured.author} · {new Date(featured.date).toLocaleDateString()}</p>
@@ -282,7 +283,13 @@ const Index = () => {
       <Hero />
       <About />
       <Campaigns />
-      <LatestPosts posts={posts} />
+      <LatestPosts posts={[
+        { id: congressPoliticalPaper.slug, slug: congressPoliticalPaper.slug,
+          title: congressPoliticalPaper.title, excerpt: congressPoliticalPaper.description,
+          author: congressPoliticalPaper.author ?? "PRC", date: congressPoliticalPaper.date,
+          image_url: congressPoliticalPaper.image ?? "" },
+        ...posts.filter((post) => post.slug !== congressPoliticalPaper.slug),
+      ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 4)} />
       <Newsletter />
       <Events />
       <MembershipCTA />

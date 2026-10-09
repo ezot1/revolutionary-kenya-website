@@ -4,6 +4,9 @@ import PageHero from "@/components/PageHero";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import { MapPin, Calendar } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { congressPoliticalPaper } from "@/content/congressPoliticalPaper";
 
 interface EventItem {
   title: string;
@@ -70,6 +73,12 @@ export default function Events() {
                     <p className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground mb-1">{e.type}</p>
                     <h3 className="font-display text-xl text-foreground">{e.title}</h3>
                     <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1"><MapPin className="w-3 h-3" /> {e.location}</p>
+                    {e.type === "Congress" && <div className="mt-4">
+                      <p className="text-xs font-bold uppercase text-primary mb-2">Main political paper · Draft for discussion and adoption</p>
+                      <Button asChild variant="link" className="h-auto p-0 whitespace-normal text-left justify-start">
+                        <Link to={`/blog/${congressPoliticalPaper.slug}`}>{congressPoliticalPaper.title}</Link>
+                      </Button>
+                    </div>}
                   </div>
                   <div className="col-span-12 sm:col-span-3 sm:text-right">
                     <button onClick={() => setActive(e.title)} className="px-5 py-2 bg-primary text-primary-foreground text-xs font-bold uppercase tracking-wider hover:bg-primary/90 transition">RSVP</button>

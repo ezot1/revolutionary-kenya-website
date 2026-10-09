@@ -5,6 +5,7 @@ import { supabase } from "@/lib/supabase";
 import { ArrowRight, Download, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { inauguralIssue } from "@/content/revolutionaryReview";
+import { congressPoliticalPaper } from "@/content/congressPoliticalPaper";
 
 interface Post {
   id: string;
@@ -31,7 +32,14 @@ const Blog = () => {
       });
   }, []);
 
-  const filtered = posts.filter((p) =>
+  const latestPaper: Post = {
+    id: congressPoliticalPaper.slug, slug: congressPoliticalPaper.slug,
+    title: congressPoliticalPaper.title, excerpt: congressPoliticalPaper.description,
+    author: congressPoliticalPaper.author ?? "PRC", date: congressPoliticalPaper.date,
+    image_url: congressPoliticalPaper.image ?? "",
+  };
+  const filtered = [latestPaper, ...posts.filter((p) => p.slug !== latestPaper.slug)]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).filter((p) =>
     p.title.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -86,6 +94,7 @@ const Blog = () => {
                     <img src={p.image_url} alt={p.title} className="w-full h-48 object-cover" loading="lazy" />
                   )}
                   <div className="p-5">
+                    {p.slug === congressPoliticalPaper.slug && <p className="mb-2 text-xs font-bold uppercase text-primary">Second Congress · Main political paper</p>}
                     <p className="text-xs text-muted-foreground mb-2">
                       {new Date(p.date).toLocaleDateString()} · {p.author}
                     </p>
