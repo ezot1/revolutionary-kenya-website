@@ -230,80 +230,29 @@ export const congressPoliticalPaper: CongressDocument & { slug: string; subtitle
       "text": "Our campaign must use the demands in the PRC program. We must explain each demand in direct terms. We must show how each demand raises the question of power."
     },
     {
-      "kind": "paragraph",
-      "text": "Wages that cover the family basket and rise with inflation."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Workers’ committees with the right to inspect company accounts, expose business secrets, stop layoffs, and block wage theft."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Shorter working hours with no wage cuts. Share available work among all workers."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Full employment as a state responsibility. Unemployment benefits equal to at least the minimum wage."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Expropriation of companies that close, sack workers, refuse wages, or break safety rules."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Free healthcare and free, secular, scientific education at every level."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Public ownership of healthcare, education, water, energy, and transport under democratic workers’ and community control."
-    },
-    {
-      "kind": "paragraph",
-      "text": "An emergency public housing plan. Working-class families should not spend more than one-tenth of their income on housing."
-    },
-    {
-      "kind": "paragraph",
-      "text": "An end to privatization and downsizing."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Publication of all loan agreements, trade deals, infrastructure contracts, investment deals, and technology-transfer arrangements."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Refusal to repay imperialist loans. Expropriation of imperialist assets."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Nationalization of banks, key services, major industries, and landed estates under democratic workers’ control."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Land for landless and poor peasants. Collective farming with modern scientific methods."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Full rights to organize, strike, protest, publish, and form workplace and campus unions."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Equal rights and representation for women. Six months of fully paid maternity leave."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Equal rights for ethnic, religious, and sexual minorities."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Voting rights from age sixteen."
-    },
-    {
-      "kind": "paragraph",
-      "text": "A constituent assembly of genuine representatives of working people."
-    },
-    {
-      "kind": "paragraph",
-      "text": "A workers’ government based on democratically elected workers’ councils."
+      "kind": "list",
+      "ordered": false,
+      "items": [
+        "Wages that cover the family basket and rise with inflation.",
+        "Workers’ committees with the right to inspect company accounts, expose business secrets, stop layoffs, and block wage theft.",
+        "Shorter working hours with no wage cuts. Share available work among all workers.",
+        "Full employment as a state responsibility. Unemployment benefits equal to at least the minimum wage.",
+        "Expropriation of companies that close, sack workers, refuse wages, or break safety rules.",
+        "Free healthcare and free, secular, scientific education at every level.",
+        "Public ownership of healthcare, education, water, energy, and transport under democratic workers’ and community control.",
+        "An emergency public housing plan. Working-class families should not spend more than one-tenth of their income on housing.",
+        "An end to privatization and downsizing.",
+        "Publication of all loan agreements, trade deals, infrastructure contracts, investment deals, and technology-transfer arrangements.",
+        "Refusal to repay imperialist loans. Expropriation of imperialist assets.",
+        "Nationalization of banks, key services, major industries, and landed estates under democratic workers’ control.",
+        "Land for landless and poor peasants. Collective farming with modern scientific methods.",
+        "Full rights to organize, strike, protest, publish, and form workplace and campus unions.",
+        "Equal rights and representation for women. Six months of fully paid maternity leave.",
+        "Equal rights for ethnic, religious, and sexual minorities.",
+        "Voting rights from age sixteen.",
+        "A constituent assembly of genuine representatives of working people.",
+        "A workers’ government based on democratically elected workers’ councils."
+      ]
     },
     {
       "kind": "paragraph",
@@ -314,72 +263,36 @@ export const congressPoliticalPaper: CongressDocument & { slug: string; subtitle
       "text": "Political dangers"
     },
     {
-      "kind": "paragraph",
-      "text": "Electoralism. We must not reduce the program to what seems popular during a campaign."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Parliamentary cretinism. We must not suggest that elected representatives can replace mass struggle."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Opportunism. We must not join capitalist alliances in the name of defeating a worse capitalist."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Sectarian abstentionism. We must not leave workers and youth to bourgeois influence by refusing all electoral work."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Personality politics. We must build the organization and program, not a single public figure."
-    },
-    {
-      "kind": "paragraph",
-      "text": "NGO-style politics. We must not replace class struggle with donor projects or professional advocacy."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Online substitution. We should use social media to reach people, but we must build real branches, committees, and democratic meetings."
+      "kind": "list",
+      "ordered": false,
+      "items": [
+        "Electoralism. We must not reduce the program to what seems popular during a campaign.",
+        "Parliamentary cretinism. We must not suggest that elected representatives can replace mass struggle.",
+        "Opportunism. We must not join capitalist alliances in the name of defeating a worse capitalist.",
+        "Sectarian abstentionism. We must not leave workers and youth to bourgeois influence by refusing all electoral work.",
+        "Personality politics. We must build the organization and program, not a single public figure.",
+        "NGO-style politics. We must not replace class struggle with donor projects or professional advocacy.",
+        "Online substitution. We should use social media to reach people, but we must build real branches, committees, and democratic meetings."
+      ]
     },
     {
       "kind": "heading",
       "text": "Congress Proposed resolutions"
     },
     {
-      "kind": "paragraph",
-      "text": "We will participate actively in the August 2027 General Election as an independent revolutionary socialist organization."
-    },
-    {
-      "kind": "paragraph",
-      "text": "We will reject electoral pacts, popular fronts, and political subordination to capitalist parties, capitalist candidates, local elites, imperialist institutions, and NGO funders."
-    },
-    {
-      "kind": "paragraph",
-      "text": "We will stand candidates only where we have the organization to run a serious campaign and sustain work after election day."
-    },
-    {
-      "kind": "paragraph",
-      "text": "We will campaign on the PRC transitional program, including living wages, jobs, unemployment benefits, shorter hours without wage cuts, workers’ control, public ownership, free healthcare and education, public housing, land redistribution, debt repudiation, democratic rights, women’s liberation, equality for oppressed groups, and workers’ councils."
-    },
-    {
-      "kind": "paragraph",
-      "text": "We will build united action with workers’ organizations and mass movements around concrete demands while retaining full political independence."
-    },
-    {
-      "kind": "paragraph",
-      "text": "All PRC candidates will publish campaign finances, reject capitalist funding, accept accountability and recall, and use elected office for revolutionary agitation and support for mass struggle."
-    },
-    {
-      "kind": "paragraph",
-      "text": "We will prioritize work among casual workers, informal workers, gig workers, unemployed youth, women workers, students, tenants, health workers, teachers, transport workers, and poor peasants."
-    },
-    {
-      "kind": "paragraph",
-      "text": "Every electoral committee will prepare a post-election plan for permanent organization."
-    },
-    {
-      "kind": "paragraph",
-      "text": "We will conduct a national review after the election. We will assess organization, recruitment, cadre development, class roots, participation in struggles, and political independence. We will not assess success by votes alone."
+      "kind": "list",
+      "ordered": true,
+      "items": [
+        "We will participate actively in the August 2027 General Election as an independent revolutionary socialist organization.",
+        "We will reject electoral pacts, popular fronts, and political subordination to capitalist parties, capitalist candidates, local elites, imperialist institutions, and NGO funders.",
+        "We will stand candidates only where we have the organization to run a serious campaign and sustain work after election day.",
+        "We will campaign on the PRC transitional program, including living wages, jobs, unemployment benefits, shorter hours without wage cuts, workers’ control, public ownership, free healthcare and education, public housing, land redistribution, debt repudiation, democratic rights, women’s liberation, equality for oppressed groups, and workers’ councils.",
+        "We will build united action with workers’ organizations and mass movements around concrete demands while retaining full political independence.",
+        "All PRC candidates will publish campaign finances, reject capitalist funding, accept accountability and recall, and use elected office for revolutionary agitation and support for mass struggle.",
+        "We will prioritize work among casual workers, informal workers, gig workers, unemployed youth, women workers, students, tenants, health workers, teachers, transport workers, and poor peasants.",
+        "Every electoral committee will prepare a post-election plan for permanent organization.",
+        "We will conduct a national review after the election. We will assess organization, recruitment, cadre development, class roots, participation in struggles, and political independence. We will not assess success by votes alone."
+      ]
     },
     {
       "kind": "heading",
