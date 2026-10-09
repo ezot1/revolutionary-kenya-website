@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Add the uploaded political paper as the latest article and main congress paper; verify full reading and congress links
+- [x] Add the uploaded political paper as the latest article and main congress paper; verify full reading and congress links
 
 - [x] Add The Revolutionary Review to News and verify its issue links
 
