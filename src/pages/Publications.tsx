@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { congressDocuments } from "@/content/congressDocuments";
 import { articles, type Article } from "@/content/articles";
 import defaultPublicationImage from "@/assets/publication-default.jpg";
+import CongressArticleBody from "@/components/CongressArticleBody";
 
 const docs = articles;
 
@@ -64,7 +65,7 @@ export default function Publications() {
                 <article key={document.title} className="py-6 flex flex-col sm:flex-row sm:items-center gap-5">
                   <FileText className="h-8 w-8 shrink-0 text-primary" aria-hidden="true" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs uppercase font-bold text-primary mb-2">Congress Document</p>
+                    <p className="text-xs uppercase font-bold text-primary mb-2">{document.isMainPaper ? "Second Congress · Main political paper" : "Congress Document"}</p>
                     <h3 className="font-display text-lg text-foreground">{document.title}</h3>
                     <p className="mt-2 text-sm text-muted-foreground">{document.description}</p>
                   </div>
@@ -140,15 +141,9 @@ export default function Publications() {
                   Photo: {selected.imageSource ? <a href={selected.imageSource} target="_blank" rel="noreferrer" className="underline hover:text-primary">{selected.imageCredit}</a> : selected.imageCredit}
                 </p>
               )}
-              <div className="font-serif-editorial text-lg text-foreground/90 leading-relaxed space-y-5">
-                {congressDocuments.find((document) => document.title === selected.title)?.blocks.map((block, i) => (
-                  block.kind === "list" ? (
-                    <ul key={i} className="list-disc pl-6 space-y-2">{block.items.map((item, j) => <li key={j}>{item}</li>)}</ul>
-                  ) : block.kind === "heading" ? (
-                    <h2 key={i} className="font-display text-2xl text-foreground pt-5">{block.text}</h2>
-                  ) : <p key={i}>{block.text}</p>
-                )) ?? selected.body.split(/\n\n+/).map((p, i) => <p key={i}>{p}</p>)}
-              </div>
+              {congressDocuments.some((document) => document.title === selected.title)
+                ? <CongressArticleBody blocks={congressDocuments.find((document) => document.title === selected.title)?.blocks ?? []} />
+                : <div className="font-serif-editorial text-lg text-foreground/90 leading-relaxed space-y-5">{selected.body.split(/\n\n+/).map((p, i) => <p key={i}>{p}</p>)}</div>}
               <div className="mt-10 pt-6 border-t border-border">
                 <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Share this document</p>
                 <SocialShare inline title={selected.title} image={selected.image} />

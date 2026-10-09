@@ -4,6 +4,8 @@ import Layout from "@/components/Layout";
 import SocialShare from "@/components/SocialShare";
 import { supabase } from "@/lib/supabase";
 import { ArrowLeft } from "lucide-react";
+import { congressPoliticalPaper } from "@/content/congressPoliticalPaper";
+import CongressArticleBody from "@/components/CongressArticleBody";
 
 interface Post {
   id: string;
@@ -20,6 +22,14 @@ const BlogPost = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (slug === congressPoliticalPaper.slug) {
+      setPost({ id: congressPoliticalPaper.slug, title: congressPoliticalPaper.title,
+        content: congressPoliticalPaper.body, author: congressPoliticalPaper.author ?? "PRC",
+        date: congressPoliticalPaper.date, image_url: congressPoliticalPaper.image ?? "" });
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
     supabase
       .from("posts")
       .select("*")
@@ -97,8 +107,10 @@ const BlogPost = () => {
           <p className="text-sm text-muted-foreground mb-4">
             {new Date(post.date).toLocaleDateString()} · {post.author}
           </p>
+          {slug === congressPoliticalPaper.slug && <p className="kicker mb-3">Second Congress · Main political paper</p>}
           <h1 className="text-3xl md:text-4xl font-black text-foreground mb-8">{post.title}</h1>
 
+          {slug === congressPoliticalPaper.slug ? <CongressArticleBody blocks={congressPoliticalPaper.blocks} /> : (
           <div className="prose prose-invert max-w-none">
             {post.content.split(/\n\n+/).map((block, i) => {
               const img = block.trim().match(/^!\[([^\]]*)\]\(([^)]+)\)$/);
@@ -132,6 +144,7 @@ const BlogPost = () => {
               );
             })}
           </div>
+          )}
           <div className="mt-12 pt-8 border-t border-border">
             <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Share this article</p>
             <SocialShare inline title={post.title} image={post.image_url} />
