@@ -10,6 +10,7 @@ const primaryNav = [
   { to: "/education", label: "Education" },
   { to: "/publications", label: "Publications" },
   { to: "/blog", label: "News" },
+  { to: "/newsletter", label: "The Revolutionary Review" },
   { to: "/international", label: "International" },
   { to: "/media", label: "Media" },
   { to: "/events", label: "Events" },
@@ -38,17 +39,17 @@ const Header = () => {
           />
           <div className="leading-tight">
             <span className="block font-display text-lg text-foreground">PRC</span>
-            <span className="hidden sm:block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Permanent Revolutionary Congress</span>
+            <span className="hidden sm:block xl:hidden 2xl:block text-[10px] uppercase tracking-[0.18em] text-muted-foreground">Permanent Revolutionary Congress</span>
           </div>
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-5 xl:gap-7">
+        <nav aria-label="Main menu" className="hidden xl:flex items-center gap-4 2xl:gap-7">
           {primaryNav.slice(0, 8).map((l) => (
             <Link
               key={l.to}
               to={l.to}
-              className={`relative text-[13px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${
-                location.pathname === l.to ? "text-primary" : "text-foreground/80"
+              className={`relative text-[12px] 2xl:text-[13px] font-bold uppercase tracking-wider transition-colors hover:text-primary ${
+                location.pathname === l.to || (l.to === "/newsletter" && location.pathname.startsWith("/newsletter/")) ? "text-primary" : "text-foreground/80"
               }`}
             >
               {l.label}
@@ -86,7 +87,7 @@ const Header = () => {
         </div>
 
         <button
-          className="lg:hidden text-foreground"
+          className="xl:hidden text-foreground"
           onClick={() => setOpen(!open)}
           aria-label="Toggle menu"
         >
@@ -95,14 +96,14 @@ const Header = () => {
       </div>
 
       {open && (
-        <div className="lg:hidden bg-background border-t border-border px-4 py-4 space-y-2 animate-fade-in-down max-h-[80vh] overflow-y-auto">
+        <nav aria-label="Main menu" className="xl:hidden bg-background border-t border-border px-4 py-4 space-y-2 animate-fade-in-down max-h-[80vh] overflow-y-auto">
           {primaryNav.map((l) => (
             <Link
               key={l.to}
               to={l.to}
               onClick={() => setOpen(false)}
               className={`block py-2 text-sm font-bold uppercase tracking-wider border-b border-border/50 ${
-                location.pathname === l.to ? "text-primary" : "text-foreground"
+                location.pathname === l.to || (l.to === "/newsletter" && location.pathname.startsWith("/newsletter/")) ? "text-primary" : "text-foreground"
               }`}
             >
               {l.label}
@@ -112,7 +113,7 @@ const Header = () => {
             <Link to="/donate" onClick={() => setOpen(false)} className="flex-1 text-center py-2 text-xs font-bold uppercase tracking-wider border border-border">Donate</Link>
             <Link to="/join" onClick={() => setOpen(false)} className="flex-1 text-center py-2 text-xs font-bold uppercase tracking-wider bg-primary text-primary-foreground">Join PRC</Link>
           </div>
-        </div>
+        </nav>
       )}
     </header>
   );

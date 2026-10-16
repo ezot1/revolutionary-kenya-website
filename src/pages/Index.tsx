@@ -186,9 +186,9 @@ const Newsletter = () => (
   <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
     <div className="absolute inset-0 grain" />
     <div className="container mx-auto px-4 text-center max-w-3xl relative">
-      <p className="text-[10px] uppercase tracking-[0.3em] mb-4 opacity-80">The PRC Weekly</p>
-      <h2 className="font-display text-4xl md:text-6xl mb-6 leading-tight">Get revolutionary analysis delivered weekly.</h2>
-      <p className="text-primary-foreground/80 text-lg mb-8">Theory, strategy and dispatches from struggles across Kenya, Africa and the world.</p>
+      <p className="text-[10px] uppercase tracking-[0.3em] mb-4 opacity-80">Monthly publication</p>
+      <h2 className="font-display text-4xl md:text-6xl mb-6 leading-tight">The Revolutionary Review</h2>
+      <p className="text-primary-foreground/80 text-lg mb-8">Receive The Revolutionary Review monthly: theory, strategy and dispatches from struggles across Kenya, Africa and the world.</p>
       <NewsletterForm />
     </div>
   </section>
