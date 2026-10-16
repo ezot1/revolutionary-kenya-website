@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
 
 interface SocialShareProps {
   /** Canonical page URL being shared (defaults to current location). */
@@ -93,28 +94,31 @@ const SocialShare = ({ url, title, image, className = "", inline = false }: Soci
 
   const containerClasses = inline
     ? `flex items-center gap-2 ${className}`
-    : `fixed right-0 top-1/2 -translate-y-1/2 z-40 flex flex-col gap-1 bg-background/90 backdrop-blur-md border border-border border-r-0 rounded-l-md p-1.5 shadow-xl ${className}`;
+    : `relative self-center mx-auto my-4 z-40 flex items-center gap-1 bg-background/90 backdrop-blur-md border border-border rounded-md p-1.5 shadow-xl md:fixed md:right-0 md:top-1/2 md:-translate-y-1/2 md:my-0 md:flex-col md:border-r-0 md:rounded-r-none ${className}`;
 
   return (
     <div className={containerClasses}>
       {!inline && (
-        <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground text-center mb-1 rotate-0">
+        <span className="text-[9px] font-bold uppercase tracking-wider text-muted-foreground text-center px-1 md:mb-1 rotate-0">
           Share
         </span>
       )}
       {platforms.map((p) => (
-        <button
+        <Button
+          variant="ghost"
+          size="icon"
           key={p.key}
           onClick={() => handleShare(p)}
           aria-label={`Share on ${p.label}`}
-          className={`grid place-items-center transition hover:scale-110 ${
+          title={`Share on ${p.label}`}
+          className={`grid place-items-center p-0 transition hover:scale-110 ${
             inline
               ? "w-9 h-9 border border-border text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary"
-              : "w-8 h-8 text-muted-foreground hover:text-primary"
+              : "w-10 h-10 md:w-8 md:h-8 text-muted-foreground hover:text-primary"
           }`}
         >
           <p.Icon />
-        </button>
+        </Button>
       ))}
     </div>
   );
