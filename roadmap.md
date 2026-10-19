@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Add the Second Congress resolutions as a readable article, replace generated congress images with the three uploaded congress photos, and add a Revolutionary Review link on the homepage; verify reading, photos and navigation
+
 - [x] Add Review to main menu, update monthly homepage wording, and prevent phone share controls overlapping headlines; verify navigation and phone layout
 
 - [x] Add the uploaded political paper as the latest article and main congress paper; verify full reading and congress links
