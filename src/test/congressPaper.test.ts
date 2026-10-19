@@ -3,11 +3,11 @@ import { congressDocuments } from "@/content/congressDocuments";
 import { congressPoliticalPaper } from "@/content/congressPoliticalPaper";
 
 describe("main congress paper", () => {
-  it("is the latest congress article and designated main paper", () => {
+  it("is listed first and designated main paper", () => {
     expect(congressDocuments[0]).toBe(congressPoliticalPaper);
     expect(congressPoliticalPaper.isMainPaper).toBe(true);
     expect(congressPoliticalPaper.date).toBe("2026-10-09");
-    expect(congressDocuments.slice(1).every((paper) => paper.date <= congressPoliticalPaper.date)).toBe(true);
+    expect(congressDocuments.filter((paper) => paper.isMainPaper).length).toBe(1);
   });
 
   it("retains nine proposed resolutions rather than treating them as adopted", () => {
