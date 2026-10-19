@@ -190,6 +190,9 @@ const Newsletter = () => (
       <h2 className="font-display text-4xl md:text-6xl mb-6 leading-tight">The Revolutionary Review</h2>
       <p className="text-primary-foreground/80 text-lg mb-8">Receive The Revolutionary Review monthly: theory, strategy and dispatches from struggles across Kenya, Africa and the world.</p>
       <NewsletterForm />
+      <Link to="/newsletter" className="inline-flex items-center gap-2 mt-8 text-sm font-bold uppercase tracking-[0.18em] underline underline-offset-4 hover:opacity-80 transition">
+        Read the latest issue <ArrowRight className="w-4 h-4" />
+      </Link>
     </div>
   </section>
 );
