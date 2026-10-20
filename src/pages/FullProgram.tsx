@@ -1,6 +1,6 @@
 import Layout from "@/components/Layout";
 import RedStar from "@/components/RedStar";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ArrowLeft, Download } from "lucide-react";
 
 const PDF_URL = "/docs/prc-program.pdf";

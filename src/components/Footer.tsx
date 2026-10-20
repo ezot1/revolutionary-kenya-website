@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import RedStar from "./RedStar";
 import { Twitter, Facebook, Instagram, Youtube, Mail } from "lucide-react";
 import NewsletterForm from "./NewsletterForm";

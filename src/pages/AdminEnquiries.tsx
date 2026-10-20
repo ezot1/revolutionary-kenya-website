@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { LogOut, Download, RefreshCw, FileText, Reply, X } from "lucide-react";

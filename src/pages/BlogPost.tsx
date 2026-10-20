@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link } from "@/lib/router-compat";
 import Layout from "@/components/Layout";
 import SocialShare from "@/components/SocialShare";
 import { supabase } from "@/lib/supabase";

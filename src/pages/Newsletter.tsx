@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { ArrowRight, Download, FileText } from "lucide-react";
 import Layout from "@/components/Layout";
 import NewsletterForm from "@/components/NewsletterForm";

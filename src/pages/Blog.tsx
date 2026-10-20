@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { ArrowRight, Download, Search } from "lucide-react";

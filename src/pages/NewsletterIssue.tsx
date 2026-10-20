@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "@/lib/router-compat";
 import { ArrowLeft, Download } from "lucide-react";
 import Layout from "@/components/Layout";
 import SocialShare from "@/components/SocialShare";
