@@ -135,7 +135,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   return (
     <TSLink
       ref={ref as never}
-      {...(linkProps as object as Record<string, never>)}
+      {...(linkProps as object as { to: never })}
       {...((rest ?? {}) as Record<string, unknown>)}
     >
       {children}
