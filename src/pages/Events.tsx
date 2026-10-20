@@ -4,7 +4,7 @@ import PageHero from "@/components/PageHero";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import { MapPin, Calendar } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import { Button } from "@/components/ui/button";
 import { congressPoliticalPaper } from "@/content/congressPoliticalPaper";
 

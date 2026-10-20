@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams } from "@/lib/router-compat";
 import { ArrowLeft, Download } from "lucide-react";
 import Layout from "@/components/Layout";
 import SocialShare from "@/components/SocialShare";
@@ -56,7 +56,7 @@ const NewsletterIssue = () => {
                 <a href={inauguralIssue.pdfUrl} download className="inline-flex items-center gap-2 bg-review-ink px-5 py-3 font-sans text-xs font-bold uppercase tracking-[0.14em] text-review-paper hover:bg-review-red">
                   <Download className="h-4 w-4" /> Download PDF
                 </a>
-                <SocialShare inline title={`${inauguralIssue.title} | The Revolutionary Review`} image={inauguralIssue.articles[0].image} />
+                <SocialShare inline title={`${inauguralIssue.title} | The Revolutionary Review`} image={inauguralIssue.articles[0]?.image} />
               </div>
             </header>
 

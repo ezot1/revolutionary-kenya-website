@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useSearchParams } from "@/lib/router-compat";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import SocialShare from "@/components/SocialShare";

@@ -1,0 +1,21 @@
+{
+  "customizations": [
+    { "token": "PRC colour variables (background, primary red, accent, etc.)", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--sidebar-* variables", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "--review-* colours (paper, ink, muted, line, red)", "source": "src/index.css + tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "Google fonts import and font-sans Inter", "source": "src/index.css + tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "heading/editorial/review font rules", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "container (centred, 2rem, 1400px)", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "custom keyframes and animate-* utilities", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" },
+    { "token": "text-gradient-gold", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "hover-lift", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "hover-scale", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "story-link", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "reveal / is-visible", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "text-shimmer", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "editorial-rule", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "kicker", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "grain", "source": "src/index.css", "reappliedIn": "src/styles.css" },
+    { "token": "typography plugin (prose)", "source": "tailwind.config.ts", "reappliedIn": "src/styles.css" }
+  ]
+}

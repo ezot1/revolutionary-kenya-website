@@ -5,12 +5,12 @@ import { buildSocialShareUrl } from "@/lib/socialShare";
 
 interface SocialShareProps {
   /** Canonical page URL being shared (defaults to current location). */
-  url?: string;
-  title?: string;
+  url?: string | undefined;
+  title?: string | undefined;
   /** Article image to show in the social preview card. */
-  image?: string;
-  className?: string;
-  inline?: boolean;
+  image?: string | undefined;
+  className?: string | undefined;
+  inline?: boolean | undefined;
 }
 
 const WhatsAppIcon = () => (

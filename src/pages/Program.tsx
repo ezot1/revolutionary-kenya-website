@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import Layout from "@/components/Layout";
 import RedStar from "@/components/RedStar";
 import { FileText, Download, BookOpen, ArrowRight } from "lucide-react";
@@ -140,7 +140,7 @@ The PRC is organized on the basis of democratic centralism: full democracy in di
 ];
 
 const Program = () => {
-  const [active, setActive] = useState(sections[0].id);
+  const [active, setActive] = useState(sections[0]?.id ?? "");
 
   useEffect(() => {
     const observer = new IntersectionObserver(

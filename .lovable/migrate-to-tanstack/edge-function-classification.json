@@ -1,0 +1,5 @@
+{"functions": [
+  {"name": "send-reply", "classification": "Deno-only dependency", "signal": "called from src/pages/AdminEnquiries.tsx, but sends through the backend-bound email pipeline (npm: specifiers for react-email and email-js, LOVABLE_SEND_URL secret bound to the backend)", "outcome": "left"},
+  {"name": "preview-transactional-email", "classification": "unknown", "signal": "no internal call sites; email template preview tooling", "outcome": "left"},
+  {"name": "share", "classification": "unknown", "signal": "no internal call sites; older share-link URLs may still point at it", "outcome": "left"}
+]}

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link } from "@/lib/router-compat";
 import Layout from "@/components/Layout";
 import SocialShare from "@/components/SocialShare";
 import { supabase } from "@/lib/supabase";
@@ -33,40 +33,14 @@ const BlogPost = () => {
     supabase
       .from("posts")
       .select("*")
-      .eq("slug", slug)
+      .eq("slug", slug ?? "")
       .eq("published", true)
       .single()
       .then(({ data }) => {
-        setPost(data);
+        setPost(data ? { ...data, image_url: data.image_url ?? "" } : null);
         setLoading(false);
       });
   }, [slug]);
-
-  useEffect(() => {
-    if (!post) return;
-    const setMeta = (attr: "property" | "name", key: string, value: string) => {
-      let tag = document.head.querySelector<HTMLMetaElement>(`meta[${attr}="${key}"]`);
-      if (!tag) {
-        tag = document.createElement("meta");
-        tag.setAttribute(attr, key);
-        document.head.appendChild(tag);
-      }
-      tag.setAttribute("content", value);
-    };
-    const origin = window.location.origin;
-    const img = post.image_url
-      ? post.image_url.startsWith("http")
-        ? post.image_url
-        : `${origin}${post.image_url}`
-      : `${origin}/images/prc-og.jpg`;
-    document.title = `${post.title} | PRC`;
-    setMeta("property", "og:title", post.title);
-    setMeta("property", "og:image", img);
-    setMeta("property", "og:url", window.location.href);
-    setMeta("property", "og:type", "article");
-    setMeta("name", "twitter:title", post.title);
-    setMeta("name", "twitter:image", img);
-  }, [post]);
 
   if (loading) {
     return (

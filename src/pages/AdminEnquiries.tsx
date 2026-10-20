@@ -1,11 +1,17 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "@/lib/router-compat";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { LogOut, Download, RefreshCw, FileText, Reply, X } from "lucide-react";
 import { toast } from "sonner";
 
-type Row = Record<string, string | null>;
+type Row = Record<string, string | null> & {
+  id: string | null;
+  email: string | null;
+  name?: string | null;
+  full_name?: string | null;
+  event_title?: string | null;
+};
 
 const TABS = [
   { key: "contacts", label: "Contact Messages", table: "contacts", cols: ["created_at", "name", "email", "message"] },

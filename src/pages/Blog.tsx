@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from "@/lib/router-compat";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { ArrowRight, Download, Search } from "lucide-react";
@@ -28,7 +28,7 @@ const Blog = () => {
       .eq("published", true)
       .order("date", { ascending: false })
       .then(({ data }) => {
-        if (data) setPosts(data);
+        if (data) setPosts(data.map((p) => ({ ...p, excerpt: p.excerpt ?? "", image_url: p.image_url ?? "" })));
       });
   }, []);
 
@@ -53,7 +53,7 @@ const Blog = () => {
           <section aria-labelledby="revolutionary-review-heading" className="mb-12 border-y-2 border-primary py-6 md:py-8">
             <div className="grid items-center gap-6 md:grid-cols-[1fr_2fr] md:gap-8">
               <Link to={`/newsletter/${inauguralIssue.slug}`} aria-label="Read The Revolutionary Review">
-                <img src={inauguralIssue.articles[0].image} alt={inauguralIssue.articles[0].imageAlt} className="aspect-[16/9] w-full object-cover" loading="lazy" />
+                <img src={inauguralIssue.articles[0]?.image} alt={inauguralIssue.articles[0]?.imageAlt ?? "The Revolutionary Review"} className="aspect-[16/9] w-full object-cover" loading="lazy" />
               </Link>
               <div className="min-w-0">
                 <p className="mb-2 text-xs font-bold uppercase text-primary">Monthly publication · Issue {inauguralIssue.issueNumber} · {inauguralIssue.month}</p>
