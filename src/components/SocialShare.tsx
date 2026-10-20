@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { buildSocialShareUrl } from "@/lib/socialShare";
 
 interface SocialShareProps {
   /** Canonical page URL being shared (defaults to current location). */
@@ -11,9 +12,6 @@ interface SocialShareProps {
   className?: string;
   inline?: boolean;
 }
-
-/** Always share the real article URL on the site's own domain. */
-const buildShareUrl = (pageUrl: string) => pageUrl;
 
 const WhatsAppIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -72,14 +70,22 @@ const platforms = [
 const SocialShare = ({ url, title, image, className = "", inline = false }: SocialShareProps) => {
   const [currentUrl, setCurrentUrl] = useState(url || "");
   const [pageTitle, setPageTitle] = useState(title || "");
+  const [pageImage, setPageImage] = useState(image);
 
   useEffect(() => {
-    if (!url) setCurrentUrl(window.location.href);
-    if (!title) setPageTitle(document.title);
-  }, [url, title]);
+    const update = () => {
+      setCurrentUrl(url || window.location.href);
+      setPageTitle(title || document.title);
+      setPageImage(image || document.head.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.content);
+    };
+    update();
+    const observer = new MutationObserver(update);
+    observer.observe(document.head, { childList: true, subtree: true, attributes: true });
+    return () => observer.disconnect();
+  }, [url, title, image]);
 
   const handleShare = (platform: typeof platforms[0]) => {
-    const linkToShare = buildShareUrl(currentUrl);
+    const linkToShare = buildSocialShareUrl(import.meta.env.VITE_SUPABASE_URL, currentUrl || window.location.href, pageTitle, pageImage);
     if (platform.key === "instagram") {
       navigator.clipboard.writeText(`${pageTitle} - ${linkToShare}`).then(() => {
         toast.success("Link copied to clipboard! Paste it on Instagram.");

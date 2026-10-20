@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import Layout from "@/components/Layout";
 import PageHero from "@/components/PageHero";
 import SocialShare from "@/components/SocialShare";
@@ -16,7 +17,14 @@ const types = ["All", "Congress Document", "Statement", "Position Paper", "Resol
 export default function Publications() {
   const [q, setQ] = useState("");
   const [type, setType] = useState("All");
-  const [selected, setSelected] = useState<Article | null>(null);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const selected = [...congressDocuments, ...articles].find((article) => article.title === searchParams.get("article")) ?? null;
+  const setSelected = (article: Article | null) => {
+    const next = new URLSearchParams(searchParams);
+    if (article) next.set("article", article.title);
+    else next.delete("article");
+    setSearchParams(next);
+  };
   const filtered = docs.filter((d) =>
     (type === "All" || d.type === type) && d.title.toLowerCase().includes(q.toLowerCase())
   );
@@ -146,7 +154,7 @@ export default function Publications() {
                 : <div className="font-serif-editorial text-lg text-foreground/90 leading-relaxed space-y-5">{selected.body.split(/\n\n+/).map((p, i) => <p key={i}>{p}</p>)}</div>}
               <div className="mt-10 pt-6 border-t border-border">
                 <p className="text-xs font-bold uppercase tracking-wider text-muted-foreground mb-3">Share this document</p>
-                <SocialShare inline title={selected.title} image={selected.image} />
+                <SocialShare inline url={`https://prca.world/publications?${searchParams.toString()}`} title={selected.title} image={selected.image || defaultPublicationImage} />
               </div>
             </article>
           </div>

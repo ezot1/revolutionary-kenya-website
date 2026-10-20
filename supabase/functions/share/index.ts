@@ -1,5 +1,5 @@
-const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
-const ANON = Deno.env.get("SUPABASE_ANON_KEY")!;
+const SUPABASE_URL = Deno.env.get("SUPABASE_URL") ?? "";
+const ANON = Deno.env.get("SUPABASE_ANON_KEY") ?? "";
 const SITE = "https://prca.world";
 const DEFAULT_IMAGE = `${SITE}/images/prc-og.jpg`;
 
@@ -43,7 +43,7 @@ Deno.serve(async (req) => {
     const post = rows?.[0];
     if (post) {
       title = post.title;
-      image = post.image_url || firstImageInBody(post.content);
+      image = image || post.image_url || firstImageInBody(post.content);
       description = (post.content || "")
         .replace(/!\[[^\]]*\]\([^)]+\)/g, "")
         .replace(/\*\*/g, "")
@@ -51,7 +51,12 @@ Deno.serve(async (req) => {
         .trim()
         .slice(0, 200);
     }
-  } else if (!target.startsWith(SITE)) {
+  }
+
+  try {
+    const destination = new URL(target);
+    if (destination.origin !== SITE) target = SITE;
+  } catch {
     target = SITE;
   }
 
@@ -64,7 +69,7 @@ Deno.serve(async (req) => {
 <meta property="og:site_name" content="Permanent Revolutionary Congress" />
 <meta property="og:title" content="${esc(title)}" />
 <meta property="og:description" content="${esc(description)}" />
-<meta property="og:url" content="${esc(target)}" />
+<meta property="og:url" content="${esc(url.href)}" />
 <meta property="og:image" content="${esc(img)}" />
 <meta property="og:image:secure_url" content="${esc(img)}" />
 <meta property="og:image:alt" content="${esc(title)}" />
@@ -72,9 +77,8 @@ Deno.serve(async (req) => {
 <meta name="twitter:title" content="${esc(title)}" />
 <meta name="twitter:description" content="${esc(description)}" />
 <meta name="twitter:image" content="${esc(img)}" />
-<meta http-equiv="refresh" content="0; url=${esc(target)}" />
 </head><body><p>Redirecting to <a href="${esc(target)}">${esc(title)}</a>…</p>
-<script>location.replace(${JSON.stringify(target)});</script></body></html>`;
+<script>location.replace(${JSON.stringify(target).replace(/</g, "\\u003c")});</script></body></html>`;
 
   return new Response(html, {
     headers: {
