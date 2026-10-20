@@ -33,11 +33,11 @@ const BlogPost = () => {
     supabase
       .from("posts")
       .select("*")
-      .eq("slug", slug)
+      .eq("slug", slug ?? "")
       .eq("published", true)
       .single()
       .then(({ data }) => {
-        setPost(data);
+        setPost(data ? { ...data, image_url: data.image_url ?? "" } : null);
         setLoading(false);
       });
   }, [slug]);

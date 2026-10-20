@@ -278,7 +278,7 @@ const Index = () => {
       .eq("published", true)
       .order("date", { ascending: false })
       .limit(4)
-      .then(({ data }) => data && setPosts(data));
+      .then(({ data }) => data && setPosts(data.map((p) => ({ ...p, excerpt: p.excerpt ?? "", image_url: p.image_url ?? "" }))));
   }, []);
 
   return (
