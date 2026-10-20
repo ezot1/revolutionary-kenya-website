@@ -70,13 +70,11 @@ const platforms = [
 const SocialShare = ({ url, title, image, className = "", inline = false }: SocialShareProps) => {
   const [currentUrl, setCurrentUrl] = useState(url || "");
   const [pageTitle, setPageTitle] = useState(title || "");
-  const [pageImage, setPageImage] = useState(image);
 
   useEffect(() => {
     const update = () => {
       setCurrentUrl(url || window.location.href);
       setPageTitle(title || document.title);
-      setPageImage(image || document.head.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.content);
     };
     update();
     const observer = new MutationObserver(update);
@@ -85,7 +83,7 @@ const SocialShare = ({ url, title, image, className = "", inline = false }: Soci
   }, [url, title, image]);
 
   const handleShare = (platform: typeof platforms[0]) => {
-    const linkToShare = buildSocialShareUrl(import.meta.env.VITE_SUPABASE_URL, currentUrl || window.location.href, pageTitle, pageImage);
+    const linkToShare = buildSocialShareUrl(currentUrl || window.location.href);
     if (platform.key === "instagram") {
       navigator.clipboard.writeText(`${pageTitle} - ${linkToShare}`).then(() => {
         toast.success("Link copied to clipboard! Paste it on Instagram.");
