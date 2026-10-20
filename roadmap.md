@@ -1,7 +1,7 @@
 # Roadmap
 
 - [x] Restore own-domain article sharing links and research standard social preview requirements.
-- [ ] Serve per-article photo metadata at prca.world in the initial page response; blocked on approval for the server-rendered template upgrade.
+- [x] Serve per-article photo metadata at prca.world in the initial page response (site upgraded to server rendering).
 
 - [x] Add the Second Congress resolutions as a readable article, replace generated congress images with the three uploaded congress photos, and add a Revolutionary Review link on the homepage; verify reading, photos and navigation
 
