@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Use each article's own photo in social previews and reopen the selected publication; verify public preview metadata and sharing controls.
+- [x] Use each article's own photo in social previews and reopen the selected publication; verified public preview metadata and sharing controls.
 
 - [x] Add the Second Congress resolutions as a readable article, replace generated congress images with the three uploaded congress photos, and add a Revolutionary Review link on the homepage; verify reading, photos and navigation
 
