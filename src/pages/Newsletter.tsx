@@ -32,7 +32,7 @@ const Newsletter = () => {
       });
   }, []);
 
-  const lead = inauguralIssue.articles[0];
+  const lead = inauguralIssue.articles[0]!;
 
   return (
     <Layout>
