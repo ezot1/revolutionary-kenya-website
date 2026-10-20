@@ -17,8 +17,8 @@ import { useMemo, useCallback, forwardRef, type ComponentProps, type ReactNode }
 
 // ---------- shared URL parsing ----------
 
-function parseTo(to: string): { pathname: string; search?: Record<string, string>; hash?: string } {
-  const [beforeHash, hashStr] = (to ?? "").split("#");
+function parseTo(to: string): { pathname: string; search: Record<string, string> | undefined; hash: string | undefined } {
+  const [beforeHash = "", hashStr] = (to ?? "").split("#");
   const [pathname, searchStr] = beforeHash.split("?");
   return {
     // react-router keeps the current path for search-only ("?a=1") and
@@ -27,6 +27,11 @@ function parseTo(to: string): { pathname: string; search?: Record<string, string
     search: searchStr ? Object.fromEntries(new URLSearchParams(searchStr)) : undefined,
     hash: hashStr || undefined,
   };
+}
+
+/** Drops undefined values so options satisfy exactOptionalPropertyTypes. */
+function defined<T extends Record<string, unknown>>(obj: T): T {
+  return Object.fromEntries(Object.entries(obj).filter(([, v]) => v !== undefined)) as T;
 }
 
 // ---------- useNavigate ----------
@@ -47,13 +52,13 @@ export function useNavigate(): NavigateFn {
       return;
     }
     const { pathname, search, hash } = parseTo(to);
-    tsNav({
+    tsNav(defined({
       to: pathname,
-      search: search as never,
+      search: search,
       hash,
-      state: options?.state as never,
+      state: options?.state,
       replace: options?.replace,
-    });
+    }) as never);
   }, [tsNav, router]) as NavigateFn;
 }
 
