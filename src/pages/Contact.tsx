@@ -76,13 +76,6 @@ const Contact = () => {
                 </div>
               </div>
               <div className="flex items-start gap-3">
-                <Twitter className="w-5 h-5 text-primary mt-0.5" />
-                <div>
-                  <p className="font-bold text-foreground text-sm">Twitter / X</p>
-                  <p className="text-muted-foreground text-sm">@PRC_Kenya</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-primary mt-0.5" />
                 <div>
                   <p className="font-bold text-foreground text-sm">Location</p>
