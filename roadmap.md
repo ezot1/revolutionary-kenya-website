@@ -1,5 +1,8 @@
 # Roadmap
 
+- [x] Give every public page its own title and description and add a sitemap; verify served HTML
+- [ ] Correct or hide the footer and contact social links; blocked on owner-confirmed accounts
+- [ ] Replace generated images on remaining non-congress articles; pending owner decision
 - [x] Restore own-domain article sharing links and research standard social preview requirements.
 - [x] Serve per-article photo metadata at prca.world in the initial page response (site upgraded to server rendering).
 
