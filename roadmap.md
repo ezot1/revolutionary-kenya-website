@@ -1,8 +1,8 @@
 # Roadmap
 
 - [x] Give every public page its own title and description and add a sitemap; verify served HTML
-- [ ] Correct or hide the footer and contact social links; blocked on owner-confirmed accounts
-- [ ] Replace generated images on remaining non-congress articles; pending owner decision
+- [x] Remove the dead footer social icons and the wrong @PRC_Kenya contact line until owner-confirmed accounts exist
+- [x] Leave the remaining generated article images in place (owner decision, 2026-10-21)
 - [x] Restore own-domain article sharing links and research standard social preview requirements.
 - [x] Serve per-article photo metadata at prca.world in the initial page response (site upgraded to server rendering).
 
