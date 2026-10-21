@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
-import { Mail, MapPin, Twitter } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { toast } from "sonner";
 
 const Contact = () => {
