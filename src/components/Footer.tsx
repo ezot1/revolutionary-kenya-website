@@ -49,17 +49,9 @@ const Footer = () => (
             A revolutionary socialist organization building workers' power, socialist democracy and permanent revolution - in Kenya, Africa and across the world.
           </p>
           <div className="flex gap-3">
-            {[
-              { Icon: Twitter, href: "#" },
-              { Icon: Facebook, href: "#" },
-              { Icon: Instagram, href: "#" },
-              { Icon: Youtube, href: "#" },
-              { Icon: Mail, href: "mailto:info@prca.world" },
-            ].map(({ Icon, href }, i) => (
-              <a key={i} href={href} className="w-9 h-9 grid place-items-center border border-border text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition">
-                <Icon className="w-4 h-4" />
-              </a>
-            ))}
+            <a href="mailto:info@prca.world" aria-label="Email PRC" className="w-9 h-9 grid place-items-center border border-border text-muted-foreground hover:bg-primary hover:text-primary-foreground hover:border-primary transition">
+              <Mail className="w-4 h-4" />
+            </a>
           </div>
           <p className="text-xs text-muted-foreground mt-4">
             <a href="mailto:info@prca.world" className="hover:text-primary transition">info@prca.world</a>
