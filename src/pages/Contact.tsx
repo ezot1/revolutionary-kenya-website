@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
-import { Mail, MapPin, Twitter } from "lucide-react";
+import { Mail, MapPin } from "lucide-react";
 import { toast } from "sonner";
 
 const Contact = () => {
@@ -73,13 +73,6 @@ const Contact = () => {
                   <p className="text-muted-foreground text-sm">
                     <a href="mailto:info@prca.world" className="hover:text-primary transition">info@prca.world</a>
                   </p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Twitter className="w-5 h-5 text-primary mt-0.5" />
-                <div>
-                  <p className="font-bold text-foreground text-sm">Twitter / X</p>
-                  <p className="text-muted-foreground text-sm">@PRC_Kenya</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
