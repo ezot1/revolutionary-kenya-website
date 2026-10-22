@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "@/lib/router-compat";
+import { useNavigate } from "@/lib/router-compat";
 import AdminLayout from "@/components/AdminLayout";
 import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
-import { LogOut, Download, RefreshCw, FileText, Reply, X } from "lucide-react";
+import { LogOut, Download, RefreshCw, Reply, Search, Mail, Check } from "lucide-react";
 import { toast } from "sonner";
+import EmailReplyComposer from "@/components/EmailReplyComposer";
 
 type Row = Record<string, string | null> & {
   id: string | null;
@@ -32,6 +33,7 @@ const AdminEnquiries = () => {
   const [tab, setTab] = useState<(typeof TABS)[number]["key"]>("contacts");
   const [rows, setRows] = useState<Row[]>([]);
   const [counts, setCounts] = useState<Record<string, number>>({});
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
   const [replyTo, setReplyTo] = useState<Row | null>(null);
   const [subject, setSubject] = useState("");
@@ -192,14 +194,14 @@ const AdminEnquiries = () => {
       <section>
         <div className="min-w-0">
           <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-            <div><p className="mb-2 text-xs font-semibold uppercase text-primary">Correspondence</p><h1 className="text-3xl font-bold">Enquiries</h1></div>
+            <div><p className="mb-2 text-xs font-semibold uppercase text-primary">Correspondence</p><h1 className="text-3xl font-bold">Email inbox</h1></div>
             <div className="flex gap-2"><Button variant="outline" onClick={fetchRows} disabled={loading}><RefreshCw className={loading ? "animate-spin" : ""} />Refresh</Button><Button onClick={exportCsv} disabled={!rows.length}><Download />Export CSV</Button></div>
           </div>
           <div className="mb-7 grid grid-cols-2 gap-3 xl:grid-cols-4">
             {TABS.map((t) => (
               <Button
                 key={t.key}
-                onClick={() => setTab(t.key)}
+                onClick={() => { setTab(t.key); setSearch(""); }}
                 aria-pressed={tab === t.key}
                 className={`h-auto min-h-24 flex-col items-start justify-between gap-3 whitespace-normal rounded-md px-4 py-4 text-left text-sm font-medium border transition ${
                   tab === t.key
@@ -213,106 +215,36 @@ const AdminEnquiries = () => {
             ))}
           </div>
 
-          <div className="mb-3 flex items-center justify-between gap-3"><h2 className="text-lg font-semibold">{current.label}</h2><span className="text-xs text-muted-foreground">{rows.length} records</span></div>
-          <div className="border border-border rounded-lg overflow-x-auto bg-card">
-            {loading ? (
-              <p className="py-16 px-6 text-center text-sm text-muted-foreground">Loading...</p>
-            ) : rows.length === 0 ? (
-              <p className="py-16 px-6 text-center text-sm text-muted-foreground">No records yet.</p>
-            ) : (
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b border-border bg-secondary/50">
-                    {current.cols.map((c) => (
-                      <th key={c} className="text-left font-bold text-foreground px-4 py-3 whitespace-nowrap">
-                        {labelize(c)}
-                      </th>
-                    ))}
-                    <th className="text-left font-bold text-foreground px-4 py-3">Reply</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {rows.map((r, i) => (
-                    <tr key={r.id ?? i} className="border-b border-border/60 last:border-0 align-top">
-                      {current.cols.map((c) => (
-                        <td key={c} className="px-4 py-4 text-muted-foreground min-w-36 max-w-md">
-                          {c === "created_at" ? (
-                            new Date(r[c] as string).toLocaleString("en-GB")
-                          ) : c === "email" ? (
-                            <a href={`mailto:${r[c]}`} className="text-primary hover:underline">
-                              {r[c]}
-                            </a>
-                          ) : (
-                            c === "message" || c === "motivation" ? (
-                              <details className="min-w-64 max-w-lg"><summary className="cursor-pointer text-foreground"><span className="line-clamp-3">{r[c] || "-"}</span><span className="mt-2 inline-block text-xs font-medium text-primary">Read message</span></summary><p className="mt-3 whitespace-pre-wrap break-words leading-relaxed">{r[c]}</p></details>
-                            ) : <span className="whitespace-pre-wrap break-words">{r[c] || "-"}</span>
-                          )}
-                        </td>
-                      ))}
-                      <td className="px-4 py-3 whitespace-nowrap">
-                        <Button
-                          onClick={() => openReply(r)}
-                          disabled={!r.email}
-                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-primary text-primary-foreground text-xs font-bold hover:bg-primary/90 transition disabled:opacity-50"
-                        >
-                          <Reply className="w-3.5 h-3.5" />
-                          {r.email && repliedTo.has(r.email.toLowerCase()) ? "Reply again" : "Reply"}
-                        </Button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
+          <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+            <h2 className="text-lg font-semibold">{current.label} <span className="ml-2 text-sm font-normal text-muted-foreground">{rows.length}</span></h2>
+            <label className="relative w-full sm:w-72"><Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" /><input aria-label="Search enquiries" placeholder="Search name, email or message" value={search} onChange={(event) => setSearch(event.target.value)} className="w-full rounded-md border border-input bg-card py-2.5 pl-9 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring" /></label>
+          </div>
+          <div className="overflow-hidden rounded-lg border border-border bg-card">
+            {loading ? <p className="px-6 py-16 text-center text-sm text-muted-foreground">Loading...</p> : rows.filter((row) => Object.values(row).some((value) => value?.toLowerCase().includes(search.toLowerCase()))).length === 0 ? <div className="px-6 py-16 text-center"><Mail className="mx-auto mb-3 h-8 w-8 text-muted-foreground" /><p className="text-sm text-muted-foreground">{search ? "No matching enquiries." : "No enquiries yet."}</p></div> : rows.filter((row) => Object.values(row).some((value) => value?.toLowerCase().includes(search.toLowerCase()))).map((r, index) => {
+              const name = r.name || r.full_name || r.email || "Enquiry";
+              const replied = !!r.email && repliedTo.has(r.email.toLowerCase());
+              return <div key={r.id ?? index} className="flex min-w-0 flex-wrap items-center gap-4 border-b border-border px-5 py-5 last:border-0">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-secondary text-sm font-semibold">{name.slice(0, 1).toUpperCase()}</span>
+                <div className="min-w-0 flex-1 basis-48"><div className="flex flex-wrap items-center gap-x-3 gap-y-1"><p className="break-all font-semibold">{name}</p><span className="text-xs text-muted-foreground">{r["created_at"] ? new Date(r["created_at"]).toLocaleDateString("en-GB") : ""}</span></div><p className="mt-1 break-all text-xs text-muted-foreground">{r.email}</p><p className="mt-2 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{r["message"] || r["motivation"] || r.event_title || r["city"] || "Newsletter subscription"}</p></div>
+                <div className="flex shrink-0 items-center gap-3">{replied && <span className="flex items-center gap-1 text-xs text-muted-foreground"><Check className="h-3 w-3" />Replied</span>}<Button onClick={() => openReply(r)} disabled={!r.email} variant="outline" size="sm"><Reply />{replied ? "Reply again" : "Reply"}</Button></div>
+              </div>;
+            })}
           </div>
         </div>
       </section>
 
-      {replyTo && (
-        <div className="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4">
-          <div role="dialog" aria-modal="true" aria-labelledby="reply-heading" className="w-full max-w-xl max-h-[90vh] overflow-y-auto bg-card border border-border rounded-lg p-6 space-y-4">
-            <div className="flex items-start justify-between gap-4">
-              <div>
-                <h2 id="reply-heading" className="text-xl font-bold text-foreground">Reply</h2>
-                <p className="break-all text-xs text-muted-foreground">
-                  From info@prca.world to <span className="text-primary">{replyTo.email}</span>
-                </p>
-              </div>
-              <Button onClick={() => setReplyTo(null)} variant="ghost" size="icon" aria-label="Cancel editing" className="text-muted-foreground">
-                <X className="w-5 h-5" />
-              </Button>
-            </div>
-            <input
-              aria-label="Subject"
-              value={subject}
-              onChange={(e) => setSubject(e.target.value)}
-              placeholder="Subject"
-              className="w-full px-3 py-2 bg-background border border-border rounded-md text-sm text-foreground focus:outline-none focus:border-primary"
-            />
-            <textarea
-              aria-label="Reply message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              rows={10}
-              className="w-full px-3 py-2 bg-background border border-border rounded-md text-sm text-foreground focus:outline-none focus:border-primary"
-            />
-            <div className="flex flex-wrap justify-end gap-2">
-              <Button asChild variant="secondary"><a
-                href={`mailto:${replyTo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`}
-                className="px-4 py-2 rounded-md bg-secondary text-foreground text-sm hover:bg-secondary/80 transition"
-              >
-                Open in mail app
-              </a></Button>
-              <Button
-                onClick={sendReply}
-                disabled={sending}
-                className="px-4 py-2 rounded-md bg-primary text-primary-foreground text-sm font-bold hover:bg-primary/90 transition disabled:opacity-50"
-              >
-                {sending ? "Sending..." : "Send reply"}
-              </Button>
-            </div>
-          </div>
-        </div>
+      {replyTo?.email && (
+        <EmailReplyComposer
+          recipient={replyTo.email}
+          name={replyTo.name || replyTo.full_name || "Comrade"}
+          details={current.cols.filter((column) => column !== "email" && column !== "name" && column !== "full_name").flatMap((column) => {
+            const value = replyTo[column];
+            return value ? [{ label: labelize(column), value: column === "created_at" ? new Date(value).toLocaleString("en-GB") : value }] : [];
+          })}
+          subject={subject} message={message} sending={sending}
+          onSubjectChange={setSubject} onMessageChange={setMessage}
+          onClose={() => setReplyTo(null)} onSend={sendReply}
+        />
       )}
     </AdminLayout>
   );

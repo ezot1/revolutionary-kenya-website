@@ -1,5 +1,7 @@
 # Roadmap
 
+- [x] Focus the email inbox and reply composer on reading the original enquiry and writing a clear reply; verified signed-in search, drafting and cancellation without sending email.
+
 - [x] Make the three admin pages presentable with shared navigation, organised editors and a clearer enquiries view; verified signed-in navigation, populated article editing, reply composer and phone layout.
 
 - [x] Give every public page its own title and description and add a sitemap; verify served HTML
