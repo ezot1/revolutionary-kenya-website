@@ -229,45 +229,45 @@ const AdminNewsletter = () => {
               )}
             </div>
 
-            <input
+            <label className="block space-y-2"><span className="text-sm font-semibold">Issue title</span><input
               type="text"
               placeholder="Issue title"
               required
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               className={inputClass}
-            />
+            /></label>
             <div className="grid sm:grid-cols-2 gap-4">
-              <input
+              <label className="block space-y-2"><span className="text-sm font-semibold">Issue number</span><input
                 type="number"
                 placeholder="Issue number"
                 value={form.issue_number}
                 onChange={(e) => setForm({ ...form, issue_number: e.target.value })}
                 className={inputClass}
-              />
-              <input
+              /></label>
+              <label className="block space-y-2"><span className="text-sm font-semibold">Publication date</span><input
                 aria-label="Publication date"
                 type="date"
                 value={form.date}
                 onChange={(e) => setForm({ ...form, date: e.target.value })}
                 className={inputClass}
-              />
+              /></label>
             </div>
-            <input
+            <label className="block space-y-2"><span className="text-sm font-semibold">Summary</span><input
               type="text"
               placeholder="Summary (short standfirst)"
               value={form.summary}
               onChange={(e) => setForm({ ...form, summary: e.target.value })}
               className={inputClass}
-            />
-            <textarea
+            /></label>
+            <label className="block space-y-2"><span className="text-sm font-semibold">Issue content</span><textarea
               placeholder="Issue content (use double line breaks between paragraphs)"
               required
               rows={14}
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
               className={inputClass}
-            />
+            /></label>
 
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-foreground">Cover Image</label>
@@ -332,9 +332,9 @@ const AdminNewsletter = () => {
             {issues.map((issue) => (
               <div key={issue.id} className="flex flex-wrap items-center gap-3 bg-card border border-border rounded-lg p-4">
                 {issue.image_url && (
-                  <img src={issue.image_url} alt="" className="w-16 h-16 object-cover rounded" />
+                  <img src={issue.image_url} alt="" className="w-14 h-14 shrink-0 object-cover rounded" />
                 )}
-                <div className="flex-1 min-w-[120px]">
+                <div className="w-full min-w-0 flex-1 basis-40">
                   <p className="font-semibold text-foreground text-sm break-words">
                     {issue.issue_number ? `#${issue.issue_number} · ` : ""}
                     {issue.title}
@@ -344,13 +344,13 @@ const AdminNewsletter = () => {
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Button onClick={() => handleEdit(issue)} variant="ghost" size="icon" className="text-primary" title="Edit">
+                  <Button onClick={() => handleEdit(issue)} variant="ghost" size="icon" className="text-primary" title="Edit" aria-label="Edit">
                     <Edit2 className="w-4 h-4" />
                   </Button>
                   <Button
                     onClick={() => handleDelete(issue.id)}
                     variant="ghost" size="icon" className="text-destructive"
-                    title="Delete"
+                    title="Delete" aria-label="Delete"
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>

@@ -220,36 +220,36 @@ const AdminBlog = () => {
               )}
             </div>
 
-            <input
+            <label className="block space-y-2"><span className="text-sm font-semibold">Article title</span><input
               type="text"
               placeholder="Title"
               required
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               className={inputClass}
-            />
-            <input
+            /></label>
+            <label className="block space-y-2"><span className="text-sm font-semibold">Author</span><input
               type="text"
               placeholder="Author"
               value={form.author}
               onChange={(e) => setForm({ ...form, author: e.target.value })}
               className={inputClass}
-            />
-            <input
+            /></label>
+            <label className="block space-y-2"><span className="text-sm font-semibold">Summary</span><input
               type="text"
               placeholder="Excerpt (short summary)"
               value={form.excerpt}
               onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
               className={inputClass}
-            />
-            <textarea
+            /></label>
+            <label className="block space-y-2"><span className="text-sm font-semibold">Article content</span><textarea
               placeholder="Content (use double line breaks for paragraphs)"
               required
               rows={12}
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
               className={inputClass}
-            />
+            /></label>
 
             {/* Image upload */}
             <div className="space-y-2">
@@ -317,9 +317,9 @@ const AdminBlog = () => {
             {posts.map((p) => (
               <div key={p.id} className="flex flex-wrap items-center gap-3 bg-card border border-border rounded-lg p-4">
                 {p.image_url && (
-                  <img src={p.image_url} alt="" className="w-16 h-16 object-cover rounded" />
+                  <img src={p.image_url} alt="" className="w-14 h-14 shrink-0 object-cover rounded" />
                 )}
-                <div className="flex-1 min-w-[120px]">
+                <div className="w-full min-w-0 flex-1 basis-40">
                   <p className="font-semibold text-foreground text-sm break-words">{p.title}</p>
                   <p className="text-xs text-muted-foreground">
                     {p.published ? "Published" : "Draft"} · {new Date(p.date).toLocaleDateString("en-GB")} · {p.author}
@@ -329,14 +329,14 @@ const AdminBlog = () => {
                   <Button
                     onClick={() => handleEdit(p)}
                     variant="ghost" size="icon" className="text-primary"
-                    title="Edit"
+                    title="Edit" aria-label="Edit"
                   >
                     <Edit2 className="w-4 h-4" />
                   </Button>
                   <Button
                     onClick={() => handleDelete(p.id)}
                     variant="ghost" size="icon" className="text-destructive"
-                    title="Delete"
+                    title="Delete" aria-label="Delete"
                   >
                     <Trash2 className="w-4 h-4" />
                   </Button>

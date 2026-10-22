@@ -243,7 +243,9 @@ const AdminEnquiries = () => {
                               {r[c]}
                             </a>
                           ) : (
-                            <span className="whitespace-pre-wrap break-words">{r[c] || "-"}</span>
+                            c === "message" || c === "motivation" ? (
+                              <details className="min-w-64 max-w-lg"><summary className="cursor-pointer text-foreground"><span className="line-clamp-3">{r[c] || "-"}</span><span className="mt-2 inline-block text-xs font-medium text-primary">Read message</span></summary><p className="mt-3 whitespace-pre-wrap break-words leading-relaxed">{r[c]}</p></details>
+                            ) : <span className="whitespace-pre-wrap break-words">{r[c] || "-"}</span>
                           )}
                         </td>
                       ))}
@@ -272,7 +274,7 @@ const AdminEnquiries = () => {
             <div className="flex items-start justify-between gap-4">
               <div>
                 <h2 id="reply-heading" className="text-xl font-bold text-foreground">Reply</h2>
-                <p className="text-xs text-muted-foreground">
+                <p className="break-all text-xs text-muted-foreground">
                   From info@prca.world to <span className="text-primary">{replyTo.email}</span>
                 </p>
               </div>
@@ -294,7 +296,7 @@ const AdminEnquiries = () => {
               rows={10}
               className="w-full px-3 py-2 bg-background border border-border rounded-md text-sm text-foreground focus:outline-none focus:border-primary"
             />
-            <div className="flex justify-end gap-2">
+            <div className="flex flex-wrap justify-end gap-2">
               <Button asChild variant="secondary"><a
                 href={`mailto:${replyTo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`}
                 className="px-4 py-2 rounded-md bg-secondary text-foreground text-sm hover:bg-secondary/80 transition"
