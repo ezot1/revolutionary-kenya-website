@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "@/lib/router-compat";
-import Layout from "@/components/Layout";
+import AdminLayout from "@/components/AdminLayout";
+import { Button } from "@/components/ui/button";
 import { supabase } from "@/lib/supabase";
 import { toast } from "sonner";
 import { Trash2, Edit2, X, Upload, LogOut, Inbox, Mail } from "lucide-react";
@@ -168,108 +169,92 @@ const AdminBlog = () => {
 
   if (!authChecked) {
     return (
-      <Layout>
+      <AdminLayout title="News & articles" section="blog" email={userEmail} onSignOut={handleLogout} authenticated={authChecked && isAdmin}>
         <section className="py-16 text-center text-muted-foreground">Loading...</section>
-      </Layout>
+      </AdminLayout>
     );
   }
 
   if (!isAdmin) {
     return (
-      <Layout>
+      <AdminLayout title="News & articles" section="blog" email={userEmail} onSignOut={handleLogout} authenticated={authChecked && isAdmin}>
         <section className="py-16">
           <div className="container mx-auto px-4 max-w-md text-center space-y-4">
             <h1 className="text-2xl font-black text-foreground">Access denied</h1>
             <p className="text-muted-foreground text-sm">
               You're signed in as <span className="font-semibold">{userEmail}</span>, but this account does not have admin privileges.
             </p>
-            <button
+            <Button
               onClick={handleLogout}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-md bg-secondary text-foreground text-sm hover:bg-secondary/80 transition"
             >
               <LogOut className="w-4 h-4" /> Sign out
-            </button>
+            </Button>
           </div>
         </section>
-      </Layout>
+      </AdminLayout>
     );
   }
 
   return (
-    <Layout>
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-3xl">
-          <div className="flex items-center justify-between mb-8">
-            <h1 className="text-3xl font-black text-foreground">Blog Admin</h1>
-            <div className="flex items-center gap-2">
-              <Link
-                to="/admin/newsletter"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary text-foreground text-xs hover:bg-secondary/80 transition"
-              >
-                <Mail className="w-3.5 h-3.5" /> Newsletter
-              </Link>
-              <Link
-                to="/admin/enquiries"
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary text-foreground text-xs hover:bg-secondary/80 transition"
-              >
-                <Inbox className="w-3.5 h-3.5" /> Enquiries
-              </Link>
-              <button
-                onClick={handleLogout}
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-secondary text-foreground text-xs hover:bg-secondary/80 transition"
-              >
-                <LogOut className="w-3.5 h-3.5" /> Sign out
-              </button>
-            </div>
+    <AdminLayout title="News & articles" section="blog" email={userEmail} onSignOut={handleLogout} authenticated={authChecked && isAdmin}>
+      <section>
+        <div>
+          <div className="mb-8">
+            <p className="mb-2 text-xs font-semibold uppercase text-primary">Editorial desk</p>
+            <h1 className="text-3xl font-bold text-foreground">News & articles</h1>
           </div>
-
-          <form onSubmit={handleSubmit} className="space-y-4 mb-12 bg-card border border-border rounded-lg p-6">
+          <div className="mb-8 grid grid-cols-3 divide-x divide-border border-y border-border bg-card py-5">
+            {[{ label: "Total articles", value: posts.length }, { label: "Published", value: posts.filter((item) => item.published).length }, { label: "Drafts", value: posts.filter((item) => !item.published).length }].map((stat) => <div key={stat.label} className="px-4 sm:px-6"><p className="text-2xl font-semibold">{stat.value}</p><p className="mt-1 text-xs text-muted-foreground">{stat.label}</p></div>)}
+          </div>
+          <div className="admin-editor">
+          <form onSubmit={handleSubmit} className="space-y-5 bg-card border border-border rounded-lg p-5 sm:p-7">
             <div className="flex items-center justify-between">
               <h2 className="text-lg font-bold text-foreground">
                 {editing ? "Edit Post" : "New Post"}
               </h2>
               {editing && (
-                <button type="button" onClick={resetForm} className="text-muted-foreground hover:text-foreground">
+                <Button type="button" onClick={resetForm} variant="ghost" size="icon" aria-label="Cancel editing" className="text-muted-foreground">
                   <X className="w-5 h-5" />
-                </button>
+                </Button>
               )}
             </div>
 
-            <input
+            <label className="block space-y-2"><span className="text-sm font-semibold">Article title</span><input
               type="text"
               placeholder="Title"
               required
               value={form.title}
               onChange={(e) => setForm({ ...form, title: e.target.value })}
               className={inputClass}
-            />
-            <input
+            /></label>
+            <label className="block space-y-2"><span className="text-sm font-semibold">Author</span><input
               type="text"
               placeholder="Author"
               value={form.author}
               onChange={(e) => setForm({ ...form, author: e.target.value })}
               className={inputClass}
-            />
-            <input
+            /></label>
+            <label className="block space-y-2"><span className="text-sm font-semibold">Summary</span><input
               type="text"
               placeholder="Excerpt (short summary)"
               value={form.excerpt}
               onChange={(e) => setForm({ ...form, excerpt: e.target.value })}
               className={inputClass}
-            />
-            <textarea
+            /></label>
+            <label className="block space-y-2"><span className="text-sm font-semibold">Article content</span><textarea
               placeholder="Content (use double line breaks for paragraphs)"
               required
               rows={12}
               value={form.content}
               onChange={(e) => setForm({ ...form, content: e.target.value })}
-              className={`${inputClass} resize-none`}
-            />
+              className={inputClass}
+            /></label>
 
             {/* Image upload */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-foreground">Cover Image</label>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap items-center gap-3">
                 <label className="cursor-pointer inline-flex items-center gap-2 px-4 py-2 rounded-md border border-border bg-secondary text-foreground text-sm hover:bg-secondary/80 transition">
                   <Upload className="w-4 h-4" />
                   {imageFile ? imageFile.name : "Upload Image"}
@@ -289,7 +274,7 @@ const AdminBlog = () => {
                   placeholder="Paste image URL"
                   value={form.image_url}
                   onChange={(e) => { setForm({ ...form, image_url: e.target.value }); setImageFile(null); }}
-                  className={`${inputClass} flex-1`}
+                  aria-label="Cover image URL" className={`${inputClass} min-w-0 flex-1 basis-40`}
                 />
               </div>
               {(form.image_url || imageFile) && (
@@ -301,7 +286,7 @@ const AdminBlog = () => {
               )}
             </div>
 
-            <label className="flex items-center gap-2 text-sm text-foreground">
+            <label className="flex items-center justify-between gap-3 border-y border-border py-4 text-sm font-medium text-foreground">
               <input
                 type="checkbox"
                 checked={form.published}
@@ -310,7 +295,7 @@ const AdminBlog = () => {
               />
               Published
             </label>
-            <button
+            <Button
               type="submit"
               disabled={saving}
               className="w-full py-3 rounded-md bg-primary text-primary-foreground font-bold hover:bg-primary/90 transition disabled:opacity-50"
@@ -322,44 +307,48 @@ const AdminBlog = () => {
                 : editing
                 ? "Update Post"
                 : "Create Post"}
-            </button>
+            </Button>
           </form>
 
+          <aside className="min-w-0">
           <h2 className="text-xl font-bold text-foreground mb-4">Existing Posts ({posts.length})</h2>
           <div className="space-y-3">
+            {posts.length === 0 && <div className="border-y border-border py-10 text-center text-sm text-muted-foreground">No articles yet.</div>}
             {posts.map((p) => (
-              <div key={p.id} className="flex items-center gap-4 bg-card border border-border rounded-lg p-4">
+              <div key={p.id} className="flex flex-wrap items-center gap-3 bg-card border border-border rounded-lg p-4">
                 {p.image_url && (
-                  <img src={p.image_url} alt="" className="w-16 h-16 object-cover rounded" />
+                  <img src={p.image_url} alt="" className="w-14 h-14 shrink-0 object-cover rounded" />
                 )}
-                <div className="flex-1 min-w-0">
-                  <p className="font-bold text-foreground text-sm truncate">{p.title}</p>
+                <div className="w-full min-w-0 flex-1 basis-40">
+                  <p className="font-semibold text-foreground text-sm break-words">{p.title}</p>
                   <p className="text-xs text-muted-foreground">
-                    {p.published ? "✅ Published" : "📝 Draft"} · {new Date(p.date).toLocaleDateString()} · {p.author}
+                    {p.published ? "Published" : "Draft"} · {new Date(p.date).toLocaleDateString("en-GB")} · {p.author}
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button
+                  <Button
                     onClick={() => handleEdit(p)}
-                    className="text-accent hover:text-accent/80 transition"
-                    title="Edit"
+                    variant="ghost" size="icon" className="text-primary"
+                    title="Edit" aria-label="Edit"
                   >
                     <Edit2 className="w-4 h-4" />
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     onClick={() => handleDelete(p.id)}
-                    className="text-destructive hover:text-destructive/80 transition"
-                    title="Delete"
+                    variant="ghost" size="icon" className="text-destructive"
+                    title="Delete" aria-label="Delete"
                   >
                     <Trash2 className="w-4 h-4" />
-                  </button>
+                  </Button>
                 </div>
               </div>
             ))}
           </div>
+          </aside>
+          </div>
         </div>
       </section>
-    </Layout>
+    </AdminLayout>
   );
 };
 
