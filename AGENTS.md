@@ -1,6 +1,7 @@
 # Architecture rules
 
 - Admin pages share AdminLayout and scoped workspace tokens, keeping editorial navigation consistent without changing public pages or access controls.
+- Enquiry replies use a dedicated EmailReplyComposer with the source enquiry beside the reply form; delivery and access controls remain in the existing enquiry flow.
 
 - Sharing controls use primary-domain article URLs, never backend redirect URLs. Per-article social preview tags (title, description, photo, canonical) come from each route's server-rendered `head()` via the shared `src/lib/shareMeta.ts` helper, because crawlers only read the initial HTML. Publications reader URLs retain the selected title in their query string so shared links reopen the same article.
 - The app runs on TanStack Start file routes under `src/routes/`; pages in `src/pages/` keep react-router-style calls through `src/lib/router-compat.tsx`, so routing call sites stay unchanged after the upgrade.
