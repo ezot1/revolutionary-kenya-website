@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Make the three admin pages presentable with shared navigation, organised editors and a clearer enquiries view; verify signed-in use.
+- [x] Make the three admin pages presentable with shared navigation, organised editors and a clearer enquiries view; verified signed-in navigation, populated article editing, reply composer and phone layout.
 
 - [x] Give every public page its own title and description and add a sitemap; verify served HTML
 - [x] Remove the dead footer social icons and the wrong @PRC_Kenya contact line until owner-confirmed accounts exist

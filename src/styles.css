@@ -259,6 +259,9 @@
 .admin-workspace input:not([type="checkbox"]):not([type="file"]), .admin-workspace textarea { background: hsl(var(--card)); }
 .admin-workspace textarea { resize: vertical; min-height: 180px; }
 .admin-workspace input[type="checkbox"] { width: 18px; height: 18px; }
+.admin-workspace td:has(details) { min-width: 200px; }
+.admin-workspace td details { min-width: 200px; }
+.admin-workspace td:has(a[href^="mailto:"]) { overflow-wrap: anywhere; }
 @media (width < 64rem) {
   .admin-sidebar > a { padding-block: 1rem; }
   .admin-sidebar > div:last-child { display: flex; align-items: center; gap: 1rem; padding-block: 0.75rem; }
