@@ -1,5 +1,7 @@
 # Roadmap
 
+- [ ] Make the three admin pages presentable with shared navigation, organised editors and a clearer enquiries view; verify signed-in use.
+
 - [x] Give every public page its own title and description and add a sitemap; verify served HTML
 - [x] Remove the dead footer social icons and the wrong @PRC_Kenya contact line until owner-confirmed accounts exist
 - [x] Leave the remaining generated article images in place (owner decision, 2026-10-21)
