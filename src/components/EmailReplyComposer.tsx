@@ -18,7 +18,7 @@ type Props = {
 export default function EmailReplyComposer({ recipient, name, details, subject, message, sending, onSubjectChange, onMessageChange, onClose, onSend }: Props) {
   return (
     <Dialog open onOpenChange={(open) => { if (!open && !sending) onClose(); }}>
-      <DialogContent className="admin-workspace max-w-[calc(100%-2rem)] gap-0 overflow-hidden rounded-lg border-border bg-card p-0 text-foreground sm:max-w-5xl">
+      <DialogContent className="admin-workspace max-w-[calc(100%_-_2rem)] gap-0 overflow-hidden rounded-lg border-border bg-card p-0 text-foreground sm:max-w-5xl">
         <header className="border-b border-border px-6 py-5 pr-12">
           <DialogTitle className="flex items-center gap-3 text-xl tracking-normal"><Mail className="h-5 w-5 text-primary" />Reply to {name}</DialogTitle>
           <DialogDescription className="mt-2">{recipient}</DialogDescription>
