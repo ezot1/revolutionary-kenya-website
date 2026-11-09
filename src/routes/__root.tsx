@@ -24,6 +24,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
+      { name: "google-site-verification", content: "Z6LBAxxPRVHHGV_M_JCtI15cTFMtlJRIk6erDgqxem8" },
       { name: "viewport", content: "width=device-width, initial-scale=1.0" },
       { title: "PRC - Workers' Power. Socialist Democracy. Permanent Revolution." },
       {
