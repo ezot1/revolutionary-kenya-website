@@ -34,7 +34,7 @@ const Header = () => {
         <Link to="/" className="flex items-center gap-3 group">
           <img
             src="/images/prc-logo.jpg"
-            alt="PRC"
+            alt="Permanent Revolutionary Congress logo"
             className="h-10 w-10 rounded-full object-cover ring-1 ring-primary/50 transition-transform duration-500 group-hover:rotate-[360deg]"
           />
           <div className="leading-tight">

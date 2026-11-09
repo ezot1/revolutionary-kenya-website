@@ -98,7 +98,7 @@ const Blog = () => {
                     <p className="text-xs text-muted-foreground mb-2">
                       {new Date(p.date).toLocaleDateString()} · {p.author}
                     </p>
-                    <h3 className="font-bold text-foreground group-hover:text-primary transition mb-2">{p.title}</h3>
+                    <h2 className="font-bold text-foreground group-hover:text-primary transition mb-2">{p.title}</h2>
                     <p className="text-sm text-muted-foreground line-clamp-3">{p.excerpt}</p>
                   </div>
                 </Link>
