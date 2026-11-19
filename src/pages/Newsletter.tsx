@@ -4,7 +4,7 @@ import { ArrowRight, Download, FileText } from "lucide-react";
 import Layout from "@/components/Layout";
 import NewsletterForm from "@/components/NewsletterForm";
 import { supabase } from "@/lib/supabase";
-import { inauguralIssue } from "@/content/revolutionaryReview";
+import { latestIssue as inauguralIssue, reviewIssues, issueLabel } from "@/content/reviewIssues";
 import defaultCover from "@/assets/publication-default.jpg";
 
 interface Issue {
@@ -25,7 +25,7 @@ const Newsletter = () => {
       .from("newsletter_issues")
       .select("id, title, slug, issue_number, summary, image_url, date")
       .eq("published", true)
-      .neq("slug", inauguralIssue.slug)
+      .not("slug", "in", `(${reviewIssues.map((i) => i.slug).join(",")})`)
       .order("date", { ascending: false })
       .then(({ data }) => {
         if (data) setIssues(data as Issue[]);
@@ -50,8 +50,8 @@ const Newsletter = () => {
                 </div>
               </div>
               <div className="mt-4 flex flex-wrap justify-between gap-2 font-sans text-[10px] font-bold uppercase tracking-[0.14em]">
-                <span>Volume I · Issue 01</span>
-                <span>Monthly · Nairobi · September 2026</span>
+                <span>{issueLabel(inauguralIssue)}</span>
+                <span>Monthly · Nairobi · {inauguralIssue.month}</span>
               </div>
             </div>
             <p className="mx-auto max-w-3xl px-5 pt-6 text-center font-review text-base font-semibold italic leading-relaxed text-review-muted md:text-lg">
@@ -61,7 +61,7 @@ const Newsletter = () => {
 
           <section className="mx-auto grid max-w-6xl border-b-4 border-review-ink lg:grid-cols-12">
             <div className="border-review-ink py-8 lg:col-span-8 lg:border-r lg:pr-10">
-              <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-review-red">Inaugural issue</p>
+              <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-review-red">Latest issue</p>
               <h2 className="mt-3 max-w-4xl font-review-display text-4xl font-black leading-[0.98] md:text-6xl">
                 {inauguralIssue.title}
               </h2>
@@ -88,7 +88,7 @@ const Newsletter = () => {
 
             <aside className="py-8 lg:col-span-4 lg:pl-10">
               <div className="border-b-2 border-review-ink pb-3">
-                <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-review-red">Inside issue 01</p>
+                <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-review-red">Inside issue {String(inauguralIssue.issueNumber).padStart(2, "0")}</p>
               </div>
               <ol className="divide-y divide-review-line">
                 {inauguralIssue.articles.map((article) => (
@@ -114,7 +114,7 @@ const Newsletter = () => {
           <section className="mx-auto grid max-w-6xl border-b-2 border-review-ink py-10 md:grid-cols-12 md:gap-10">
             <div className="md:col-span-5">
               <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-review-red">Editorial</p>
-              <h2 className="mt-2 font-review-display text-3xl font-bold leading-tight">Why this review, why now?</h2>
+              <h2 className="mt-2 font-review-display text-3xl font-bold leading-tight">{inauguralIssue.editorialTitle ?? "Why this review, why now?"}</h2>
             </div>
             <div className="mt-5 space-y-4 font-review leading-relaxed text-review-muted md:col-span-7 md:mt-0 md:columns-2 md:gap-8">
               {inauguralIssue.editorial.slice(0, 2).map((paragraph) => <p key={paragraph}>{paragraph}</p>)}
@@ -134,13 +134,21 @@ const Newsletter = () => {
             </div>
           </section>
 
-          {issues.length > 0 && (
+          {(
             <section className="mx-auto max-w-6xl py-10">
               <div className="flex items-end justify-between border-b-2 border-review-ink pb-3">
                 <h2 className="font-review-display text-3xl font-bold">Archive</h2>
                 <span className="font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-review-muted">Past issues</span>
               </div>
               <div className="grid gap-px bg-review-line md:grid-cols-3">
+                {reviewIssues.slice(1).map((issue) => (
+                  <Link key={issue.slug} to={`/newsletter/${issue.slug}`} className="group bg-review-paper py-6 md:px-5">
+                    <img src={issue.articles[0]?.image || defaultCover} alt="" className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:brightness-90" />
+                    <p className="mt-4 font-sans text-[10px] font-bold uppercase tracking-[0.18em] text-review-red">Issue {issue.issueNumber} · {issue.month}</p>
+                    <h3 className="mt-2 font-review-display text-2xl font-bold leading-tight group-hover:text-review-red">{issue.title}</h3>
+                    <span className="mt-4 inline-flex items-center gap-2 font-sans text-xs font-bold uppercase"><FileText className="h-4 w-4" /> Read issue</span>
+                  </Link>
+                ))}
                 {issues.map((issue) => (
                   <Link key={issue.id} to={`/newsletter/${issue.slug}`} className="group bg-review-paper py-6 md:px-5">
                      <img src={issue.image_url || defaultCover} alt="" className="aspect-[4/3] w-full object-cover transition duration-500 group-hover:brightness-90" />

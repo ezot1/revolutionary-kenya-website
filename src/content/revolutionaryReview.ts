@@ -32,6 +32,7 @@ export interface ReviewIssue {
   slug: string;
   subtitle: string;
   editorial: string[];
+  editorialTitle?: string;
   pdfUrl: string;
   articles: ReviewArticle[];
 }

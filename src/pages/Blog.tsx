@@ -4,7 +4,7 @@ import Layout from "@/components/Layout";
 import { supabase } from "@/lib/supabase";
 import { ArrowRight, Download, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { inauguralIssue } from "@/content/revolutionaryReview";
+import { latestIssue as inauguralIssue } from "@/content/reviewIssues";
 import { congressPoliticalPaper } from "@/content/congressPoliticalPaper";
 
 interface Post {

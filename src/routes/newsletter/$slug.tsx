@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import NewsletterIssue from "@/pages/NewsletterIssue";
 import { supabase } from "@/integrations/supabase/client";
-import { inauguralIssue } from "@/content/revolutionaryReview";
+import { getReviewIssue } from "@/content/reviewIssues";
 import { shareHead, summarize } from "@/lib/shareMeta";
 
 interface IssuePreview {
@@ -12,7 +12,8 @@ interface IssuePreview {
 
 export const Route = createFileRoute("/newsletter/$slug")({
   loader: async ({ params }): Promise<IssuePreview | null> => {
-    if (params.slug === inauguralIssue.slug) {
+    const inauguralIssue = getReviewIssue(params.slug);
+    if (inauguralIssue) {
       return {
         title: `${inauguralIssue.title} | The Revolutionary Review`,
         description: inauguralIssue.subtitle,

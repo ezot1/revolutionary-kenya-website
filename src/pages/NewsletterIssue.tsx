@@ -4,7 +4,7 @@ import { ArrowLeft, Download } from "lucide-react";
 import Layout from "@/components/Layout";
 import SocialShare from "@/components/SocialShare";
 import { supabase } from "@/lib/supabase";
-import { inauguralIssue } from "@/content/revolutionaryReview";
+import { getReviewIssue, issueLabel } from "@/content/reviewIssues";
 
 interface Issue {
   id: string;
@@ -19,7 +19,8 @@ interface Issue {
 
 const NewsletterIssue = () => {
   const { slug } = useParams();
-  const isInaugural = slug === inauguralIssue.slug;
+  const staticIssue = getReviewIssue(slug);
+  const isInaugural = Boolean(staticIssue);
   const [issue, setIssue] = useState<Issue | null>(null);
   const [loading, setLoading] = useState(!isInaugural);
 
@@ -31,7 +32,8 @@ const NewsletterIssue = () => {
     });
   }, [isInaugural, slug]);
 
-  if (isInaugural) {
+  if (staticIssue) {
+    const inauguralIssue = staticIssue;
     return (
       <Layout>
         <article className="overflow-x-hidden bg-review-paper text-review-ink py-8 md:py-14">
@@ -48,7 +50,7 @@ const NewsletterIssue = () => {
                     <p className="mt-1 break-words font-review-display text-2xl font-black uppercase leading-none sm:text-4xl md:text-6xl">The Revolutionary Review</p>
                   </div>
                 </div>
-                <p className="mt-4 text-left font-sans text-[10px] font-bold uppercase tracking-[0.14em]">Volume I · Issue 01 · September 2026</p>
+                <p className="mt-4 text-left font-sans text-[10px] font-bold uppercase tracking-[0.14em]">{issueLabel(inauguralIssue)} · {inauguralIssue.month}</p>
               </div>
               <h1 className="mx-auto mt-8 max-w-4xl font-review-display text-5xl font-black leading-[0.95] md:text-7xl">{inauguralIssue.title}</h1>
               <p className="mx-auto mt-4 max-w-2xl font-review text-xl italic text-review-muted">{inauguralIssue.subtitle}</p>
@@ -62,7 +64,7 @@ const NewsletterIssue = () => {
 
             <section className="mx-auto max-w-3xl border-b-2 border-review-ink py-12">
               <p className="font-sans text-[10px] font-bold uppercase tracking-[0.2em] text-review-red">Editorial</p>
-              <h2 className="mt-2 font-review-display text-3xl font-bold">The opening word</h2>
+              <h2 className="mt-2 font-review-display text-3xl font-bold">{inauguralIssue.editorialTitle ?? "The opening word"}</h2>
               <div className="mt-6 space-y-5 font-review text-lg leading-relaxed text-review-muted">
                 {inauguralIssue.editorial.map((paragraph, index) => <p key={paragraph} className={index === 0 ? "first-letter:float-left first-letter:mr-2 first-letter:font-review-display first-letter:text-6xl first-letter:font-black first-letter:leading-[0.8]" : ""}>{paragraph}</p>)}
               </div>
