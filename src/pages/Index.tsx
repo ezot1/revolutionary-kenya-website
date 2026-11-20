@@ -6,10 +6,11 @@ import { supabase } from "@/lib/supabase";
 import { useReveal, useRevealGroup } from "@/hooks/use-reveal";
 import {
   Hammer, GraduationCap, Users, Leaf, Globe2, Building2,
-  Wifi, Heart, ArrowRight, Calendar, MapPin
+  Wifi, Heart, ArrowRight, Calendar, MapPin, Download
 } from "lucide-react";
 import heroRally from "@/assets/hero-rally.jpg";
 import { congressPoliticalPaper } from "@/content/congressPoliticalPaper";
+import { latestIssue, issueLabel } from "@/content/reviewIssues";
 
 interface Post {
   id: string; title: string; slug: string; excerpt: string;
@@ -182,20 +183,101 @@ const LatestPosts = ({ posts }: { posts: Post[] }) => {
   );
 };
 
-const Newsletter = () => (
-  <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-    <div className="absolute inset-0 grain" />
-    <div className="container mx-auto px-4 text-center max-w-3xl relative">
-      <p className="text-[10px] uppercase tracking-[0.3em] mb-4 opacity-80">Monthly publication</p>
-      <h2 className="font-display text-4xl md:text-6xl mb-6 leading-tight">The Revolutionary Review</h2>
-      <p className="text-primary-foreground/80 text-lg mb-8">Receive The Revolutionary Review monthly: theory, strategy and dispatches from struggles across Kenya, Africa and the world.</p>
-      <NewsletterForm />
-      <Link to="/newsletter" className="inline-flex items-center gap-2 mt-8 text-sm font-bold uppercase tracking-[0.18em] underline underline-offset-4 hover:opacity-80 transition">
-        Read the latest issue <ArrowRight className="w-4 h-4" />
-      </Link>
-    </div>
-  </section>
-);
+const Newsletter = () => {
+  const cardRef = useReveal<HTMLDivElement>();
+  const lead = latestIssue.articles[0]!;
+
+  return (
+    <section className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
+      <div className="absolute inset-0 grain" />
+      <div className="container mx-auto px-4 relative">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-16 items-center">
+          <div className="lg:col-span-6 text-center lg:text-left">
+            <p className="text-[10px] uppercase tracking-[0.3em] mb-4 opacity-80">Monthly publication</p>
+            <h2 className="font-display text-4xl md:text-6xl mb-6 leading-tight">The Revolutionary Review</h2>
+            <p className="text-primary-foreground/80 text-lg mb-8">Receive The Revolutionary Review monthly: theory, strategy and dispatches from struggles across Kenya, Africa and the world.</p>
+            <NewsletterForm />
+            <Link to="/newsletter" className="inline-flex items-center gap-2 mt-8 text-sm font-bold uppercase tracking-[0.18em] underline underline-offset-4 hover:opacity-80 transition">
+              Read the latest issue <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          <div className="lg:col-span-6 flex justify-center lg:justify-end lg:pr-14">
+            <div
+              ref={cardRef}
+              className="reveal w-full max-w-sm border-2 border-review-ink bg-review-paper text-review-ink shadow-2xl"
+            >
+              <div className="flex items-center gap-3 bg-review-red px-4 py-3">
+                <img
+                  src="/images/prc-logo.jpg"
+                  alt="Permanent Revolutionary Congress"
+                  className="h-8 w-8 shrink-0 rounded-full border border-review-paper/60 object-cover"
+                />
+                <p className="font-review-display text-sm font-black uppercase leading-none text-review-paper">
+                  The Revolutionary Review
+                </p>
+              </div>
+
+              <div className="flex items-center justify-between gap-2 border-b border-review-line px-4 py-2 font-sans text-[9px] font-bold uppercase tracking-[0.16em] text-review-muted">
+                <span>{issueLabel(latestIssue)}</span>
+                <span>{latestIssue.month}</span>
+              </div>
+
+              <div className="px-4 pt-4">
+                <h3 className="font-review-display text-2xl font-black leading-[1.03]">{latestIssue.title}</h3>
+                <p className="mt-2 font-review text-xs italic leading-relaxed text-review-muted line-clamp-2">
+                  {latestIssue.subtitle}
+                </p>
+              </div>
+
+              <img
+                src={lead.image}
+                alt={lead.imageAlt}
+                className="mt-4 aspect-[16/9] w-full object-cover"
+                loading="lazy"
+              />
+
+              <div className="px-4 pb-3 pt-3">
+                <p className="font-sans text-[9px] font-bold uppercase tracking-[0.18em] text-review-red">
+                  Inside this issue
+                </p>
+                <ol className="mt-2 divide-y divide-review-line">
+                  {latestIssue.articles.slice(0, 4).map((article) => (
+                    <li key={article.number} className="grid grid-cols-[1.7rem_1fr] gap-2 py-1.5">
+                      <span className="font-sans text-[10px] font-bold text-review-red">{article.number}</span>
+                      <span className="font-review-display text-[13px] font-bold leading-snug">
+                        {article.title}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+                <p className="mt-2 font-review text-[11px] italic text-review-muted">
+                  + {latestIssue.articles.length - 4} more in this issue
+                </p>
+              </div>
+
+              <div className="grid grid-cols-2 gap-2 border-t-2 border-review-ink p-3">
+                <Link
+                  to={`/newsletter/${latestIssue.slug}`}
+                  className="inline-flex items-center justify-center gap-1.5 bg-review-ink px-3 py-2.5 font-sans text-[10px] font-bold uppercase tracking-[0.14em] text-review-paper transition hover:bg-review-red"
+                >
+                  Read issue <ArrowRight className="h-3.5 w-3.5" />
+                </Link>
+                <a
+                  href={latestIssue.pdfUrl}
+                  download
+                  className="inline-flex items-center justify-center gap-1.5 border-2 border-review-ink px-3 py-2 font-sans text-[10px] font-bold uppercase tracking-[0.14em] transition hover:bg-review-ink hover:text-review-paper"
+                >
+                  <Download className="h-3.5 w-3.5" /> PDF
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 const upcomingEvents = [
   { date: "Oct 11-12", endDate: "2026-10-12", title: "2nd Congress of the PRC", type: "Congress", location: "Nairobi" },
